@@ -1,6 +1,6 @@
 # Flux UI Skill
 
-An [Agent Skills](https://agentskills.org) compatible skill for [Flux UI](https://fluxui.dev) - the official Livewire component library.
+An [Agent Skills](https://agentskills.io/) compatible skill for [Flux UI](https://fluxui.dev/) - the official Livewire component library.
 
 ## What's included
 
