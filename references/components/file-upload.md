@@ -9,12 +9,23 @@ A flexible file upload component with built-in drag-and-drop support, file previ
 
 ```blade
 <flux:file-upload wire:model="photos" multiple label="Upload files">
-<flux:file-upload.dropzone        heading="Drop files here or click to browse"        text="JPG, PNG, GIF up to 10MB"    /></flux:file-upload><div class="mt-4 flex flex-col gap-2">
-<flux:file-item        heading="Profile_pic.jpg"        image="https://fluxui.dev/img/demo/user.png"        size="162400"    >
-<x-slot name="actions">
-<flux:file-item.remove />
-</x-slot>
-</flux:file-item></div>
+    <flux:file-upload.dropzone
+        heading="Drop files here or click to browse"
+        text="JPG, PNG, GIF up to 10MB"
+    />
+</flux:file-upload>
+
+<div class="mt-4 flex flex-col gap-2">
+    <flux:file-item
+        heading="Profile_pic.jpg"
+        image="https://fluxui.dev/img/demo/user.png"
+        size="162400"
+    >
+        <x-slot name="actions">
+            <flux:file-item.remove />
+        </x-slot>
+    </flux:file-item>
+</div>
 ```
 
 ## Inline layout
@@ -22,17 +33,26 @@ For a more compact interface, use the inline prop on the dropzone to create a ho
 
 ```blade
 <flux:file-upload wire:model="photos" multiple label="Upload files">
-<flux:file-upload.dropzone        heading="Drop files or click to browse"        text="JPG, PNG, GIF up to 10MB"        inline    /></flux:file-upload><div class="mt-3 flex flex-col gap-2">
-<flux:file-item heading="Profile_pic.jpg">
-<x-slot name="actions">
-<flux:file-item.remove />
-</x-slot>
-</flux:file-item>
-<flux:file-item heading="Brand_banner.jpg">
-<x-slot name="actions">
-<flux:file-item.remove />
-</x-slot>
-</flux:file-item></div>
+    <flux:file-upload.dropzone
+        heading="Drop files or click to browse"
+        text="JPG, PNG, GIF up to 10MB"
+        inline
+    />
+</flux:file-upload>
+
+<div class="mt-3 flex flex-col gap-2">
+    <flux:file-item heading="Profile_pic.jpg">
+        <x-slot name="actions">
+            <flux:file-item.remove />
+        </x-slot>
+    </flux:file-item>
+
+    <flux:file-item heading="Brand_banner.jpg">
+        <x-slot name="actions">
+            <flux:file-item.remove />
+        </x-slot>
+    </flux:file-item>
+</div>
 ```
 
 ## Progress indicator
@@ -42,7 +62,13 @@ The text prop is required with the progress indicator.
 
 ```blade
 <flux:file-upload wire:model="photos" multiple label="Upload files">
-<flux:file-upload.dropzone        heading="Drop files or click to browse"        text="JPG, PNG, GIF up to 10MB"        with-progress        inline    /></flux:file-upload>
+    <flux:file-upload.dropzone
+        heading="Drop files or click to browse"
+        text="JPG, PNG, GIF up to 10MB"
+        with-progress
+        inline
+    />
+</flux:file-upload>
 ```
 
 When using with-progress, the component provides two CSS variables that you can use for custom progress implementations:
@@ -57,7 +83,12 @@ Use the disabled prop to prevent user interaction with the file upload component
 
 ```blade
 <flux:file-upload wire:model="photos" multiple label="Upload files" disabled>
-<flux:file-upload.dropzone        heading="Drop files or click to browse"        text="JPG, PNG, GIF up to 10MB"        inline    /></flux:file-upload>
+    <flux:file-upload.dropzone
+        heading="Drop files or click to browse"
+        text="JPG, PNG, GIF up to 10MB"
+        inline
+    />
+</flux:file-upload>
 ```
 
 ## Custom uploader
@@ -67,14 +98,26 @@ Here's an example of a custom avatar uploader:
 
 ```blade
 <flux:file-upload wire:model="photo">
-<!-- Custom avatar uploader -->
-<div class="        relative flex items-center justify-center size-20 rounded-full transition-colors cursor-pointer        border border-zinc-200 dark:border-white/10 hover:border-zinc-300 dark:hover:border-white/10        bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 hover:dark:bg-white/15 in-data-dragging:dark:bg-white/15    ">
-<!-- Show the uploaded file if it exists -->        @if ($photo)            <img src="{{ $photo?->temporaryUrl() }}" class="size-full object-cover rounded-full" />        @else            <!-- Show the default icon if no file is uploaded -->
-<flux:icon name="user" variant="solid" class="text-zinc-500 dark:text-zinc-400" />        @endif        <!-- Corner upload icon -->
-<div class="absolute bottom-0 right-0 bg-white dark:bg-zinc-800 rounded-full">
-<flux:icon name="arrow-up-circle" variant="solid" class="text-zinc-500 dark:text-zinc-400" />
-</div>
-</div></flux:file-upload>
+    <!-- Custom avatar uploader -->
+    <div class="
+        relative flex items-center justify-center size-20 rounded-full transition-colors cursor-pointer
+        border border-zinc-200 dark:border-white/10 hover:border-zinc-300 dark:hover:border-white/10
+        bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 hover:dark:bg-white/15 in-data-dragging:dark:bg-white/15
+    ">
+        <!-- Show the uploaded file if it exists -->
+        @if ($photo)
+            <img src="{{ $photo?->temporaryUrl() }}" class="size-full object-cover rounded-full" />
+        @else
+            <!-- Show the default icon if no file is uploaded -->
+            <flux:icon name="user" variant="solid" class="text-zinc-500 dark:text-zinc-400" />
+        @endif
+
+        <!-- Corner upload icon -->
+        <div class="absolute bottom-0 right-0 bg-white dark:bg-zinc-800 rounded-full">
+            <flux:icon name="arrow-up-circle" variant="solid" class="text-zinc-500 dark:text-zinc-400" />
+        </div>
+    </div>
+</flux:file-upload>
 ```
 
 The file upload wrapper automatically provides data attributes you can use to style your custom uploader:
@@ -91,36 +134,113 @@ The file upload component seamlessly integrates with Livewire's file upload func
 For single file uploads, bind directly to a property and handle the uploaded file display and removal.
 
 ```
-use Livewire\Component;use Livewire\WithFileUploads;use Livewire\Attributes\Validate;class FileUpload extends Component {    use WithFileUploads;    #[Validate('image|max:10240')] // 10MB Max    public $photo;    public function removePhoto()    {        $this->photo->delete();        $this->photo = null;    }    public function save()    {        $this->photo->store(path: 'photos');        return $this->redirect('...');    }}
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\Attributes\Validate;
+
+class FileUpload extends Component {
+    use WithFileUploads;
+
+    #[Validate('image|max:10240')] // 10MB Max
+    public $photo;
+
+    public function removePhoto()
+    {
+        $this->photo->delete();
+
+        $this->photo = null;
+    }
+
+    public function save()
+    {
+        $this->photo->store(path: 'photos');
+
+        return $this->redirect('...');
+    }
+}
 blade
-<!-- Blade view: --><form wire:submit="save">
-<flux:file-upload wire:model="photo" label="Upload file">
-<flux:file-upload.dropzone heading="Drop file here or click to browse" text="JPG, PNG, GIF up to 10MB" />
-</flux:file-upload>
-<div class="mt-3 flex flex-col gap-2">        @if ($photo)            <flux:file-item                :heading="$photo->getClientOriginalName()"                :image="$photo->temporaryUrl()"                :size="$photo->getSize()"            >
-<x-slot name="actions">
-<flux:file-item.remove wire:click="removePhoto" aria-label="{{ 'Remove file: ' . $photo->getClientOriginalName() }}" />
-</x-slot>
-</flux:file-item>        @endif    </div>
-<flux:button type="submit">Save</flux:button></form>
+<!-- Blade view: -->
+
+<form wire:submit="save">
+    <flux:file-upload wire:model="photo" label="Upload file">
+        <flux:file-upload.dropzone heading="Drop file here or click to browse" text="JPG, PNG, GIF up to 10MB" />
+    </flux:file-upload>
+
+    <div class="mt-3 flex flex-col gap-2">
+        @if ($photo)
+            <flux:file-item
+                :heading="$photo->getClientOriginalName()"
+                :image="$photo->temporaryUrl()"
+                :size="$photo->getSize()"
+            >
+                <x-slot name="actions">
+                    <flux:file-item.remove wire:click="removePhoto" aria-label="{{ 'Remove file: ' . $photo->getClientOriginalName() }}" />
+                </x-slot>
+            </flux:file-item>
+        @endif
+    </div>
+
+    <flux:button type="submit">Save</flux:button>
+</form>
 ```
 
 ### Multiple files upload
 Handle multiple file uploads by using an array property and the multiple attribute.
 
 ```
-use Livewire\Component;use Livewire\WithFileUploads;use Livewire\Attributes\Validate;class FileUpload extends Component {    use WithFileUploads;    #[Validate(['photos.*' => 'image|max:1024'])]    public $photos = [];    public function removePhoto($index)    {        $photo = $this->photos[$index];        $photo->delete();        unset($this->photos[$index]);        $this->photos = array_values($this->photos);    }    public function save()    {        foreach ($this->photos as $photo) {            $photo->store(path: 'photos');        }        return $this->redirect('...');    }}
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\Attributes\Validate;
+
+class FileUpload extends Component {
+    use WithFileUploads;
+
+    #[Validate(['photos.*' => 'image|max:1024'])]
+    public $photos = [];
+
+    public function removePhoto($index)
+    {
+        $photo = $this->photos[$index];
+
+        $photo->delete();
+
+        unset($this->photos[$index]);
+
+        $this->photos = array_values($this->photos);
+    }
+
+    public function save()
+    {
+        foreach ($this->photos as $photo) {
+            $photo->store(path: 'photos');
+        }
+
+        return $this->redirect('...');
+    }
+}
 blade
-<!-- Blade view: --><form wire:submit="save">
-<flux:file-upload wire:model="photos" label="Upload files" multiple>
-<flux:file-upload.dropzone heading="Drop files here or click to browse" text="JPG, PNG, GIF up to 10MB" />
-</flux:file-upload>
-<div class="mt-3 flex flex-col gap-2">        @foreach ($photos as $index => $photo)            <flux:file-item                :heading="$photo->getClientOriginalName()"                :image="$photo->temporaryUrl()"                :size="$photo->getSize()"            >
-<x-slot name="actions">
-<flux:file-item.remove wire:click="removePhoto({{ $index }})" aria-label="{{ 'Remove file: ' . $photo->getClientOriginalName() }}" />
-</x-slot>
-</flux:file-item>        @endforeach    </div>
-<flux:button type="submit">Save</flux:button></form>
+<!-- Blade view: -->
+<form wire:submit="save">
+    <flux:file-upload wire:model="photos" label="Upload files" multiple>
+        <flux:file-upload.dropzone heading="Drop files here or click to browse" text="JPG, PNG, GIF up to 10MB" />
+    </flux:file-upload>
+
+    <div class="mt-3 flex flex-col gap-2">
+        @foreach ($photos as $index => $photo)
+            <flux:file-item
+                :heading="$photo->getClientOriginalName()"
+                :image="$photo->temporaryUrl()"
+                :size="$photo->getSize()"
+            >
+                <x-slot name="actions">
+                    <flux:file-item.remove wire:click="removePhoto({{ $index }})" aria-label="{{ 'Remove file: ' . $photo->getClientOriginalName() }}" />
+                </x-slot>
+            </flux:file-item>
+        @endforeach
+    </div>
+
+    <flux:button type="submit">Save</flux:button>
+</form>
 ```
 
 ## Reference

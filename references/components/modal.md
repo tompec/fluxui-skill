@@ -9,27 +9,38 @@ Display content in a layer above the main page. Ideal for confirmations, alerts,
 
 ```blade
 <flux:modal.trigger name="edit-profile">
-<flux:button>Edit profile</flux:button></flux:modal.trigger>
+    <flux:button>Edit profile</flux:button>
+</flux:modal.trigger>
+
 <flux:modal name="edit-profile" class="md:w-96">
-<div class="space-y-6">
-<div>
-<flux:heading size="lg">Update profile</flux:heading>
-<flux:text class="mt-2">Make changes to your personal details.</flux:text>
-</div>
-<flux:input label="Name" placeholder="Your name" />
-<flux:input label="Date of birth" type="date" />
-<div class="flex">
-<flux:spacer />
-<flux:button type="submit" variant="primary">Save changes</flux:button>
-</div>
-</div></flux:modal>
+    <div class="space-y-6">
+        <div>
+            <flux:heading size="lg">Update profile</flux:heading>
+            <flux:text class="mt-2">Make changes to your personal details.</flux:text>
+        </div>
+
+        <flux:input label="Name" placeholder="Your name" />
+
+        <flux:input label="Date of birth" type="date" />
+
+        <div class="flex">
+            <flux:spacer />
+
+            <flux:button type="submit" variant="primary">Save changes</flux:button>
+        </div>
+    </div>
+</flux:modal>
 ```
 
 ## Unique modal names
 If you are placing modals inside a loop, ensure that you are dynamically generating unique modal names. Otherwise, one modal trigger, will trigger all modals of that name on the page causing unexpected behavior.
 
 ```blade
-@foreach ($users as $user)    <flux:modal :name="'edit-profile-'.$user->id">        ...    </flux:modal>@endforeach
+@foreach ($users as $user)
+    <flux:modal :name="'edit-profile-'.$user->id">
+        ...
+    </flux:modal>
+@endforeach
 ```
 
 ## Livewire methods
@@ -39,17 +50,28 @@ Consider a "confirm" modal in your Blade template like so:
 
 ```blade
 <flux:modal name="confirm">
-<!-- ... --></flux:modal>
+    <!-- ... -->
+</flux:modal>
 ```
 
 You can now open and close this modal from your Livewire component using the following methods:
 
-```php
+```
 <?php
 
 class ShowPost extends \Livewire\Component {
+    public function delete() {
+        // Control "confirm" modals anywhere on the page...
+        Flux::modal('confirm')->show();
+        Flux::modal('confirm')->close();
 
-        public function delete() {        // Control "confirm" modals anywhere on the page...        Flux::modal('confirm')->show();        Flux::modal('confirm')->close();        // Control "confirm" modals within this Livewire component...        $this->modal('confirm')->show();        $this->modal('confirm')->close();        // Closes all modals on the page...        Flux::modals()->close();    }
+        // Control "confirm" modals within this Livewire component...
+        $this->modal('confirm')->show();
+        $this->modal('confirm')->close();
+
+        // Closes all modals on the page...
+        Flux::modals()->close();
+    }
 }
 ```
 
@@ -57,13 +79,28 @@ class ShowPost extends \Livewire\Component {
 You can also control modals from Alpine directly using Flux's magic methods:
 
 ```
-<button x-on:click="$flux.modal('confirm').show()">    Open modal</button><button x-on:click="$flux.modal('confirm').close()">    Close modal</button><button x-on:click="$flux.modals().close()">    Close all modals</button>
+<button x-on:click="$flux.modal('confirm').show()">
+    Open modal
+</button>
+
+<button x-on:click="$flux.modal('confirm').close()">
+    Close modal
+</button>
+
+<button x-on:click="$flux.modals().close()">
+    Close all modals
+</button>
 ```
 
 Or you can use the window.Flux global object to control modals from any JavaScript in your application:
 
 ```
-// Control "confirm" modals anywhere on the page...Flux.modal('confirm').show()Flux.modal('confirm').close()// Closes all modals on the page...Flux.modals().close()
+// Control "confirm" modals anywhere on the page...
+Flux.modal('confirm').show()
+Flux.modal('confirm').close()
+
+// Closes all modals on the page...
+Flux.modals().close()
 ```
 
 ## Data binding
@@ -73,19 +110,23 @@ Consider a confirmation modal in your Blade template like so:
 
 ```blade
 <flux:modal wire:model.self="showConfirmModal">
-<!-- ... --></flux:modal>
+    <!-- ... -->
+</flux:modal>
 ```
 
 It's important to add the .self modifier to the wire:model attribute to prevent nested elements from dispatching input events that would interfere with the state of the modal.
 
 You can now open and close this modal from your Livewire component by toggling the wire:model property.
 
-```php
+```
 <?php
 
 class ShowPost extends \Livewire\Component {
+    public $showConfirmModal = false;
 
-        public $showConfirmModal = false;        public function delete() {        $this->showConfirmModal = true;    }
+    public function delete() {
+        $this->showConfirmModal = true;
+    }
 }
 ```
 
@@ -100,7 +141,8 @@ If you need to perform some logic after a modal closes, you can register a close
 
 ```blade
 <flux:modal @close="someLivewireAction">
-<!-- ... --></flux:modal>
+    <!-- ... -->
+</flux:modal>
 ```
 
 You can also use wire:close or x-on:close if you prefer those syntaxes.
@@ -110,7 +152,8 @@ If you need to perform some logic after a modal is cancelled, you can register a
 
 ```blade
 <flux:modal @cancel="someLivewireAction">
-<!-- ... --></flux:modal>
+    <!-- ... -->
+</flux:modal>
 ```
 
 You can also use wire:cancel or x-on:cancel if you prefer those syntaxes.
@@ -120,7 +163,8 @@ By default, clicking outside the modal will close it. If you want to disable thi
 
 ```blade
 <flux:modal :dismissible="false">
-<!-- ... --></flux:modal>
+    <!-- ... -->
+</flux:modal>
 ```
 
 ## Confirmation
@@ -128,21 +172,31 @@ Prompt a user for confirmation before performing a dangerous action.
 
 ```blade
 <flux:modal.trigger name="delete-profile">
-<flux:button variant="danger">Delete</flux:button></flux:modal.trigger>
+    <flux:button variant="danger">Delete</flux:button>
+</flux:modal.trigger>
+
 <flux:modal name="delete-profile" class="min-w-[22rem]">
-<div class="space-y-6">
-<div>
-<flux:heading size="lg">Delete project?</flux:heading>
-<flux:text class="mt-2">                You're about to delete this project.<br>                This action cannot be reversed.            </flux:text>
-</div>
-<div class="flex gap-2">
-<flux:spacer />
-<flux:modal.close>
-<flux:button variant="ghost">Cancel</flux:button>
-</flux:modal.close>
-<flux:button type="submit" variant="danger">Delete project</flux:button>
-</div>
-</div></flux:modal>
+    <div class="space-y-6">
+        <div>
+            <flux:heading size="lg">Delete project?</flux:heading>
+
+            <flux:text class="mt-2">
+                You're about to delete this project.<br>
+                This action cannot be reversed.
+            </flux:text>
+        </div>
+
+        <div class="flex gap-2">
+            <flux:spacer />
+
+            <flux:modal.close>
+                <flux:button variant="ghost">Cancel</flux:button>
+            </flux:modal.close>
+
+            <flux:button type="submit" variant="danger">Delete project</flux:button>
+        </div>
+    </div>
+</flux:modal>
 ```
 
 ## Flyout
@@ -150,20 +204,27 @@ Use the flyout prop for a more anchored and long-form dialog.
 
 ```blade
 <flux:modal.trigger name="edit-profile">
-<flux:button>Edit profile</flux:button></flux:modal.trigger>
+    <flux:button>Edit profile</flux:button>
+</flux:modal.trigger>
+
 <flux:modal name="edit-profile" flyout>
-<div class="space-y-6">
-<div>
-<flux:heading size="lg">Update profile</flux:heading>
-<flux:text class="mt-2">Make changes to your personal details.</flux:text>
-</div>
-<flux:input label="Name" placeholder="Your name" />
-<flux:input label="Date of birth" type="date" />
-<div class="flex">
-<flux:spacer />
-<flux:button type="submit" variant="primary">Save changes</flux:button>
-</div>
-</div></flux:modal>
+    <div class="space-y-6">
+        <div>
+            <flux:heading size="lg">Update profile</flux:heading>
+            <flux:text class="mt-2">Make changes to your personal details.</flux:text>
+        </div>
+
+        <flux:input label="Name" placeholder="Your name" />
+
+        <flux:input label="Date of birth" type="date" />
+
+        <div class="flex">
+            <flux:spacer />
+
+            <flux:button type="submit" variant="primary">Save changes</flux:button>
+        </div>
+    </div>
+</flux:modal>
 ```
 
 ## Flyout positioning
@@ -172,7 +233,8 @@ By default, flyouts will open from the right. You can change this behavior by pa
 
 ```blade
 <flux:modal flyout position="left">
-<!-- ... --></flux:modal>
+    <!-- ... -->
+</flux:modal>
 ```
 
 ### Floating flyout
@@ -180,20 +242,28 @@ Use the "floating" variant to give your flyout modal a floating appearance.
 
 ```blade
 <flux:modal.trigger name="edit-profile">
-<flux:button>Edit profile</flux:button></flux:modal.trigger>
+    <flux:button>Edit profile</flux:button>
+</flux:modal.trigger>
+
 <flux:modal name="edit-profile" flyout variant="floating" class="md:w-lg">
-<div class="space-y-6">
-<flux:heading size="lg">Update profile</flux:heading>
-<flux:subheading>Make changes to your personal details.</flux:subheading>
-<flux:input label="Name" placeholder="Your name" />
-<flux:input label="Date of birth" type="date" />
-</div>
-<x-slot name="footer" class="flex items-center justify-end gap-2">
-<flux:modal.close>
-<flux:button variant="filled">Cancel</flux:button>
-</flux:modal.close>
-<flux:button type="submit" variant="primary">Save changes</flux:button>
-</x-slot></flux:modal>
+    <div class="space-y-6">
+        <flux:heading size="lg">Update profile</flux:heading>
+
+        <flux:subheading>Make changes to your personal details.</flux:subheading>
+
+        <flux:input label="Name" placeholder="Your name" />
+
+        <flux:input label="Date of birth" type="date" />
+    </div>
+
+    <x-slot name="footer" class="flex items-center justify-end gap-2">
+        <flux:modal.close>
+            <flux:button variant="filled">Cancel</flux:button>
+        </flux:modal.close>
+
+        <flux:button type="submit" variant="primary">Save changes</flux:button>
+    </x-slot>
+</flux:modal>
 ```
 
 ## Reference

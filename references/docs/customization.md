@@ -57,7 +57,11 @@ php artisan flux:publish --all
 Let's say you decided to publish the checkbox component into your project, you would find the component file in the following location:
 
 ```
-resources/    views/        flux/            checkbox.blade.php            ...
+resources/
+    views/
+        flux/
+            checkbox.blade.php
+            ...
 ```
 
 Now, you can continue using the checkbox component like normal, but the published Blade files will be used instead of the original ones. This means you can change anything you like about the component such as classes, slots and variants.
@@ -67,5 +71,9 @@ Now, you can continue using the checkbox component like normal, but the publishe
 Most HTML elements used inside flux component have a data-flux-\* attribute. You can use this attribute to override any styles you'd like to. Here's an example of using Tailwind's @apply directive to change the default background color of all buttons:
 
 ```
-<style>    [data-flux-button] {        @apply bg-zinc-800 dark:bg-zinc-400 hover:bg-zinc-700 dark:hover:bg-zinc-300;    }</style>
+<style>
+    [data-flux-button] {
+        @apply bg-zinc-800 dark:bg-zinc-400 hover:bg-zinc-700 dark:hover:bg-zinc-300;
+    }
+</style>
 ```

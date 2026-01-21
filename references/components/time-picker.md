@@ -73,7 +73,11 @@ Restrict the selectable times by setting minimum and maximum boundaries.
 You can also use the convenient "now" shorthand:
 
 ```blade
-<!-- Prevent selection before now... --><flux:time-picker min="now" /><!-- Prevent selection after now... --><flux:time-picker max="now" />
+<!-- Prevent selection before now... -->
+<flux:time-picker min="now" />
+
+<!-- Prevent selection after now... -->
+<flux:time-picker max="now" />
 ```
 
 ## Unavailable times

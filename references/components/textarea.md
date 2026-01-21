@@ -14,7 +14,10 @@ Capture multi-line text input from users. Ideal for comments, descriptions, and 
 Display a hint inside the textarea to guide users on what to enter.
 
 ```blade
-<flux:textarea    label="Order notes"    placeholder="No lettuce, tomato, or onion..."/>
+<flux:textarea
+    label="Order notes"
+    placeholder="No lettuce, tomato, or onion..."
+/>
 ```
 
 ## Fixed row height
@@ -38,7 +41,8 @@ If you want to restrict the user from resizing the textarea, you can use the res
 
 ```blade
 <flux:textarea resize="vertical" />
-<flux:textarea resize="none" /><flux:textarea resize="horizontal" />
+<flux:textarea resize="none" />
+<flux:textarea resize="horizontal" />
 <flux:textarea resize="both" />
 ```
 

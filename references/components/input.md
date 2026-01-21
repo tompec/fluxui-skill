@@ -9,10 +9,14 @@ Capture user data with various forms of text input.
 
 ```blade
 <flux:field>
-<flux:label>Username</flux:label>
-<flux:description>This will be publicly displayed.</flux:description>
-<flux:input />
-<flux:error name="username" /></flux:field>
+    <flux:label>Username</flux:label>
+
+    <flux:description>This will be publicly displayed.</flux:description>
+
+    <flux:input />
+
+    <flux:error name="username" />
+</flux:field>
 ```
 
 ## Shorthand
@@ -36,7 +40,8 @@ Use the browser's various input types for different situations: text, email, pas
 
 ```blade
 <flux:input type="email" label="Email" />
-<flux:input type="password" label="Password" /><flux:input type="date" max="2999-12-31" label="Date" />
+<flux:input type="password" label="Password" />
+<flux:input type="date" max="2999-12-31" label="Date" />
 ```
 
 ## File
@@ -80,6 +85,7 @@ Restrict the formatting of text content for unique cases by using [Alpine's mask
 
 ```blade
 <flux:input mask="(999) 999-9999" value="7161234567" />
+
 <flux:input mask:dynamic="$money($input)" value="1234.56" />
 ```
 
@@ -88,7 +94,10 @@ Append or prepend an icon to the inside of a form input.
 
 ```blade
 <flux:input icon="magnifying-glass" placeholder="Search orders" />
-<flux:input icon:trailing="credit-card" placeholder="4444-4444-4444-4444" /><flux:input icon:trailing="loading" placeholder="Search transactions" />
+
+<flux:input icon:trailing="credit-card" placeholder="4444-4444-4444-4444" />
+
+<flux:input icon:trailing="loading" placeholder="Search transactions" />
 ```
 
 ## Icon buttons
@@ -96,13 +105,16 @@ Append a button to the inside of an input to provide associated functionality.
 
 ```blade
 <flux:input placeholder="Search orders">
-<x-slot name="iconTrailing">
-<flux:button size="sm" variant="subtle" icon="x-mark" class="-mr-1" />
-</x-slot></flux:input>
+    <x-slot name="iconTrailing">
+        <flux:button size="sm" variant="subtle" icon="x-mark" class="-mr-1" />
+    </x-slot>
+</flux:input>
+
 <flux:input type="password" value="password">
-<x-slot name="iconTrailing">
-<flux:button size="sm" variant="subtle" icon="eye" class="-mr-1" />
-</x-slot></flux:input>
+    <x-slot name="iconTrailing">
+        <flux:button size="sm" variant="subtle" icon="eye" class="-mr-1" />
+    </x-slot>
+</flux:input>
 ```
 
 ## Clearable, copyable, and viewable inputs
@@ -110,7 +122,8 @@ Flux provides three special input properties to configure common input button be
 
 ```blade
 <flux:input placeholder="Search orders" clearable />
-<flux:input type="password" value="password" viewable /><flux:input icon="key" value="FLUX-1234-5678-ABCD-EFGH" readonly copyable />
+<flux:input type="password" value="password" viewable />
+<flux:input icon="key" value="FLUX-1234-5678-ABCD-EFGH" readonly copyable />
 ```
 
 ## Keyboard hint
@@ -132,14 +145,19 @@ Attach buttons to the beginning or end of an input element.
 
 ```blade
 <flux:input.group>
-<flux:input placeholder="Post title" />
-<flux:button icon="plus">New post</flux:button></flux:input.group>
+    <flux:input placeholder="Post title" />
+
+    <flux:button icon="plus">New post</flux:button>
+</flux:input.group>
+
 <flux:input.group>
-<flux:select class="max-w-fit">
-<flux:select.option selected>USD</flux:select.option>
-<!-- ... -->
-</flux:select>
-<flux:input placeholder="$99.99" /></flux:input.group>
+    <flux:select class="max-w-fit">
+        <flux:select.option selected>USD</flux:select.option>
+        <!-- ... -->
+    </flux:select>
+
+    <flux:input placeholder="$99.99" />
+</flux:input.group>
 ```
 
 ## Text prefixes and suffixes
@@ -147,11 +165,16 @@ Append text inside a form input.
 
 ```blade
 <flux:input.group>
-<flux:input.group.prefix>https://</flux:input.group.prefix>
-<flux:input placeholder="example.com" /></flux:input.group>
+    <flux:input.group.prefix>https://</flux:input.group.prefix>
+
+    <flux:input placeholder="example.com" />
+</flux:input.group>
+
 <flux:input.group>
-<flux:input placeholder="chunky-spaceship" />
-<flux:input.group.suffix>.brand.com</flux:input.group.suffix></flux:input.group>
+    <flux:input placeholder="chunky-spaceship" />
+
+    <flux:input.group.suffix>.brand.com</flux:input.group.suffix>
+</flux:input.group>
 ```
 
 ## Input group labels
@@ -159,12 +182,16 @@ If you want to use an input group in a form field with a label, you will need to
 
 ```blade
 <flux:field>
-<flux:label>Website</flux:label>
-<flux:input.group>
-<flux:input.group.prefix>https://</flux:input.group.prefix>
-<flux:input wire:model="website" placeholder="example.com" />
-</flux:input.group>
-<flux:error name="website" /></flux:field>
+    <flux:label>Website</flux:label>
+
+    <flux:input.group>
+        <flux:input.group.prefix>https://</flux:input.group.prefix>
+
+        <flux:input wire:model="website" placeholder="example.com" />
+    </flux:input.group>
+
+    <flux:error name="website" />
+</flux:field>
 ```
 
 ## Reference

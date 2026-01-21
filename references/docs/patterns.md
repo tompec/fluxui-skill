@@ -78,7 +78,8 @@ For example, the flux:input component actually renders two HTML elements by defa
 
 ```
 <div class="...">
-<input type="text" class="..."></div>
+    <input type="text" class="...">
+</div>
 ```
 
 This presents a problem when passing bespoke Tailwind classes into the component: which element should receive the provided classes?
@@ -95,7 +96,8 @@ Flux will apply the w-full class to the wrapping <div> element and the autofocus
 
 ```
 <div class="w-full ...">
-<input type="text" class="..." autofocus></div>
+    <input type="text" class="..." autofocus>
+</div>
 ```
 
 ## Common props
@@ -110,9 +112,12 @@ Here's a list of a few common component variants:
 
 ```blade
 <flux:button variant="primary" />
-<flux:input variant="filled" /><flux:modal variant="flyout" />
-<flux:badge variant="solid" /><flux:select variant="combobox" />
-<flux:separator variant="subtle" /><flux:tabs variant="segmented" />
+<flux:input variant="filled" />
+<flux:modal variant="flyout" />
+<flux:badge variant="solid" />
+<flux:select variant="combobox" />
+<flux:separator variant="subtle" />
+<flux:tabs variant="segmented" />
 ```
 
 If you find the need for a variant we don't offer, don't be afraid to [publish a component and add your own.](/docs/customization#publishing-components)
@@ -127,9 +132,12 @@ Here's a handful of components you can pass icons into:
 
 ```blade
 <flux:button icon="magnifying-glass" />
-<flux:input icon="magnifying-glass" /><flux:tab icon="cog-6-tooth" />
-<flux:badge icon="user" /><flux:breadcrumbs.item icon="home" />
-<flux:navlist.item icon="user" /><flux:navbar.item icon="user" />
+<flux:input icon="magnifying-glass" />
+<flux:tab icon="cog-6-tooth" />
+<flux:badge icon="user" />
+<flux:breadcrumbs.item icon="home" />
+<flux:navlist.item icon="user" />
+<flux:navbar.item icon="user" />
 <flux:menu.item icon="plus" />
 ```
 
@@ -137,7 +145,8 @@ Occasionally, if a component supports adding an icon to the end of an element in
 
 ```blade
 <flux:button icon:trailing="chevron-down" />
-<flux:input icon:trailing="credit-card" /><flux:badge icon:trailing="x-mark" />
+<flux:input icon:trailing="credit-card" />
+<flux:badge icon:trailing="x-mark" />
 <flux:navbar.item icon:trailing="chevron-down" />
 ```
 
@@ -149,7 +158,8 @@ Here are a few components that can be sized-down:
 
 ```blade
 <flux:button size="sm" />
-<flux:select size="sm" /><flux:input size="sm" />
+<flux:select size="sm" />
+<flux:input size="sm" />
 <flux:tabs size="sm" />
 ```
 
@@ -166,8 +176,10 @@ Similar to the icon prop, many components allow you to add decorative hints for 
 
 ```blade
 <flux:button kbd="⌘S" />
-<flux:tooltip kbd="D" /><flux:input kbd="⌘K" />
-<flux:menu.item kbd="⌘E" /><flux:command.item kbd="⌘N" />
+<flux:tooltip kbd="D" />
+<flux:input kbd="⌘K" />
+<flux:menu.item kbd="⌘E" />
+<flux:command.item kbd="⌘N" />
 ```
 
 ## Inset
@@ -177,7 +189,8 @@ Certain components offer the inset prop which makes it easy to add the exact amo
 This is extremely useful for putting a button or a badge inline with other text and not stretching the entire height of the container.
 
 ```blade
-<flux:badge inset="top bottom"><flux:button variant="ghost" inset="left">
+<flux:badge inset="top bottom">
+<flux:button variant="ghost" inset="left">
 ```
 
 ## Prop forwarding
@@ -194,7 +207,8 @@ This is often a more desirable alternative to composing the entire component lik
 
 ```blade
 <flux:button>
-<flux:icon.bell /></flux:button>
+   <flux:icon.bell />
+</flux:button>
 ```
 
 However, when using the icon prop, you are unable to add additional props to the Icon component like variant.
@@ -225,9 +239,12 @@ For example, here's a full input field:
 
 ```blade
 <flux:field>
-<flux:label>Email</flux:label>
-<flux:input wire:model="email" type="email" />
-<flux:error name="email" /></flux:field>
+    <flux:label>Email</flux:label>
+
+    <flux:input wire:model="email" type="email" />
+
+    <flux:error name="email" />
+</flux:field>
 ```
 
 This can be shortened to the following:
@@ -246,7 +263,8 @@ Here's a long-form toolip:
 
 ```blade
 <flux:tooltip content="Settings">
-<flux:button icon="cog-6-tooth" /></flux:tooltip>
+    <flux:button icon="cog-6-tooth" />
+</flux:tooltip>
 ```
 
 Because the above is often repetitive, you can shorten it to a simple tooltip prop:
@@ -263,14 +281,18 @@ In Flux, the experience is no different. Here are some common components you wil
 
 ```blade
 <flux:input wire:model="email" />
-<flux:checkbox wire:model="terms" /><flux:switch wire:model.live="enabled" />
-<flux:textarea wire:model="content" /><flux:select wire:model="state" />
+<flux:checkbox wire:model="terms" />
+<flux:switch wire:model.live="enabled" />
+<flux:textarea wire:model="content" />
+<flux:select wire:model="state" />
 ```
 
 In addition to these common ones you'd expect, here are a few other components you can control via wire:model:
 
 ```blade
-<flux:checkbox.group wire:model="notifications"><flux:radio.group wire:model="payment"><flux:tabs wire:model="activeTab">
+<flux:checkbox.group wire:model="notifications">
+<flux:radio.group wire:model="payment">
+<flux:tabs wire:model="activeTab">
 ```
 
 Of course, you can also pass x-model or x-on:change to any of these and they should behave exactly like native input elements.
@@ -283,34 +305,56 @@ All of the following components can be used on their own, or grouped together:
 
 ```blade
 <flux:button.group>
-<flux:button /></flux:button.group>
+    <flux:button />
+</flux:button.group>
+
 <flux:input.group>
-<flux:input /></flux:input.group>
+    <flux:input />
+</flux:input.group>
+
 <flux:checkbox.group>
-<flux:checkbox /></flux:checkbox.group>
+    <flux:checkbox />
+</flux:checkbox.group>
+
 <flux:radio.group>
-<flux:radio /></flux:radio.group>
+    <flux:radio />
+</flux:radio.group>
 ```
 
 Alternatively, if a component can NOT be used on its own, but can be grouped, the wrapper will often be the main name of the component, and each child will have a .item suffix:
 
 ```blade
 <flux:accordion>
-<flux:accordion.item /></flux:accordion>
+    <flux:accordion.item />
+</flux:accordion>
+
 <flux:menu>
-<flux:menu.item /></flux:menu>
+    <flux:menu.item />
+</flux:menu>
+
 <flux:breadcrumbs>
-<flux:breadcrumbs.item /></flux:breadcrumbs>
+    <flux:breadcrumbs.item />
+</flux:breadcrumbs>
+
 <flux:navbar>
-<flux:navbar.item /></flux:navbar>
+    <flux:navbar.item />
+</flux:navbar>
+
 <flux:navlist>
-<flux:navlist.item /></flux:navlist>
+    <flux:navlist.item />
+</flux:navlist>
+
 <flux:navmenu>
-<flux:navmenu.item /></flux:navmenu>
+    <flux:navmenu.item />
+</flux:navmenu>
+
 <flux:command>
-<flux:command.item /></flux:command>
+    <flux:command.item />
+</flux:command>
+
 <flux:autocomplete>
-<flux:autocomplete.item /></flux:autocomplete>
+    <flux:autocomplete.item />
+</flux:autocomplete>
 ```
 
 # Root components
@@ -323,9 +367,10 @@ For example, this is flux's field component:
 
 ```blade
 <flux:field>
-<flux:label></flux:label>
-<flux:description></flux:description>
-<flux:error></flux:error></flux:field>
+    <flux:label></flux:label>
+    <flux:description></flux:description>
+    <flux:error></flux:error>
+</flux:field>
 ```
 
 You'll notice bare component names like flux:label, instead of flux:field.label.
@@ -342,10 +387,12 @@ For example, the flux:tabs component doesn't follow the aforementioned rules:
 
 ```blade
 <flux:tab.group>
-<flux:tabs>
-<flux:tab>
-</flux:tabs>
-<flux:tab.panel></flux:tab.group>
+    <flux:tabs>
+        <flux:tab>
+    </flux:tabs>
+
+    <flux:tab.panel>
+</flux:tab.group>
 ```
 
 ## Slots
@@ -366,9 +413,10 @@ Here is the above, rewritten with a wrapping button:
 
 ```blade
 <flux:input>
-<x-slot name="iconTrailing">
-<flux:button icon="x-mark" size="sm" variant="subtle" wire:click="clear" />
-</x-slot></flux:input>
+    <x-slot name="iconTrailing">
+        <flux:button icon="x-mark" size="sm" variant="subtle" wire:click="clear" />
+    </x-slot>
+</flux:input>
 ```
 
 ## Paper cuts
@@ -384,5 +432,7 @@ However, those expressions are not supported inside the opening tag of a Blade o
 Instead, you must stay within the confines of the Blade component [dynamic attribute syntax](https://laravel.com/docs/12.x/blade#component-attributes):
 
 ```blade
-<!-- Conditional attributes: --><input @if ($disabled) disabled @endif><flux:input :disabled="$disabled">
+<!-- Conditional attributes: -->
+<input @if ($disabled) disabled @endif>
+<flux:input :disabled="$disabled">
 ```

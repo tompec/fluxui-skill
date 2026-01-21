@@ -16,17 +16,20 @@ Display a form for verifying one-time passwords.
 
 ```blade
 <flux:card>
-<form wire:submit="verify" class="space-y-8">
-<div class="max-w-64 mx-auto space-y-2">
-<flux:heading size="lg" class="text-center">Verify your account</flux:heading>
-<flux:text class="text-center">Please enter a one-time password from the authenticator app.</flux:text>
-</div>
-<flux:otp wire:model="code" length="6" label="OTP Code" label:sr-only :error:icon="false" error:class="text-center" class="mx-auto" />
-<div class="space-y-4">
-<flux:button variant="primary" type="submit" class="w-full">Verify</flux:button>
-<flux:button wire:click="resend" class="w-full">Resend code</flux:button>
-</div>
-</form></flux:card>
+    <form wire:submit="verify" class="space-y-8">
+        <div class="max-w-64 mx-auto space-y-2">
+            <flux:heading size="lg" class="text-center">Verify your account</flux:heading>
+            <flux:text class="text-center">Please enter a one-time password from the authenticator app.</flux:text>
+        </div>
+
+        <flux:otp wire:model="code" length="6" label="OTP Code" label:sr-only :error:icon="false" error:class="text-center" class="mx-auto" />
+
+        <div class="space-y-4">
+            <flux:button variant="primary" type="submit" class="w-full">Verify</flux:button>
+            <flux:button wire:click="resend" class="w-full">Resend code</flux:button>
+        </div>
+    </form>
+</flux:card>
 ```
 
 ## Autosubmit
@@ -34,13 +37,15 @@ Use the submit="auto" prop to automatically submit the form once all input field
 
 ```blade
 <form wire:submit="verify" class="space-y-8">
-<div class="max-w-64 mx-auto space-y-2">
-<flux:heading size="lg" class="text-center">Verify your account</flux:heading>
-<flux:text class="text-center">Please enter a one-time password from the authenticator app.</flux:text>
-</div>
-<div class="space-y-6">
-<flux:otp wire:model="code" length="6" submit="auto" class="mx-auto" />
-</div></form>
+    <div class="max-w-64 mx-auto space-y-2">
+        <flux:heading size="lg" class="text-center">Verify your account</flux:heading>
+        <flux:text class="text-center">Please enter a one-time password from the authenticator app.</flux:text>
+    </div>
+
+    <div class="space-y-6">
+        <flux:otp wire:model="code" length="6" submit="auto" class="mx-auto" />
+    </div>
+</form>
 ```
 
 ## Alphanumeric
@@ -62,13 +67,14 @@ Use the default slot to render input fields with a separator in between them.
 
 ```blade
 <flux:otp wire:model="code">
-<flux:otp.input />
-<flux:otp.input />
-<flux:otp.input />
-<flux:otp.separator />
-<flux:otp.input />
-<flux:otp.input />
-<flux:otp.input /></flux:otp>
+    <flux:otp.input />
+    <flux:otp.input />
+    <flux:otp.input />
+    <flux:otp.separator />
+    <flux:otp.input />
+    <flux:otp.input />
+    <flux:otp.input />
+</flux:otp>
 ```
 
 ## Group
@@ -76,14 +82,15 @@ Group all input fields together using the flux:otp.group component.
 
 ```blade
 <flux:otp wire:model="code">
-<flux:otp.group>
-<flux:otp.input />
-<flux:otp.input />
-<flux:otp.input />
-<flux:otp.input />
-<flux:otp.input />
-<flux:otp.input />
-</flux:otp.group></flux:otp>
+    <flux:otp.group>
+        <flux:otp.input />
+        <flux:otp.input />
+        <flux:otp.input />
+        <flux:otp.input />
+        <flux:otp.input />
+        <flux:otp.input />
+    </flux:otp.group>
+</flux:otp>
 ```
 
 ## Group separator
@@ -91,17 +98,20 @@ Add a separator between groups of input fields using the flux:otp.separator comp
 
 ```blade
 <flux:otp wire:model="code">
-<flux:otp.group>
-<flux:otp.input />
-<flux:otp.input />
-<flux:otp.input />
-</flux:otp.group>
-<flux:otp.separator />
-<flux:otp.group>
-<flux:otp.input />
-<flux:otp.input />
-<flux:otp.input />
-</flux:otp.group></flux:otp>
+    <flux:otp.group>
+        <flux:otp.input />
+        <flux:otp.input />
+        <flux:otp.input />
+    </flux:otp.group>
+
+    <flux:otp.separator />
+
+    <flux:otp.group>
+        <flux:otp.input />
+        <flux:otp.input />
+        <flux:otp.input />
+    </flux:otp.group>
+</flux:otp>
 ```
 
 ## Reference

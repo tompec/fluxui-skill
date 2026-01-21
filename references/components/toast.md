@@ -10,35 +10,51 @@ To use the Toast component from Livewire, you must include it somewhere on the p
 
 ```blade
 <body>
-<!-- ... -->
-<flux:toast /></body>
+    <!-- ... -->
+
+    <flux:toast />
+</body>
 ```
 
 If you are using wire:navigate to navigate between pages, you may want to persist the toast component so that toast messages don't suddenly disappear when navigating away from the page.
 
 ```blade
 <body>
-<!-- ... -->    @persist('toast')        <flux:toast />    @endpersist</body>
+    <!-- ... -->
+
+    @persist('toast')
+        <flux:toast />
+    @endpersist
+</body>
 ```
 
 Once the toast component is present on the page, you can use the Flux::toast() method to trigger a toast message from your Livewire components:
 
-```php
+```
 <?php
 
-namespace App\Livewire;use Livewire\Component;
+namespace App\Livewire;
+
+use Livewire\Component;
 use Flux\Flux;
 
-class EditPost extends Component{
+class EditPost extends Component
+{
+    public function save()
+    {
+        // ...
 
-        public function save()    {        // ...        Flux::toast('Your changes have been saved.');    }
+        Flux::toast('Your changes have been saved.');
+    }
 }
 ```
 
 You can also trigger a toast from Alpine directly using Flux's magic methods:
 
 ```
-<button x-on:click="$flux.toast('Your changes have been saved.')">    Save changes</button>
+<button x-on:click="$flux.toast('Your changes have been saved.')">
+    Save changes
+</button>
 ```
 
 Or you can use the window.Flux global object to trigger a toast from any JavaScript in your application:
@@ -46,42 +62,60 @@ Or you can use the window.Flux global object to trigger a toast from any JavaScr
 Both $flux and window.Flux support the following method parameter signatures:
 
 ```
-Flux.toast('Your changes have been saved.')// Or...Flux.toast({    heading: 'Changes saved',    text: 'Your changes have been saved.',    variant: 'success',})
+Flux.toast('Your changes have been saved.')
+
+// Or...
+
+Flux.toast({
+    heading: 'Changes saved',
+    text: 'Your changes have been saved.',
+    variant: 'success',
+})
 ```
 
 ## With heading
 Use a heading to provide additional context for the toast.
 
 ```
-Flux::toast(    heading: 'Changes saved.',    text: 'You can always update this in your settings.',);
+Flux::toast(
+    heading: 'Changes saved.',
+    text: 'You can always update this in your settings.',
+);
 ```
 
 ## Variants
 Use the variant prop to change the visual style of the toast.
 
 ```
-Flux::toast(variant: 'success', ...);Flux::toast(variant: 'warning', ...);Flux::toast(variant: 'danger', ...);
+Flux::toast(variant: 'success', ...);
+Flux::toast(variant: 'warning', ...);
+Flux::toast(variant: 'danger', ...);
 ```
 
 ## Positioning
 By default, the toast will appear in the bottom right corner of the page. You can customize this position using the position prop.
 
 ```blade
-<flux:toast position="top end" /><!-- Customize top padding for things like navbars... --><flux:toast position="top end" class="pt-24" />
+<flux:toast position="top end" />
+
+<!-- Customize top padding for things like navbars... -->
+<flux:toast position="top end" class="pt-24" />
 ```
 
 ## Duration
 By default, the toast will automatically dismiss after 5 seconds. You can customize this duration by passing a number of milliseconds to the duration prop.
 
 ```
-// 1 second...Flux::toast(duration: 1000, ...);
+// 1 second...
+Flux::toast(duration: 1000, ...);
 ```
 
 ## Permanent
 Use a value of 0 as the duration prop to make the toast stay open indefinitely.
 
 ```
-// Show indefinitely...Flux::toast(duration: 0, ...);
+// Show indefinitely...
+Flux::toast(duration: 0, ...);
 ```
 
 ## Stack
@@ -89,21 +123,24 @@ To show a stack of toasts, you can wrap the flux:toast component in a flux:toast
 
 ```blade
 <flux:toast.group>
-<flux:toast /></flux:toast.group>
+    <flux:toast />
+</flux:toast.group>
 ```
 
 Use the expanded prop to always show the toast stack in an expanded state, making all toasts visible at once.
 
 ```blade
 <flux:toast.group expanded>
-<flux:toast /></flux:toast.group>
+    <flux:toast />
+</flux:toast.group>
 ```
 
 The group component also accepts the position prop to control where the toast stack appears on the screen.
 
 ```blade
 <flux:toast.group position="top end">
-<flux:toast /></flux:toast.group>
+    <flux:toast />
+</flux:toast.group>
 ```
 
 ## Reference
@@ -133,7 +170,16 @@ The PHP method used to trigger toasts from Livewire components.
 The Alpine.js magic method used to trigger toasts from Alpine components. It can be used in two ways:
 
 ```
-// Simple usage with just a message...$flux.toast('Your changes have been saved')// Advanced usage with full configuration...$flux.toast({    heading: 'Success!',    text: 'Your changes have been saved',    variant: 'success',    duration: 3000})
+// Simple usage with just a message...
+$flux.toast('Your changes have been saved')
+
+// Advanced usage with full configuration...
+$flux.toast({
+    heading: 'Success!',
+    text: 'Your changes have been saved',
+    variant: 'success',
+    duration: 3000
+})
 ```
 
 | Parameter | Description |

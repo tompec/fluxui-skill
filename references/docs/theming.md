@@ -19,7 +19,22 @@ Because zinc is hard-coded throughout Flux's source code, you will need to redef
 Here is an example of redefining "zinc" to "slate" in your CSS file:
 
 ```
-/* resources/css/app.css *//* Re-assign Flux's gray of choice... */@theme {  --color-zinc-50: var(--color-slate-50);  --color-zinc-100: var(--color-slate-100);  --color-zinc-200: var(--color-slate-200);  --color-zinc-300: var(--color-slate-300);  --color-zinc-400: var(--color-slate-400);  --color-zinc-500: var(--color-slate-500);  --color-zinc-600: var(--color-slate-600);  --color-zinc-700: var(--color-slate-700);  --color-zinc-800: var(--color-slate-800);  --color-zinc-900: var(--color-slate-900);  --color-zinc-950: var(--color-slate-950);}
+/* resources/css/app.css */
+
+/* Re-assign Flux's gray of choice... */
+@theme {
+  --color-zinc-50: var(--color-slate-50);
+  --color-zinc-100: var(--color-slate-100);
+  --color-zinc-200: var(--color-slate-200);
+  --color-zinc-300: var(--color-slate-300);
+  --color-zinc-400: var(--color-slate-400);
+  --color-zinc-500: var(--color-slate-500);
+  --color-zinc-600: var(--color-slate-600);
+  --color-zinc-700: var(--color-slate-700);
+  --color-zinc-800: var(--color-slate-800);
+  --color-zinc-900: var(--color-slate-900);
+  --color-zinc-950: var(--color-slate-950);
+}
 ```
 
 Now, Flux will use "slate" as the base color instead of "zinc", and you can use "slate" inside your application utilities like you normally would:
@@ -35,7 +50,21 @@ Under the hood, flux uses CSS variables for its accent colors. This means that y
 We recommend you use the [interactive theme builder](/themes) with pre-selected colors, however, if you'd like to use a different accent color, you can define the following CSS variables in your own css file:
 
 ```
-/* resources/css/app.css */@theme {    --color-accent: var(--color-red-500);    --color-accent-content: var(--color-red-600);    --color-accent-foreground: var(--color-white);}@layer theme {    .dark {        --color-accent: var(--color-red-500);        --color-accent-content: var(--color-red-400);        --color-accent-foreground: var(--color-white);    }}
+/* resources/css/app.css */
+
+@theme {
+    --color-accent: var(--color-red-500);
+    --color-accent-content: var(--color-red-600);
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-red-500);
+        --color-accent-content: var(--color-red-400);
+        --color-accent-foreground: var(--color-white);
+    }
+}
 ```
 
 You'll notice Flux uses three different hues in both light mode and dark mode for its accent color palette. Here are descriptions of each hue:
@@ -63,14 +92,27 @@ However, this is not a very ergonomic syntax. Instead you can use utility classe
 Certain design elements like tabs and links use the accent color by default. If you'd like to opt out of this behavior, and use the base color instead, you can use the :accent="false" prop:
 
 ```blade
-<!-- Link --><flux:link :accent="false">Profile</flux:tab><!-- Tabs --><flux:tabs>
-<flux:tab :accent="false">Profile</flux:tab>
-<flux:tab :accent="false">Account</flux:tab>
-<flux:tab :accent="false">Billing</flux:tab></flux:tabs><!-- Navbar --><flux:navbar>
-<flux:navbar.item :accent="false">Profile</flux:navbar.item>
-<flux:navbar.item :accent="false">Account</flux:navbar.item>
-<flux:navbar.item :accent="false">Billing</flux:navbar.item></flux:navbar><!-- Navlist --><flux:navlist>
-<flux:navlist.item :accent="false">Profile</flux:navlist.item>
-<flux:navlist.item :accent="false">Account</flux:navlist.item>
-<flux:navlist.item :accent="false">Billing</flux:navlist.item></flux:navlist>
+<!-- Link -->
+<flux:link :accent="false">Profile</flux:tab>
+
+<!-- Tabs -->
+<flux:tabs>
+    <flux:tab :accent="false">Profile</flux:tab>
+    <flux:tab :accent="false">Account</flux:tab>
+    <flux:tab :accent="false">Billing</flux:tab>
+</flux:tabs>
+
+<!-- Navbar -->
+<flux:navbar>
+    <flux:navbar.item :accent="false">Profile</flux:navbar.item>
+    <flux:navbar.item :accent="false">Account</flux:navbar.item>
+    <flux:navbar.item :accent="false">Billing</flux:navbar.item>
+</flux:navbar>
+
+<!-- Navlist -->
+<flux:navlist>
+    <flux:navlist.item :accent="false">Profile</flux:navlist.item>
+    <flux:navlist.item :accent="false">Account</flux:navlist.item>
+    <flux:navlist.item :accent="false">Billing</flux:navlist.item>
+</flux:navlist>
 ```

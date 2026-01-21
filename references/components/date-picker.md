@@ -18,7 +18,7 @@ Use date inputs instead of date pickers for far-future or past events such as bi
 Set the initial selected date using the value prop with a Y-m-d formatted date string:
 
 ```blade
-<flux:date-picker value="2026-01-20" />
+<flux:date-picker value="2026-01-21" />
 ```
 
 You can also bind the selection to a Livewire property using wire:model:
@@ -29,7 +29,7 @@ You can also bind the selection to a Livewire property using wire:model:
 
 Now you can access the selected date from your Livewire component using either a Carbon instance or a Y-m-d formatted string:
 
-```php
+```
 <?php
 
 use Illuminate\Support\Carbon;
@@ -37,8 +37,17 @@ use Livewire\Component;
 use App\Models\Post;
 
 class CreatePost extends Component {
+    public ?Carbon $date;
 
-        public ?Carbon $date;        public function save()    {        Post::create([            // ...            'published_at' => $this->date,        ])        // ...    }
+    public function save()
+    {
+        Post::create([
+            // ...
+            'published_at' => $this->date,
+        ])
+
+        // ...
+    }
 }
 ```
 
@@ -47,9 +56,10 @@ Attach the date picker to a date input for more precise date selection control.
 
 ```blade
 <flux:date-picker wire:model="date">
-<x-slot name="trigger">
-<flux:date-picker.input />
-</x-slot></flux:date-picker>
+    <x-slot name="trigger">
+        <flux:date-picker.input />
+    </x-slot>
+</flux:date-picker>
 ```
 
 ## Range picker
@@ -73,30 +83,38 @@ You can also bind the selection to a Livewire property using wire:model:
 
 Now you can access the selected range from your Livewire component using an associative array of Y-m-d formatted date strings:
 
-```php
+```
 <?php
 
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 
 class Dashboard extends Component {
+    public array $range;
 
-        public array $range;        public function mount() {        $this->range = [            'start' => now()->subMonth()->format('Y-m-d'),            'end' => now()->format('Y-m-d'),        ];
+    public function mount() {
+        $this->range = [
+            'start' => now()->subMonth()->format('Y-m-d'),
+            'end' => now()->format('Y-m-d'),
+        ];
     }
 }
 ```
 
 Alternatively, you can use the specialized DateRange object for enhanced functionality:
 
-```php
+```
 <?php
 
 use Livewire\Component;
 use Flux\DateRange;
 
 class Dashboard extends Component {
+    public DateRange $range;
 
-        public DateRange $range;        public function mount() {        $this->range = new DateRange(now()->subMonth(), now());    }
+    public function mount() {
+        $this->range = new DateRange(now()->subMonth(), now());
+    }
 }
 ```
 
@@ -118,12 +136,13 @@ Use separate inputs for start and end dates to provide a clearer interface for d
 
 ```blade
 <flux:date-picker mode="range">
-<x-slot name="trigger">
-<div class="flex flex-col sm:flex-row gap-6 sm:gap-4">
-<flux:date-picker.input label="Start" />
-<flux:date-picker.input label="End" />
-</div>
-</x-slot></flux:date-picker>
+    <x-slot name="trigger">
+        <div class="flex flex-col sm:flex-row gap-6 sm:gap-4">
+            <flux:date-picker.input label="Start" />
+            <flux:date-picker.input label="End" />
+        </div>
+    </x-slot>
+</flux:date-picker>
 ```
 
 ## Presets
@@ -136,7 +155,10 @@ Allow users to select from frequently used ranges like "Last 7 days" or "This mo
 You can also specify which presets to show, and in which order, using the presets prop:
 
 ```blade
-<flux:date-picker    mode="range"    presets="today yesterday thisWeek last7Days thisMonth yearToDate allTime"/>
+<flux:date-picker
+    mode="range"
+    presets="today yesterday thisWeek last7Days thisMonth yearToDate allTime"
+/>
 ```
 
 ## Available presets
@@ -169,19 +191,27 @@ Below is a list of all available presets.
 When using the allTime preset, you must specify a minimum date using the min prop. This minimum date will be used as the start date of the "All Time" range. Today's date will be used as the end date:
 
 ```blade
-<flux:date-picker    mode="range"    presets="... allTime"    :min="auth()->user()->created_at->format('Y-m-d')"/>
+<flux:date-picker
+    mode="range"
+    presets="... allTime"
+    :min="auth()->user()->created_at->format('Y-m-d')"
+/>
 ```
 
 If you need to construct this via the DateRange object from Livewire, you can do so like this:
 
 ```
-use Flux\DateRange;$this->range = DateRange::allTime(start: auth()->user()->created_at);
+use Flux\DateRange;
+
+$this->range = DateRange::allTime(start: auth()->user()->created_at);
 ```
 
 If you are using this date range to filter data, you may want to remove "where" constraints from the query when allTime is selected:
 
 ```
-$orders = Order::when($this->range->isNotAllTime(), function ($query) => {    $query->whereBetween('created_at', $this->range);})->get();
+$orders = Order::when($this->range->isNotAllTime(), function ($query) => {
+    $query->whereBetween('created_at', $this->range);
+})->get();
 ```
 
 ## Custom range preset
@@ -196,7 +226,7 @@ When a user selects a custom date range that doesn't match any other preset, the
 Disable specific dates from being selected. Useful for blocking out holidays, showing booked dates, or indicating unavailable time slots.
 
 ```blade
-<flux:date-picker unavailable="2026-01-19,2026-01-21" />
+<flux:date-picker unavailable="2026-01-20,2026-01-22" />
 ```
 
 ## With today shortcut
@@ -268,30 +298,33 @@ First, it's worth noting that most of the time, you will want to use wire:model.
 
 Now, in your component, you can type hint the range property as a DateRange object:
 
-```php
+```
 <?php
 
 use Livewire\Component;
 use Flux\DateRange;
 
 class Dashboard extends Component {
-
-        public DateRange $range;}
+    public DateRange $range;
+}
 ```
 
 ## Instantiation
 
 You can initialize a DateRange object by passing a start and end date to the DateRange constructor from something like the mount method:
 
-```php
+```
 <?php
 
 use Livewire\Component;
 use Flux\DateRange;
 
 class Dashboard extends Component {
+    public DateRange $range;
 
-        public DateRange $range;        public function mount() {        $this->range = new DateRange(now(), now()->addDays(7));    }
+    public function mount() {
+        $this->range = new DateRange(now(), now()->addDays(7));
+    }
 }
 ```
 
@@ -299,7 +332,7 @@ class Dashboard extends Component {
 
 You can persist a DateRange object in the user's session by using the #\[Session\] attribute:
 
-```php
+```
 <?php
 
 use Livewire\Attributes\Session;
@@ -307,14 +340,16 @@ use Livewire\Component;
 use Flux\DateRange;
 
 class Dashboard extends Component {
-    #[Session]        public DateRange $range;}
+    #[Session]
+    public DateRange $range;
+}
 ```
 
 ## Using with Eloquent
 
 You can use the DateRange object with Eloquent's whereBetween() method to filter queries by date range:
 
-```php
+```
 <?php
 
 use Livewire\Attributes\Computed;
@@ -323,8 +358,14 @@ use App\Models\Order;
 use Flux\DateRange;
 
 class Dashboard extends Component {
+    public ?DateRange $range;
 
-        public ?DateRange $range;    #[Computed]        public function orders() {        return $this->range            ? Order::whereBetween('created_at', $this->range)->get()            : Order::all();    }
+    #[Computed]
+    public function orders() {
+        return $this->range
+            ? Order::whereBetween('created_at', $this->range)->get()
+            : Order::all();
+    }
 }
 ```
 
@@ -333,7 +374,28 @@ class Dashboard extends Component {
 The DateRange object extends the native CarbonPeriod class, so it inherits all of its methods. Here are a few examples:
 
 ```
-$range = new Flux\DateRange(    now()->subDays(1),    now()->addDays(1),);// Get the start and end dates as Carbon instances...$start = $range->start();$end = $range->end();// Check if the range contains a date...$range->contains(now());// Get the number of days in the range...$range->length();// Loop over the range by day...foreach ($range as $date) {    // $date is a Carbon instance...}// Get the range as an array of Carbon instances representing each day in the range...$range->toArray();
+$range = new Flux\DateRange(
+    now()->subDays(1),
+    now()->addDays(1),
+);
+
+// Get the start and end dates as Carbon instances...
+$start = $range->start();
+$end = $range->end();
+
+// Check if the range contains a date...
+$range->contains(now());
+
+// Get the number of days in the range...
+$range->length();
+
+// Loop over the range by day...
+foreach ($range as $date) {
+    // $date is a Carbon instance...
+}
+
+// Get the range as an array of Carbon instances representing each day in the range...
+$range->toArray();
 ```
 
 You can also use it anywhere Eloquent utilities expect a CarbonPeriod instance:
@@ -347,19 +409,29 @@ $orders = Order::whereBetween('created_at', $range)->get();
 When using the presets prop, the calendar will get/set an associative array of dates as well as a preset key:
 
 ```
-[    'start' => null,    'end' => null,    'preset' => 'lastMonth',]
+[
+    'start' => null,
+    'end' => null,
+    'preset' => 'lastMonth',
+]
 ```
 
 You can directly get/set the preset string through a simple array binding:
 
-```php
+```
 <?php
 
 use Livewire\Component;
 
 class Dashboard extends Component {
+    public array $range;
 
-        public array $range;        public function mount() {        $this->range = [            'start' => null,            'end' => null,            'preset' => 'lastMonth',        ];
+    public function mount() {
+        $this->range = [
+            'start' => null,
+            'end' => null,
+            'preset' => 'lastMonth',
+        ];
     }
 }
 ```
@@ -368,15 +440,18 @@ However, the DateRange object is equipped to manage the preset internally.
 
 For example, you can create a range using the lastMonth() method:
 
-```php
+```
 <?php
 
 use Livewire\Component;
 use Flux\DateRange;
 
 class Dashboard extends Component {
+    public DateRange $range;
 
-        public DateRange $range;        public function mount() {        $this->range = DateRange::lastMonth();    }
+    public function mount() {
+        $this->range = DateRange::lastMonth();
+    }
 }
 ```
 
@@ -385,7 +460,9 @@ class Dashboard extends Component {
 You can access the preset as an enum value via the preset() method:
 
 ```
-$this->range->preset();// This will return a value like `DateRangePreset::LastMonth`...
+$this->range->preset();
+
+// This will return a value like `DateRangePreset::LastMonth`...
 ```
 
 ## Reference

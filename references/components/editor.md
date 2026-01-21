@@ -49,17 +49,22 @@ The following toolbar items are available:
 You can add your own toolbar items by adding new files to the resources/views/flux/editor directory in your project.
 
 ```
-- resources    - views        - flux            - editor                - copy.blade.php
+- resources
+    - views
+        - flux
+            - editor
+                - copy.blade.php
 ```
 
 Here's an example of what a custom "Copy to clipboard" item in a blade file might look like:
 
 ```blade
 <flux:tooltip content="{{ __('Copy to clipboard') }}" class="contents">
-<flux:editor.button x-on:click="navigator.clipboard?.writeText($el.closest('[data-flux-editor]').value); $el.setAttribute('data-copied', ''); setTimeout(() => $el.removeAttribute('data-copied'), 2000)">
-<flux:icon.clipboard variant="outline" class="[[data-copied]_&]:hidden size-5!" />
-<flux:icon.clipboard-document-check variant="outline" class="hidden [[data-copied]_&]:block size-5!" />
-</flux:editor.button></flux:tooltip>
+    <flux:editor.button x-on:click="navigator.clipboard?.writeText($el.closest('[data-flux-editor]').value); $el.setAttribute('data-copied', ''); setTimeout(() => $el.removeAttribute('data-copied'), 2000)">
+        <flux:icon.clipboard variant="outline" class="[[data-copied]_&]:hidden size-5!" />
+        <flux:icon.clipboard-document-check variant="outline" class="hidden [[data-copied]_&]:block size-5!" />
+    </flux:editor.button>
+</flux:tooltip>
 ```
 
 Now you can reference your new component by name in any toolbar configuration like so:
@@ -74,31 +79,36 @@ If you have deeper customization needs, you can compose your own editor componen
 
 ```blade
 <flux:editor>
-<flux:editor.toolbar>
-<flux:editor.heading />
-<flux:editor.separator />
-<flux:editor.bold />
-<flux:editor.italic />
-<flux:editor.strike />
-<flux:editor.separator />
-<flux:editor.bullet />
-<flux:editor.ordered />
-<flux:editor.blockquote />
-<flux:editor.separator />
-<flux:editor.link />
-<flux:editor.separator />
-<flux:editor.align />
-<flux:editor.spacer />
-<flux:dropdown position="bottom end" offset="-15">
-<flux:editor.button icon="ellipsis-horizontal" tooltip="More" />
-<flux:menu>
-<flux:menu.item wire:click="…" icon="arrow-top-right-on-square">Preview</flux:menu.item>
-<flux:menu.item wire:click="…" icon="arrow-down-tray">Export</flux:menu.item>
-<flux:menu.item wire:click="…" icon="share">Share</flux:menu.item>
-</flux:menu>
-</flux:dropdown>
-</flux:editor.toolbar>
-<flux:editor.content /></flux:editor>
+    <flux:editor.toolbar>
+        <flux:editor.heading />
+        <flux:editor.separator />
+        <flux:editor.bold />
+        <flux:editor.italic />
+        <flux:editor.strike />
+        <flux:editor.separator />
+        <flux:editor.bullet />
+        <flux:editor.ordered />
+        <flux:editor.blockquote />
+        <flux:editor.separator />
+        <flux:editor.link />
+        <flux:editor.separator />
+        <flux:editor.align />
+
+        <flux:editor.spacer />
+
+        <flux:dropdown position="bottom end" offset="-15">
+            <flux:editor.button icon="ellipsis-horizontal" tooltip="More" />
+
+            <flux:menu>
+                <flux:menu.item wire:click="…" icon="arrow-top-right-on-square">Preview</flux:menu.item>
+                <flux:menu.item wire:click="…" icon="arrow-down-tray">Export</flux:menu.item>
+                <flux:menu.item wire:click="…" icon="share">Share</flux:menu.item>
+            </flux:menu>
+        </flux:dropdown>
+    </flux:editor.toolbar>
+
+    <flux:editor.content />
+</flux:editor>
 ```
 
 ## Height
@@ -163,7 +173,36 @@ If you need to localize the editor's aria-label or tooltip copy, you'll need to 
 Here's an example of supporting Spanish localization:
 
 ```
-// lang/es.json{    "Rich text editor": "Editor de texto enriquecido",    "Formatting": "Formato",    "Text": "Texto",    "Heading 1": "Encabezado 1",    "Heading 2": "Encabezado 2",    "Heading 3": "Encabezado 3",    "Styles": "Estilos",    "Bold": "Negrita",    "Italic": "Cursiva",    "Underline": "Subrayado",    "Strikethrough": "Tachado",    "Subscript": "Subíndice",    "Superscript": "Superíndice",    "Highlight": "Resaltar",    "Code": "Código",    "Bullet list": "Lista con viñetas",    "Ordered list": "Lista numerada",    "Blockquote": "Cita",    "Insert link": "Insertar enlace",    "Unlink": "Quitar enlace",    "Align": "Alinear",    "Left": "Izquierda",    "Center": "Centro",    "Right": "Derecha",    "Undo": "Deshacer",    "Redo": "Rehacer"}
+// lang/es.json
+
+{
+    "Rich text editor": "Editor de texto enriquecido",
+    "Formatting": "Formato",
+    "Text": "Texto",
+    "Heading 1": "Encabezado 1",
+    "Heading 2": "Encabezado 2",
+    "Heading 3": "Encabezado 3",
+    "Styles": "Estilos",
+    "Bold": "Negrita",
+    "Italic": "Cursiva",
+    "Underline": "Subrayado",
+    "Strikethrough": "Tachado",
+    "Subscript": "Subíndice",
+    "Superscript": "Superíndice",
+    "Highlight": "Resaltar",
+    "Code": "Código",
+    "Bullet list": "Lista con viñetas",
+    "Ordered list": "Lista numerada",
+    "Blockquote": "Cita",
+    "Insert link": "Insertar enlace",
+    "Unlink": "Quitar enlace",
+    "Align": "Alinear",
+    "Left": "Izquierda",
+    "Center": "Centro",
+    "Right": "Derecha",
+    "Undo": "Deshacer",
+    "Redo": "Rehacer"
+}
 ```
 
 ## Extensions
@@ -187,13 +226,20 @@ But you can also add your own extensions, disable built-in extensions, or modify
 To do this, you'll first need to create a listener for the flux:editor event in the <head> tag in your layout.
 
 ```
-<head>    ...    </head>
+<head>
+    ...
+
+</head>
 ```
 
 Or you can add the listener to your app.js file.
 
 ```
-...document.addEventListener('flux:editor', (e) => {    ...})
+...
+
+document.addEventListener('flux:editor', (e) => {
+    ...
+})
 ```
 
 ## Registering extensions
@@ -203,7 +249,16 @@ Once you have the listener set up, you can add extensions by passing an array of
 If an extension already exists, it will be replaced.
 
 ```
-import Youtube from 'https://cdn.jsdelivr.net/npm/@tiptap/extension-youtube@2.11.7/+esm'document.addEventListener('flux:editor', (e) => {    e.detail.registerExtensions([        Youtube.configure({            controls: false,            nocookie: true,        }),    ])})
+import Youtube from 'https://cdn.jsdelivr.net/npm/@tiptap/extension-youtube@2.11.7/+esm'
+
+document.addEventListener('flux:editor', (e) => {
+    e.detail.registerExtensions([
+        Youtube.configure({
+            controls: false,
+            nocookie: true,
+        }),
+    ])
+})
 ```
 
 ## Disabling extensions
@@ -211,7 +266,9 @@ import Youtube from 'https://cdn.jsdelivr.net/npm/@tiptap/extension-youtube@2.11
 If you need to disable an extension that comes with the editor, you can disable an extension by calling the disableExtension method supplied by the flux:editor event and passing through the name of the extension.
 
 ```
-document.addEventListener('flux:editor', (e) => {    e.detail.disableExtension('underline')})
+document.addEventListener('flux:editor', (e) => {
+    e.detail.disableExtension('underline')
+})
 ```
 
 ## Accessing the instance
@@ -223,7 +280,29 @@ You can do so by passing a callback to the init method supplied by the flux:edit
 The init callback will be called when Tiptap's beforeCreate event is fired. You can find more details about Tiptap's events in the [Tiptap documentation](https://tiptap.dev/docs/editor/api/events).
 
 ```
-document.addEventListener('flux:editor', (e) => {    e.detail.init(({ editor }) => {        editor.on('create', () => {})        editor.on('update', () => {})        editor.on('selectionUpdate', () => {})        editor.on('transaction', () => {})        editor.on('focus', () => {})        editor.on('blur', () => {})        editor.on('destroy', () => {})        editor.on('drop', () => {})        editor.on('paste', () => {})        editor.on('contentError', () => {})    })})
+document.addEventListener('flux:editor', (e) => {
+    e.detail.init(({ editor }) => {
+        editor.on('create', () => {})
+
+        editor.on('update', () => {})
+
+        editor.on('selectionUpdate', () => {})
+
+        editor.on('transaction', () => {})
+
+        editor.on('focus', () => {})
+
+        editor.on('blur', () => {})
+
+        editor.on('destroy', () => {})
+
+        editor.on('drop', () => {})
+
+        editor.on('paste', () => {})
+
+        editor.on('contentError', () => {})
+    })
+})
 ```
 
 ## Reference

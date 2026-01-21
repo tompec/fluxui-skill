@@ -9,17 +9,19 @@ A configurable message input with support for action buttons and rich text. Idea
 
 ```blade
 <form wire:submit="send">
-<flux:composer wire:model="prompt" label="Prompt" label:sr-only placeholder="How can I help you today?">
-<x-slot name="actionsLeading">
-<flux:button size="sm" variant="subtle" icon="paper-clip" />
-<flux:button size="sm" variant="subtle" icon="slash" />
-<flux:button size="sm" variant="subtle" icon="adjustments-horizontal" />
-</x-slot>
-<x-slot name="actionsTrailing">
-<flux:button size="sm" variant="filled" icon="microphone" />
-<flux:button type="submit" size="sm" variant="primary" icon="paper-airplane" />
-</x-slot>
-</flux:composer></form>
+    <flux:composer wire:model="prompt" label="Prompt" label:sr-only placeholder="How can I help you today?">
+        <x-slot name="actionsLeading">
+            <flux:button size="sm" variant="subtle" icon="paper-clip" />
+            <flux:button size="sm" variant="subtle" icon="slash" />
+            <flux:button size="sm" variant="subtle" icon="adjustments-horizontal" />
+        </x-slot>
+
+        <x-slot name="actionsTrailing">
+            <flux:button size="sm" variant="filled" icon="microphone" />
+            <flux:button type="submit" size="sm" variant="primary" icon="paper-airplane" />
+        </x-slot>
+    </flux:composer>
+</form>
 ```
 
 ## With header
@@ -27,23 +29,27 @@ Display file previews or other content above the input area using the header slo
 
 ```blade
 <flux:composer wire:model="prompt" label="Prompt" label:sr-only placeholder="How can I help you today?">
-<x-slot name="header">
-<!-- Header content... -->
-<div class="relative border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden">
-<img src="https://fluxui.dev/img/demo/caleb.png" alt="Profile picture" class="size-14">
-<div class="absolute top-0 right-0 p-1">
-<button type="button" class="p-0.5 rounded-full bg-zinc-900/50 hover:bg-zinc-900/70 flex justify-center items-center">
-<flux:icon icon="x-mark" variant="micro" class="text-white" />
-</button>
-</div>
-</div>
-</x-slot>
-<x-slot name="actionsLeading">
-<!-- ... -->
-</x-slot>
-<x-slot name="actionsTrailing">
-<!-- ... -->
-</x-slot></flux:composer>
+    <x-slot name="header">
+        <!-- Header content... -->
+        <div class="relative border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden">
+            <img src="https://fluxui.dev/img/demo/caleb.png" alt="Profile picture" class="size-14">
+
+            <div class="absolute top-0 right-0 p-1">
+                <button type="button" class="p-0.5 rounded-full bg-zinc-900/50 hover:bg-zinc-900/70 flex justify-center items-center">
+                    <flux:icon icon="x-mark" variant="micro" class="text-white" />
+                </button>
+            </div>
+        </div>
+    </x-slot>
+
+    <x-slot name="actionsLeading">
+        <!-- ... -->
+    </x-slot>
+
+    <x-slot name="actionsTrailing">
+        <!-- ... -->
+    </x-slot>
+</flux:composer>
 ```
 
 ## Inline
@@ -51,13 +57,15 @@ Place action buttons alongside the input in a single row for a more compact layo
 
 ```blade
 <flux:composer wire:model="prompt" rows="1" inline label="Prompt" label:sr-only placeholder="How can I help you today?">
-<x-slot name="actionsLeading">
-<flux:button size="sm" variant="ghost" icon="plus" />
-</x-slot>
-<x-slot name="actionsTrailing">
-<flux:button size="sm" variant="filled" icon="microphone" />
-<flux:button type="submit" size="sm" variant="primary" icon="paper-airplane" />
-</x-slot></flux:composer>
+    <x-slot name="actionsLeading">
+        <flux:button size="sm" variant="ghost" icon="plus" />
+    </x-slot>
+
+    <x-slot name="actionsTrailing">
+        <flux:button size="sm" variant="filled" icon="microphone" />
+        <flux:button type="submit" size="sm" variant="primary" icon="paper-airplane" />
+    </x-slot>
+</flux:composer>
 ```
 
 ## Input variant
@@ -65,7 +73,8 @@ Use the variant="input" prop to render the composer with border radiuses that ma
 
 ```blade
 <flux:composer variant="input" label="Message" placeholder="What's on your mind?">
-<!-- ... --></flux:composer>
+    <!-- ... -->
+</flux:composer>
 ```
 
 ## Height
@@ -73,7 +82,8 @@ Set the initial and maximum height of the input area using rows and max-rows.
 
 ```blade
 <flux:composer rows="4" max-rows="8" ...>
-<!-- ... --></flux:composer>
+    <!-- ... -->
+</flux:composer>
 ```
 
 ## Submit behavior
@@ -81,9 +91,10 @@ By default, the form submits when pressing <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd
 
 ```blade
 <form wire:submit="send">
-<flux:composer wire:model="prompt" submit="enter" ...>
-<!-- ... -->
-</flux:composer></form>
+    <flux:composer wire:model="prompt" submit="enter" ...>
+        <!-- ... -->
+    </flux:composer>
+</form>
 ```
 
 ## Rich text
@@ -91,18 +102,21 @@ Enable rich text formatting by passing an editor component to the input slot.
 
 ```blade
 <flux:composer wire:model="prompt" rows="3" label="Prompt" label:sr-only placeholder="How can I help you today?">
-<x-slot name="input">
-<flux:editor variant="borderless" toolbar="bold italic bullet ordered | link | align" />
-</x-slot>
-<x-slot name="actionsLeading">
-<flux:button size="sm" variant="subtle" icon="paper-clip" />
-<flux:button size="sm" variant="subtle" icon="slash" />
-<flux:button size="sm" variant="subtle" icon="adjustments-horizontal" />
-</x-slot>
-<x-slot name="actionsTrailing">
-<flux:button size="sm" variant="filled" icon="microphone" />
-<flux:button type="submit" size="sm" variant="primary" icon="paper-airplane" />
-</x-slot></flux:composer>
+    <x-slot name="input">
+        <flux:editor variant="borderless" toolbar="bold italic bullet ordered | link | align" />
+    </x-slot>
+
+    <x-slot name="actionsLeading">
+        <flux:button size="sm" variant="subtle" icon="paper-clip" />
+        <flux:button size="sm" variant="subtle" icon="slash" />
+        <flux:button size="sm" variant="subtle" icon="adjustments-horizontal" />
+    </x-slot>
+
+    <x-slot name="actionsTrailing">
+        <flux:button size="sm" variant="filled" icon="microphone" />
+        <flux:button type="submit" size="sm" variant="primary" icon="paper-airplane" />
+    </x-slot>
+</flux:composer>
 ```
 
 ## Disabled
@@ -110,7 +124,8 @@ Prevent user interaction with the composer by adding the disabled attribute.
 
 ```blade
 <flux:composer disabled ...>
-<!-- ... --></flux:composer>
+    <!-- ... -->
+</flux:composer>
 ```
 
 ## Invalid
@@ -118,7 +133,8 @@ When paired with a name or wire:model attribute alongside a label prop, validati
 
 ```blade
 <flux:composer wire:model="prompt" label="Prompt" label:sr-only ...>
-<!-- ... --></flux:composer>
+    <!-- ... -->
+</flux:composer>
 ```
 
 ## Reference

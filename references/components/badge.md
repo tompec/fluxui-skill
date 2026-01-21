@@ -47,7 +47,9 @@ Make the entire badge clickable by wrapping it in a button element.
 Make a badge removable by appending a close button.
 
 ```blade
-<flux:badge>    Admin <flux:badge.close /></flux:badge>
+<flux:badge>
+    Admin <flux:badge.close />
+</flux:badge>
 ```
 
 ## Colors
@@ -102,7 +104,10 @@ Bold, high-contrast badges for more important status indicators or alerts.
 If you're using badges alongside inline text, you might run into spacing issues because of the extra padding around the badge. Use the inset prop to add negative margins to the top and bottom of the badge to avoid this.
 
 ```blade
-<flux:heading>    Page builder <flux:badge color="lime" inset="top bottom">New</flux:badge></flux:heading>
+<flux:heading>
+    Page builder <flux:badge color="lime" inset="top bottom">New</flux:badge>
+</flux:heading>
+
 <flux:text class="mt-2">Easily author new pages without leaving your browser.</flux:text>
 ```
 

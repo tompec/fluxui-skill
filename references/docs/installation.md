@@ -55,7 +55,15 @@ You can also view your [licenses and their associated install instructions hereÂ
 Now, add the @fluxAppearance and @fluxScripts Blade directives to your layout file:
 
 ```
-<head>    ...    @fluxAppearance</head><body>    ...    @fluxScripts</body>
+<head>
+    ...
+    @fluxAppearance
+</head>
+
+<body>
+    ...
+    @fluxScripts
+</body>
 ```
 
 The last step is to set up Tailwind CSS. Flux uses Tailwind CSS for its default styling.
@@ -65,7 +73,10 @@ The last step is to set up Tailwind CSS. Flux uses Tailwind CSS for its default 
 If you already have Tailwind installed in your project, just add the following configuration to your resources/css/app.css file:
 
 ```
-@import 'tailwindcss';@import '../../vendor/livewire/flux/dist/flux.css';@custom-variant dark (&:where(.dark, .dark *));
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
 ```
 
 If you don't have Tailwind installed, you can learn how to install it on the [Tailwind website](https://tailwindcss.com/docs/guides/laravel).
@@ -75,14 +86,24 @@ Although completely optional, we recommend using the [Inter font family](https:/
 Add the following to the head tag in your layout file to ensure the font is loaded:
 
 ```
-<head>    ...    <link rel="preconnect" href="https://fonts.bunny.net">
-<link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" /></head>
+<head>
+    ...
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
+</head>
 ```
 
 You can configure Tailwind to use this font family in your resources/css/app.css file:
 
 ```
-@import 'tailwindcss';@import '../../vendor/livewire/flux/dist/flux.css';...@theme {    --font-sans: Inter, sans-serif;}
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+...
+
+@theme {
+    --font-sans: Inter, sans-serif;
+}
 ```
 
 ## Theming
@@ -100,7 +121,10 @@ By default, Flux will handle the appearance of your application by adding a dark
 If you don't want Flux to handle this for you, you can remove the @fluxAppearance directive from your layout file.
 
 ```
-<head>    ...--    @fluxAppearance</head>
+<head>
+    ...
+--    @fluxAppearance
+</head>
 ```
 
 Now you can handle the appearance of your application manually.
@@ -212,7 +236,8 @@ Once you've added these secrets, if you're using Laravel's [Livewire Starter Kit
 If you are not using the Livewire Starter Kit, you will need to add the following configuration to your GitHub Actions workflows:
 
 ```
-- name: Add Flux license  run: composer config http-basic.composer.fluxui.dev "${{ secrets.FLUX_USERNAME }}" "${{ secrets.FLUX_LICENSE_KEY }}"
+- name: Add Flux license
+  run: composer config http-basic.composer.fluxui.dev "${{ secrets.FLUX_USERNAME }}" "${{ secrets.FLUX_LICENSE_KEY }}"
 ```
 
 This should be placed before the step that runs composer install.
@@ -240,5 +265,8 @@ This is fine for most applications, however, if you are using nginx with a custo
 To fix this issue, you can add the following to your nginx configuration:
 
 ```
-location ~ ^/flux/flux(\.min)?\.(js|css)$ {    expires off;    try_files $uri $uri/ /index.php?$query_string;}
+location ~ ^/flux/flux(\.min)?\.(js|css)$ {
+    expires off;
+    try_files $uri $uri/ /index.php?$query_string;
+}
 ```

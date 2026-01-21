@@ -16,11 +16,10 @@ Search for the exact icon you need over at [Heroicons](https://heroicons.com/)
 There are four variants for each icon: outline (default), solid, mini, and micro.
 
 ```blade
-<flux:icon.bolt />
-<!-- 24px, outline --><flux:icon.bolt variant="solid" />
-<!-- 24px, filled --><flux:icon.bolt variant="mini" />
-<!-- 20px, filled --><flux:icon.bolt variant="micro" />
-<!-- 16px, filled -->
+<flux:icon.bolt />                  <!-- 24px, outline -->
+<flux:icon.bolt variant="solid" />  <!-- 24px, filled -->
+<flux:icon.bolt variant="mini" />   <!-- 20px, filled -->
+<flux:icon.bolt variant="micro" />  <!-- 16px, filled -->
 ```
 
 ## Sizes
@@ -30,7 +29,8 @@ Avoid tweaking icon sizes. Each variant is specifically designed for its default
 
 ```blade
 <flux:icon.bolt class="size-12" />
-<flux:icon.bolt class="size-10" /><flux:icon.bolt class="size-8" />
+<flux:icon.bolt class="size-10" />
+<flux:icon.bolt class="size-8" />
 ```
 
 ## Color
@@ -69,20 +69,44 @@ This command will prompt you to select which icons you want to import. You can a
 php artisan flux:icon crown grip-vertical github
 blade
 <flux:icon.crown />
-<flux:icon.grip-vertical /><flux:icon.github />
+<flux:icon.grip-vertical />
+<flux:icon.github />
 ```
 
 ## Custom icons
 For full control over your icons, you can create your own Blade files in the resources/views/flux/icon directory in your project.
 
 ```
-- resources    - views        - flux            - icon                - wink.blade.php
+- resources
+    - views
+        - flux
+            - icon
+                - wink.blade.php
 ```
 
 You can simply paste SVG code directly into the Blade file, however we recommend using the following template structure to ensure compatibility with other components:
 
 ```
-@php $attributes = $unescapedForwardedAttributes ?? $attributes; @endphp@props([    'variant' => 'outline',])@php$classes = Flux::classes('shrink-0')    ->add(match($variant) {        'outline' => '[:where(&)]:size-6',        'solid' => '[:where(&)]:size-6',        'mini' => '[:where(&)]:size-5',        'micro' => '[:where(&)]:size-4',    });@endphp{{-- Your SVG code here: --}}<svg {{ $attributes->class($classes) }} data-flux-icon aria-hidden="true" ... >    ...</svg>
+@php $attributes = $unescapedForwardedAttributes ?? $attributes; @endphp
+
+@props([
+    'variant' => 'outline',
+])
+
+@php
+$classes = Flux::classes('shrink-0')
+    ->add(match($variant) {
+        'outline' => '[:where(&)]:size-6',
+        'solid' => '[:where(&)]:size-6',
+        'mini' => '[:where(&)]:size-5',
+        'micro' => '[:where(&)]:size-4',
+    });
+@endphp
+
+{{-- Your SVG code here: --}}
+<svg {{ $attributes->class($classes) }} data-flux-icon aria-hidden="true" ... >
+    ...
+</svg>
 blade
 <flux:icon.wink />
 ```

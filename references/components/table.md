@@ -9,24 +9,61 @@ Display structured data in a condensed, searchable format.
 
 ```blade
 <flux:table :paginate="$this->orders">
-<flux:table.columns>
-<flux:table.column>Customer</flux:table.column>
-<flux:table.column sortable :sorted="$sortBy === 'date'" :direction="$sortDirection" wire:click="sort('date')">Date</flux:table.column>
-<flux:table.column sortable :sorted="$sortBy === 'status'" :direction="$sortDirection" wire:click="sort('status')">Status</flux:table.column>
-<flux:table.column sortable :sorted="$sortBy === 'amount'" :direction="$sortDirection" wire:click="sort('amount')">Amount</flux:table.column>
-</flux:table.columns>
-<flux:table.rows>        @foreach ($this->orders as $order)            <flux:table.row :key="$order->id">
-<flux:table.cell class="flex items-center gap-3">
-<flux:avatar size="xs" src="{{ $order->customer_avatar }}" />                    {{ $order->customer }}                </flux:table.cell>
-<flux:table.cell class="whitespace-nowrap">{{ $order->date }}</flux:table.cell>
-<flux:table.cell>
-<flux:badge size="sm" :color="$order->status_color" inset="top bottom">{{ $order->status }}</flux:badge>
-</flux:table.cell>
-<flux:table.cell variant="strong">{{ $order->amount }}</flux:table.cell>
-<flux:table.cell>
-<flux:button variant="ghost" size="sm" icon="ellipsis-horizontal" inset="top bottom"></flux:button>
-</flux:table.cell>
-</flux:table.row>        @endforeach    </flux:table.rows></flux:table><!-- Livewire component example code...    use \Livewire\WithPagination;    public $sortBy = 'date';    public $sortDirection = 'desc';    public function sort($column) {        if ($this->sortBy === $column) {            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';        } else {            $this->sortBy = $column;            $this->sortDirection = 'asc';        }    }    #[\Livewire\Attributes\Computed]    public function orders()    {        return \App\Models\Order::query()            ->tap(fn ($query) => $this->sortBy ? $query->orderBy($this->sortBy, $this->sortDirection) : $query)            ->paginate(5);    }-->
+    <flux:table.columns>
+        <flux:table.column>Customer</flux:table.column>
+        <flux:table.column sortable :sorted="$sortBy === 'date'" :direction="$sortDirection" wire:click="sort('date')">Date</flux:table.column>
+        <flux:table.column sortable :sorted="$sortBy === 'status'" :direction="$sortDirection" wire:click="sort('status')">Status</flux:table.column>
+        <flux:table.column sortable :sorted="$sortBy === 'amount'" :direction="$sortDirection" wire:click="sort('amount')">Amount</flux:table.column>
+    </flux:table.columns>
+
+    <flux:table.rows>
+        @foreach ($this->orders as $order)
+            <flux:table.row :key="$order->id">
+                <flux:table.cell class="flex items-center gap-3">
+                    <flux:avatar size="xs" src="{{ $order->customer_avatar }}" />
+
+                    {{ $order->customer }}
+                </flux:table.cell>
+
+                <flux:table.cell class="whitespace-nowrap">{{ $order->date }}</flux:table.cell>
+
+                <flux:table.cell>
+                    <flux:badge size="sm" :color="$order->status_color" inset="top bottom">{{ $order->status }}</flux:badge>
+                </flux:table.cell>
+
+                <flux:table.cell variant="strong">{{ $order->amount }}</flux:table.cell>
+
+                <flux:table.cell>
+                    <flux:button variant="ghost" size="sm" icon="ellipsis-horizontal" inset="top bottom"></flux:button>
+                </flux:table.cell>
+            </flux:table.row>
+        @endforeach
+    </flux:table.rows>
+</flux:table>
+
+<!-- Livewire component example code...
+    use \Livewire\WithPagination;
+
+    public $sortBy = 'date';
+    public $sortDirection = 'desc';
+
+    public function sort($column) {
+        if ($this->sortBy === $column) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortBy = $column;
+            $this->sortDirection = 'asc';
+        }
+    }
+
+    #[\Livewire\Attributes\Computed]
+    public function orders()
+    {
+        return \App\Models\Order::query()
+            ->tap(fn ($query) => $this->sortBy ? $query->orderBy($this->sortBy, $this->sortDirection) : $query)
+            ->paginate(5);
+    }
+-->
 ```
 
 ## Simple
@@ -34,46 +71,54 @@ The primary table example above is a full-featured table with sorting, paginatio
 
 ```blade
 <flux:table>
-<flux:table.columns>
-<flux:table.column>Customer</flux:table.column>
-<flux:table.column>Date</flux:table.column>
-<flux:table.column>Status</flux:table.column>
-<flux:table.column>Amount</flux:table.column>
-</flux:table.columns>
-<flux:table.rows>
-<flux:table.row>
-<flux:table.cell>Lindsey Aminoff</flux:table.cell>
-<flux:table.cell>Jul 29, 10:45 AM</flux:table.cell>
-<flux:table.cell><flux:badge color="green" size="sm" inset="top bottom">Paid</flux:badge></flux:table.cell>
-<flux:table.cell variant="strong">$49.00</flux:table.cell>
-</flux:table.row>
-<flux:table.row>
-<flux:table.cell>Hanna Lubin</flux:table.cell>
-<flux:table.cell>Jul 28, 2:15 PM</flux:table.cell>
-<flux:table.cell><flux:badge color="green" size="sm" inset="top bottom">Paid</flux:badge></flux:table.cell>
-<flux:table.cell variant="strong">$312.00</flux:table.cell>
-</flux:table.row>
-<flux:table.row>
-<flux:table.cell>Kianna Bushevi</flux:table.cell>
-<flux:table.cell>Jul 30, 4:05 PM</flux:table.cell>
-<flux:table.cell><flux:badge color="zinc" size="sm" inset="top bottom">Refunded</flux:badge></flux:table.cell>
-<flux:table.cell variant="strong">$132.00</flux:table.cell>
-</flux:table.row>
-<flux:table.row>
-<flux:table.cell>Gustavo Geidt</flux:table.cell>
-<flux:table.cell>Jul 27, 9:30 AM</flux:table.cell>
-<flux:table.cell><flux:badge color="green" size="sm" inset="top bottom">Paid</flux:badge></flux:table.cell>
-<flux:table.cell variant="strong">$31.00</flux:table.cell>
-</flux:table.row>
-</flux:table.rows></flux:table>
+    <flux:table.columns>
+        <flux:table.column>Customer</flux:table.column>
+        <flux:table.column>Date</flux:table.column>
+        <flux:table.column>Status</flux:table.column>
+        <flux:table.column>Amount</flux:table.column>
+    </flux:table.columns>
+
+    <flux:table.rows>
+        <flux:table.row>
+            <flux:table.cell>Lindsey Aminoff</flux:table.cell>
+            <flux:table.cell>Jul 29, 10:45 AM</flux:table.cell>
+            <flux:table.cell><flux:badge color="green" size="sm" inset="top bottom">Paid</flux:badge></flux:table.cell>
+            <flux:table.cell variant="strong">$49.00</flux:table.cell>
+        </flux:table.row>
+
+        <flux:table.row>
+            <flux:table.cell>Hanna Lubin</flux:table.cell>
+            <flux:table.cell>Jul 28, 2:15 PM</flux:table.cell>
+            <flux:table.cell><flux:badge color="green" size="sm" inset="top bottom">Paid</flux:badge></flux:table.cell>
+            <flux:table.cell variant="strong">$312.00</flux:table.cell>
+        </flux:table.row>
+
+        <flux:table.row>
+            <flux:table.cell>Kianna Bushevi</flux:table.cell>
+            <flux:table.cell>Jul 30, 4:05 PM</flux:table.cell>
+            <flux:table.cell><flux:badge color="zinc" size="sm" inset="top bottom">Refunded</flux:badge></flux:table.cell>
+            <flux:table.cell variant="strong">$132.00</flux:table.cell>
+        </flux:table.row>
+
+        <flux:table.row>
+            <flux:table.cell>Gustavo Geidt</flux:table.cell>
+            <flux:table.cell>Jul 27, 9:30 AM</flux:table.cell>
+            <flux:table.cell><flux:badge color="green" size="sm" inset="top bottom">Paid</flux:badge></flux:table.cell>
+            <flux:table.cell variant="strong">$31.00</flux:table.cell>
+        </flux:table.row>
+    </flux:table.rows>
+</flux:table>
 ```
 
 ## Pagination
 Allow users to navigate through different pages of data by passing in any model paginator to the paginate prop.
 
 ```blade
-<!-- $orders = \App\Models\Order::paginate(5) --><flux:table :paginate="$orders">
-<!-- ... --></flux:table>
+<!-- $orders = \App\Models\Order::paginate(5) -->
+
+<flux:table :paginate="$orders">
+    <!-- ... -->
+</flux:table>
 ```
 
 ## Sortable
@@ -81,12 +126,14 @@ Allow users to sort rows by specific columns using a combination of the sortable
 
 ```blade
 <flux:table>
-<flux:table.columns>
-<flux:table.column>Customer</flux:table.column>
-<flux:table.column sortable sorted direction="desc">Date</flux:table.column>
-<flux:table.column sortable>Amount</flux:table.column>
-</flux:table.columns>
-<!-- ... --></flux:table>
+    <flux:table.columns>
+        <flux:table.column>Customer</flux:table.column>
+        <flux:table.column sortable sorted direction="desc">Date</flux:table.column>
+        <flux:table.column sortable>Amount</flux:table.column>
+    </flux:table.columns>
+
+    <!-- ... -->
+</flux:table>
 ```
 
 ## Sticky header
@@ -95,11 +142,14 @@ Keep the header visible during vertical scrolling by adding the sticky prop to t
 Make sure to set a background color on the header row to prevent content overlap.
 
 ```blade
-<!-- Set the height of the table container... --><flux:table container:class="max-h-80">
-<flux:table.columns sticky class="bg-white dark:bg-zinc-900">
-<!-- ... -->
-</flux:table.columns>
-<!-- ... --></flux:table>
+<!-- Set the height of the table container... -->
+<flux:table container:class="max-h-80">
+    <flux:table.columns sticky class="bg-white dark:bg-zinc-900">
+         <!-- ... -->
+    </flux:table.columns>
+
+    <!-- ... -->
+</flux:table>
 ```
 
 ## Sticky columns
@@ -109,14 +159,22 @@ Make sure to set a background color on columns and cells to prevent content over
 
 ```blade
 <flux:table container:class="max-h-80">
-<flux:table.columns sticky class="bg-white dark:bg-zinc-900">
-<flux:table.column sticky class="bg-white dark:bg-zinc-900">ID</flux:table.column>
-<!-- ... -->
-</flux:table.columns>
-<flux:table.rows>        @foreach ($this->orders as $order)            <flux:table.row :key="$order->id">
-<flux:table.cell sticky class="bg-white dark:bg-zinc-900">{{ $order->id }}</flux:table.cell>
-<!-- ... -->
-</flux:table.row>        @endforeach    </flux:table.rows></flux:table>
+    <flux:table.columns sticky class="bg-white dark:bg-zinc-900">
+        <flux:table.column sticky class="bg-white dark:bg-zinc-900">ID</flux:table.column>
+
+        <!-- ... -->
+    </flux:table.columns>
+
+    <flux:table.rows>
+        @foreach ($this->orders as $order)
+            <flux:table.row :key="$order->id">
+                <flux:table.cell sticky class="bg-white dark:bg-zinc-900">{{ $order->id }}</flux:table.cell>
+
+                <!-- ... -->
+            </flux:table.row>
+        @endforeach
+    </flux:table.rows>
+</flux:table>
 ```
 
 ## Reference

@@ -18,10 +18,16 @@ Now, consider a dystopian version of the same input field where simplicity is no
 
 ```blade
 <flux:form.field>
-<flux:form.field.label>Email</flux:form.field.label>
-<div>
-<flux:form.field.text-input wire:model="email" />
-</div>    @error('email')        <p class="mt-2 text-red-500 dark:text-red-400 text-xs">{{ $message }}</p>    @enderror</flux:form.field>
+    <flux:form.field.label>Email</flux:form.field.label>
+
+    <div>
+        <flux:form.field.text-input wire:model="email" />
+    </div>
+
+    @error('email')
+        <p class="mt-2 text-red-500 dark:text-red-400 text-xs">{{ $message }}</p>
+    @enderror
+</flux:form.field>
 ```
 
 It's a *mess*.
@@ -42,9 +48,12 @@ If you want more control, you can *compose* the form field manually from its ind
 
 ```blade
 <flux:field>
-<flux:label>Email</flux:label>
-<flux:input wire:model="email" />
-<flux:error name="email" /></flux:field>
+    <flux:label>Email</flux:label>
+
+    <flux:input wire:model="email" />
+
+    <flux:error name="email" />
+</flux:field>
 ```
 
 This gives you the best of both worlds. A short, succinct, syntax for the common case, and the ability to customize each part on an as-needed basis.
@@ -71,10 +80,12 @@ If you want to trigger a dropdown using that button, simply wrap it in <flux:dro
 
 ```blade
 <flux:dropdown>
-<flux:button>Options</flux:button>
-<flux:navmenu>
-<!-- ... -->
-</flux:navmenu></flux:dropdown>
+    <flux:button>Options</flux:button>
+
+    <flux:navmenu>
+        <!-- ... -->
+    </flux:navmenu>
+</flux:dropdown>
 ```
 
 Many other libraries force you into more rigid component shapes, dissalowing use of a simple button inside a dropdown and instead forcing you to use a more perscriptive alternative like <flux:dropdown.button>.
@@ -83,20 +94,24 @@ Because composition is a priority, you can turn this navigation dropdown into a 
 
 ```blade
 <flux:dropdown>
-<flux:button>Options</flux:button>
-<flux:menu>
-<!-- ... -->
-</flux:menu></flux:dropdown>
+    <flux:button>Options</flux:button>
+
+    <flux:menu>
+        <!-- ... -->
+    </flux:menu>
+</flux:dropdown>
 ```
 
 Because <flux:menu> is a standalone component in its own right, you can use it to create a context menu that opens on right click instead using the <flux:context> component:
 
 ```blade
 <flux:context>
-<flux:button>Options</flux:button>
-<flux:menu>
-<!-- ... -->
-</flux:menu></flux:context>
+    <flux:button>Options</flux:button>
+
+    <flux:menu>
+        <!-- ... -->
+    </flux:menu>
+</flux:context>
 ```
 
 *This* is the power of composition; the ability to combine independent components into new and more powerful ones.
@@ -115,7 +130,10 @@ Here are a few examples of Flux components that use the word "heading":
 
 ```blade
 <flux:heading>...</flux:heading>
-<flux:menu.submenu heading="..."><flux:accordion.heading>...</flux:accordion.heading>
+
+<flux:menu.submenu heading="...">
+
+<flux:accordion.heading>...</flux:accordion.heading>
 ```
 
 ## Brevity
@@ -134,10 +152,12 @@ Composition helps with this quest for brevity. Consider the following dropdown m
 
 ```blade
 <flux:dropdown>
-<flux:button>Options</flux:button>
-<flux:menu>
-<!-- ... -->
-</flux:menu></flux:dropdown>
+    <flux:button>Options</flux:button>
+
+    <flux:menu>
+        <!-- ... -->
+    </flux:menu>
+</flux:dropdown>
 ```
 
 Notice the simple, single-word names for the dropdown component.
@@ -146,10 +166,12 @@ Consider what it might look like if composability and brevity weren't as high a 
 
 ```blade
 <flux:dropdown-menu>
-<flux:dropdown-menu.button>Options</flux:dropdown-menu.button>
-<flux:dropdown-menu.items>
-<!-- ... -->
-</flux:dropdown-menu.items></flux:dropdown-menu>
+    <flux:dropdown-menu.button>Options</flux:dropdown-menu.button>
+
+    <flux:dropdown-menu.items>
+        <!-- ... -->
+    </flux:dropdown-menu.items>
+</flux:dropdown-menu>
 ```
 
 ## Use the browser
@@ -162,7 +184,8 @@ For example, anytime you see a dropdown (popover) in Flux, it will likely by usi
 
 ```
 <div popover>
-<!-- ... --></div>
+    <!-- ... -->
+</div>
 ```
 
 [Read more about the popover attribute](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
@@ -171,7 +194,8 @@ Another example is using the <dialog> element for modals instead of something ha
 
 ```
 <dialog>
-<!-- ... --></dialog>
+    <!-- ... -->
+</dialog>
 ```
 
 By using the native <dialog> element, you get a much more consistent and reliable modal experience with things like focus management, accessibility, and keyboard navigation out of the box.
@@ -210,16 +234,20 @@ For example, take a look at the following "Create account" form:
 
 ```blade
 <form wire:submit="createAccount">
-<div class="mb-6">
-<flux:heading>Create an account</flux:heading>
-<flux:text class="mt-2">We're excited to have you on board.</flux:text>
-</div>
-<flux:input class="mb-6" label="Email" wire:model="email" />
-<div class="mb-6 flex *:w-1/2 gap-4">
-<flux:input label="Password" wire:model="password" />
-<flux:input label="Confirm password" wire:model="password_confirmation" />
-</div>
-<flux:button type="submit" variant="primary">Create account</flux:button></form>
+    <div class="mb-6">
+        <flux:heading>Create an account</flux:heading>
+        <flux:text class="mt-2">We're excited to have you on board.</flux:text>
+    </div>
+
+    <flux:input class="mb-6" label="Email" wire:model="email" />
+
+    <div class="mb-6 flex *:w-1/2 gap-4">
+        <flux:input label="Password" wire:model="password" />
+        <flux:input label="Confirm password" wire:model="password_confirmation" />
+    </div>
+
+    <flux:button type="submit" variant="primary">Create account</flux:button>
+</form>
 ```
 
 Notice how Flux handles the styling of individual components, but leaves the spacing and layout to you.

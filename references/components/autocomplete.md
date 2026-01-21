@@ -12,10 +12,11 @@ If you need to show a label but store a value (e.g., showing a user's name but s
 
 ```blade
 <flux:autocomplete wire:model="state" label="State of residence">
-<flux:autocomplete.item>Alabama</flux:autocomplete.item>
-<flux:autocomplete.item>Arkansas</flux:autocomplete.item>
-<flux:autocomplete.item>California</flux:autocomplete.item>
-<!-- ... --></flux:autocomplete>
+    <flux:autocomplete.item>Alabama</flux:autocomplete.item>
+    <flux:autocomplete.item>Arkansas</flux:autocomplete.item>
+    <flux:autocomplete.item>California</flux:autocomplete.item>
+    <!-- ... -->
+</flux:autocomplete>
 ```
 
 ## Reference

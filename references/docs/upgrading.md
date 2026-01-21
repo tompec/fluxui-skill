@@ -27,7 +27,11 @@ In Flux v2, the @fluxStyles directive has been removed as these styles are now i
 However, the @fluxAppearance directive has been added as a replacement to manage dark mode in your application—it controls the .dark class on the <html> element.
 
 ```
-<head>    ...--    @fluxStyles++    @fluxAppearance</head>
+<head>
+    ...
+--    @fluxStyles
+++    @fluxAppearance
+</head>
 ```
 
 ## Clear the view cache
@@ -43,7 +47,13 @@ php artisan view:clear
 Because Flux's styles are no longer added via the @fluxStyles directive, you will need to import the Flux CSS file directly into your ./resources/css/app.css file like so:
 
 ```
-@import "tailwindcss";@import '../../vendor/livewire/flux/dist/flux.css';/* Required for dark mode in Flux... */@custom-variant dark (&:where(.dark, .dark *));...
+@import "tailwindcss";
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+/* Required for dark mode in Flux... */
+@custom-variant dark (&:where(.dark, .dark *));
+
+...
 ```
 
 ## Migrating accent colors
@@ -58,13 +68,41 @@ Before, these were defined in a single @layer base block within your app.css fil
 Here's an example of defining sky as your application's accent color:
 
 ```
-@theme {    --color-accent: var(--color-sky-600);    --color-accent-content: var(--color-sky-600);    --color-accent-foreground: var(--color-white);}@layer theme {    .dark {        --color-accent: var(--color-sky-600);        --color-accent-content: var(--color-sky-400);        --color-accent-foreground: var(--color-white);    }}
+@theme {
+    --color-accent: var(--color-sky-600);
+    --color-accent-content: var(--color-sky-600);
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-sky-600);
+        --color-accent-content: var(--color-sky-400);
+        --color-accent-foreground: var(--color-white);
+    }
+}
 ```
 
 If you're still using your old Tailwind config, you can now remove the following lines:
 
 ```
-export default {    ...    theme: {        extend: {            colors: {                ...--             accent: {--                  DEFAULT: 'var(--color-accent)',--                  content: 'var(--color-accent-content)',--                  foreground: 'var(--color-accent-foreground)',--              },            },        },    },};
+export default {
+    ...
+
+    theme: {
+        extend: {
+            colors: {
+                ...
+
+--             accent: {
+--                  DEFAULT: 'var(--color-accent)',
+--                  content: 'var(--color-accent-content)',
+--                  foreground: 'var(--color-accent-foreground)',
+--              },
+            },
+        },
+    },
+};
 ```
 
 ## Re-assigning gray
@@ -74,13 +112,41 @@ If you had previously re-assigned Flux's gray of choice in your tailwind.config.
 Here's an example of re-assigning zinc to neutral:
 
 ```
-/* Re-assign Flux's gray of choice... */@theme {  --color-zinc-50: var(--color-neutral-50);  --color-zinc-100: var(--color-neutral-100);  --color-zinc-200: var(--color-neutral-200);  --color-zinc-300: var(--color-neutral-300);  --color-zinc-400: var(--color-neutral-400);  --color-zinc-500: var(--color-neutral-500);  --color-zinc-600: var(--color-neutral-600);  --color-zinc-700: var(--color-neutral-700);  --color-zinc-800: var(--color-neutral-800);  --color-zinc-900: var(--color-neutral-900);  --color-zinc-950: var(--color-neutral-950);}
+/* Re-assign Flux's gray of choice... */
+@theme {
+  --color-zinc-50: var(--color-neutral-50);
+  --color-zinc-100: var(--color-neutral-100);
+  --color-zinc-200: var(--color-neutral-200);
+  --color-zinc-300: var(--color-neutral-300);
+  --color-zinc-400: var(--color-neutral-400);
+  --color-zinc-500: var(--color-neutral-500);
+  --color-zinc-600: var(--color-neutral-600);
+  --color-zinc-700: var(--color-neutral-700);
+  --color-zinc-800: var(--color-neutral-800);
+  --color-zinc-900: var(--color-neutral-900);
+  --color-zinc-950: var(--color-neutral-950);
+}
 ```
 
 If you are continuing to use your tailwind.config.js file in your application, then you can remove the following:
 
 ```
--- import colors from 'tailwindcss/colors';export default {    ...    theme: {        extend: {            colors: {--              // Re-assign Flux's gray of choice...--              zinc: colors.neutral,                ...            },        },    },};
+-- import colors from 'tailwindcss/colors';
+
+export default {
+    ...
+
+    theme: {
+        extend: {
+            colors: {
+--              // Re-assign Flux's gray of choice...
+--              zinc: colors.neutral,
+
+                ...
+            },
+        },
+    },
+};
 ```
 
 ## Dark mode changes
@@ -88,7 +154,10 @@ If you are continuing to use your tailwind.config.js file in your application, t
 If you had previously set darkMode: null in your tailwind.config.js file to prevent Flux from controlling the .dark class and handling dark mode automatically, you can now accomplish this by not including the @fluxAppearance directive in your layout file:
 
 ```
-<head>    ...--    @fluxAppearance</head>
+<head>
+    ...
+--    @fluxAppearance
+</head>
 ```
 
 ## Rename components

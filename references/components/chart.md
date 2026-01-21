@@ -11,36 +11,46 @@ Currently, Flux supports line and area charts. Additional chart types are planne
 
 ```blade
 <flux:chart wire:model="data" class="aspect-3/1">
-<flux:chart.svg>
-<flux:chart.line field="visitors" class="text-pink-500 dark:text-pink-400" />
-<flux:chart.axis axis="x" field="date">
-<flux:chart.axis.line />
-<flux:chart.axis.tick />
-</flux:chart.axis>
-<flux:chart.axis axis="y">
-<flux:chart.axis.grid />
-<flux:chart.axis.tick />
-</flux:chart.axis>
-<flux:chart.cursor />
-</flux:chart.svg>
-<flux:chart.tooltip>
-<flux:chart.tooltip.heading field="date" :format="['year' => 'numeric', 'month' => 'numeric', 'day' => 'numeric']" />
-<flux:chart.tooltip.value field="visitors" label="Visitors" />
-</flux:chart.tooltip></flux:chart>
+    <flux:chart.svg>
+        <flux:chart.line field="visitors" class="text-pink-500 dark:text-pink-400" />
+
+        <flux:chart.axis axis="x" field="date">
+            <flux:chart.axis.line />
+            <flux:chart.axis.tick />
+        </flux:chart.axis>
+
+        <flux:chart.axis axis="y">
+            <flux:chart.axis.grid />
+            <flux:chart.axis.tick />
+        </flux:chart.axis>
+
+        <flux:chart.cursor />
+    </flux:chart.svg>
+
+    <flux:chart.tooltip>
+        <flux:chart.tooltip.heading field="date" :format="['year' => 'numeric', 'month' => 'numeric', 'day' => 'numeric']" />
+        <flux:chart.tooltip.value field="visitors" label="Visitors" />
+    </flux:chart.tooltip>
+</flux:chart>
 ```
 
 ## Data structure
 
 Flux charts expect a structured array of data, typically provided via wire:model or passed as a value prop. Each data point should be an associative array with named fields:
 
-```php
+```
 <?php
 
 use Livewire\Component;
 
-class Dashboard extends Component{
-
-        public array $data = [        ['date' => '2026-01-20', 'visitors' => 267],        ['date' => '2026-01-19', 'visitors' => 259],        ['date' => '2026-01-18', 'visitors' => 269],        // ...    ];
+class Dashboard extends Component
+{
+    public array $data = [
+        ['date' => '2026-01-21', 'visitors' => 267],
+        ['date' => '2026-01-20', 'visitors' => 259],
+        ['date' => '2026-01-19', 'visitors' => 269],
+        // ...
+    ];
 }
 ```
 
@@ -70,18 +80,21 @@ To create a line chart, you can include the <flux:chart.line> component in the <
 
 ```blade
 <flux:chart wire:model="data" class="aspect-[3/1]">
-<flux:chart.svg>
-<flux:chart.line field="memory" class="text-pink-500" />
-<flux:chart.point field="memory" class="text-pink-400" />
-<flux:chart.axis axis="x" field="date">
-<flux:chart.axis.tick />
-<flux:chart.axis.line />
-</flux:chart.axis>
-<flux:chart.axis axis="y" tick-values="[0, 128, 256, 384, 512]" :format="['style' => 'unit', 'unit' => 'megabyte']">
-<flux:chart.axis.grid />
-<flux:chart.axis.tick />
-</flux:chart.axis>
-</flux:chart.svg></flux:chart>
+    <flux:chart.svg>
+        <flux:chart.line field="memory" class="text-pink-500" />
+        <flux:chart.point field="memory" class="text-pink-400" />
+
+        <flux:chart.axis axis="x" field="date">
+            <flux:chart.axis.tick />
+            <flux:chart.axis.line />
+        </flux:chart.axis>
+
+        <flux:chart.axis axis="y" tick-values="[0, 128, 256, 384, 512]" :format="['style' => 'unit', 'unit' => 'megabyte']">
+            <flux:chart.axis.grid />
+            <flux:chart.axis.tick />
+        </flux:chart.axis>
+    </flux:chart.svg>
+</flux:chart>
 ```
 
 As you can see above, you can also render circular points on top of the line using the <flux:chart.point> component.
@@ -92,18 +105,25 @@ Similar to a line chart but with a filled area beneath the line. Great for showi
 
 ```blade
 <flux:chart wire:model="data" class="aspect-3/1">
-<flux:chart.svg>
-<flux:chart.line field="stock" class="text-blue-500 dark:text-blue-400" curve="none" />
-<flux:chart.area field="stock" class="text-blue-200/50 dark:text-blue-400/30" curve="none" />
-<flux:chart.axis axis="y" position="right" tick-prefix="$" :format="[            'notation' => 'compact',            'compactDisplay' => 'short',            'maximumFractionDigits' => 1,        ]">
-<flux:chart.axis.grid />
-<flux:chart.axis.tick />
-</flux:chart.axis>
-<flux:chart.axis axis="x" field="date">
-<flux:chart.axis.tick />
-<flux:chart.axis.line />
-</flux:chart.axis>
-</flux:chart.svg></flux:chart>
+    <flux:chart.svg>
+        <flux:chart.line field="stock" class="text-blue-500 dark:text-blue-400" curve="none" />
+        <flux:chart.area field="stock" class="text-blue-200/50 dark:text-blue-400/30" curve="none" />
+
+        <flux:chart.axis axis="y" position="right" tick-prefix="$" :format="[
+            'notation' => 'compact',
+            'compactDisplay' => 'short',
+            'maximumFractionDigits' => 1,
+        ]">
+            <flux:chart.axis.grid />
+            <flux:chart.axis.tick />
+        </flux:chart.axis>
+
+        <flux:chart.axis axis="x" field="date">
+            <flux:chart.axis.tick />
+            <flux:chart.axis.line />
+        </flux:chart.axis>
+    </flux:chart.svg>
+</flux:chart>
 ```
 
 ## Multiple lines
@@ -112,35 +132,45 @@ You can plot multiple lines in the same chart by including multiple <flux:chart.
 
 ```blade
 <flux:chart wire:model="data">
-<flux:chart.viewport class="min-h-[20rem]" >
-<flux:chart.svg>
-<flux:chart.line field="twitter" class="text-blue-500" curve="none" />
-<flux:chart.point field="twitter" class="text-blue-500" r="6" stroke-width="3" />
-<flux:chart.line field="facebook" class="text-red-500" curve="none" />
-<flux:chart.point field="facebook" class="text-red-500" r="6" stroke-width="3" />
-<flux:chart.line field="instagram" class="text-green-500" curve="none" />
-<flux:chart.point field="instagram" class="text-green-500" r="6" stroke-width="3" />
-<flux:chart.axis axis="x" field="date">
-<flux:chart.axis.tick />
-<flux:chart.axis.line />
-</flux:chart.axis>
-<flux:chart.axis axis="y" tick-start="0" tick-end="1" :format="[                'style' => 'percent',                'minimumFractionDigits' => 0,                'maximumFractionDigits' => 0,            ]">
-<flux:chart.axis.grid />
-<flux:chart.axis.tick />
-</flux:chart.axis>
-</flux:chart.svg>
-</flux:chart.viewport>
-<div class="flex justify-center gap-4 pt-4">
-<flux:chart.legend label="Instagram">
-<flux:chart.legend.indicator class="bg-green-400" />
-</flux:chart.legend>
-<flux:chart.legend label="Twitter">
-<flux:chart.legend.indicator class="bg-blue-400" />
-</flux:chart.legend>
-<flux:chart.legend label="Facebook">
-<flux:chart.legend.indicator class="bg-red-400" />
-</flux:chart.legend>
-</div></flux:chart>
+    <flux:chart.viewport class="min-h-[20rem]" >
+        <flux:chart.svg>
+            <flux:chart.line field="twitter" class="text-blue-500" curve="none" />
+            <flux:chart.point field="twitter" class="text-blue-500" r="6" stroke-width="3" />
+            <flux:chart.line field="facebook" class="text-red-500" curve="none" />
+            <flux:chart.point field="facebook" class="text-red-500" r="6" stroke-width="3" />
+            <flux:chart.line field="instagram" class="text-green-500" curve="none" />
+            <flux:chart.point field="instagram" class="text-green-500" r="6" stroke-width="3" />
+
+            <flux:chart.axis axis="x" field="date">
+                <flux:chart.axis.tick />
+                <flux:chart.axis.line />
+            </flux:chart.axis>
+
+            <flux:chart.axis axis="y" tick-start="0" tick-end="1" :format="[
+                'style' => 'percent',
+                'minimumFractionDigits' => 0,
+                'maximumFractionDigits' => 0,
+            ]">
+                <flux:chart.axis.grid />
+                <flux:chart.axis.tick />
+            </flux:chart.axis>
+        </flux:chart.svg>
+    </flux:chart.viewport>
+
+    <div class="flex justify-center gap-4 pt-4">
+        <flux:chart.legend label="Instagram">
+            <flux:chart.legend.indicator class="bg-green-400" />
+        </flux:chart.legend>
+
+        <flux:chart.legend label="Twitter">
+            <flux:chart.legend.indicator class="bg-blue-400" />
+        </flux:chart.legend>
+
+        <flux:chart.legend label="Facebook">
+            <flux:chart.legend.indicator class="bg-red-400" />
+        </flux:chart.legend>
+    </div>
+</flux:chart>
 ```
 
 You might have noticed that the above example includes a <flux:chart.viewport> component. This is used to constrain the chart SVG within the chart component so that you can render siblings like legends or summaries above or below it.
@@ -151,40 +181,49 @@ Flux charts support live summaries, which are updated as the user hovers over th
 
 ```blade
 <flux:card>
-<flux:chart class="grid gap-6" wire:model="data">
-<flux:chart.summary class="flex gap-12">
-<div>
-<flux:text>Today</flux:text>
-<flux:heading size="xl" class="mt-2 tabular-nums">
-<flux:chart.summary.value field="sales" :format="['style' => 'currency', 'currency' => 'USD']" />
-</flux:heading>
-<flux:text class="mt-2 tabular-nums">
-<flux:chart.summary.value field="date" :format="['hour' => 'numeric', 'minute' => 'numeric', 'hour12' => true]" />
-</flux:text>
-</div>
-<div>
-<flux:text>Yesterday</flux:text>
-<flux:heading size="lg" class="mt-2 tabular-nums">
-<flux:chart.summary.value field="yesterday" :format="['style' => 'currency', 'currency' => 'USD']" />
-</flux:heading>
-</div>
-</flux:chart.summary>
-<flux:chart.viewport class="aspect-[3/1]">
-<flux:chart.svg>
-<flux:chart.line field="yesterday" class="text-zinc-300 dark:text-white/40" stroke-dasharray="4 4" curve="none" />
-<flux:chart.line field="sales" class="text-sky-500 dark:text-sky-400" curve="none" />
-<flux:chart.axis axis="x" field="date">
-<flux:chart.axis.grid />
-<flux:chart.axis.tick />
-<flux:chart.axis.line />
-</flux:chart.axis>
-<flux:chart.axis axis="y">
-<flux:chart.axis.tick />
-</flux:chart.axis>
-<flux:chart.cursor />
-</flux:chart.svg>
-</flux:chart.viewport>
-</flux:chart></flux:card>
+    <flux:chart class="grid gap-6" wire:model="data">
+        <flux:chart.summary class="flex gap-12">
+            <div>
+                <flux:text>Today</flux:text>
+
+                <flux:heading size="xl" class="mt-2 tabular-nums">
+                    <flux:chart.summary.value field="sales" :format="['style' => 'currency', 'currency' => 'USD']" />
+                </flux:heading>
+
+                <flux:text class="mt-2 tabular-nums">
+                    <flux:chart.summary.value field="date" :format="['hour' => 'numeric', 'minute' => 'numeric', 'hour12' => true]" />
+                </flux:text>
+            </div>
+
+            <div>
+                <flux:text>Yesterday</flux:text>
+
+                <flux:heading size="lg" class="mt-2 tabular-nums">
+                    <flux:chart.summary.value field="yesterday" :format="['style' => 'currency', 'currency' => 'USD']" />
+                </flux:heading>
+            </div>
+        </flux:chart.summary>
+
+        <flux:chart.viewport class="aspect-[3/1]">
+            <flux:chart.svg>
+                <flux:chart.line field="yesterday" class="text-zinc-300 dark:text-white/40" stroke-dasharray="4 4" curve="none" />
+                <flux:chart.line field="sales" class="text-sky-500 dark:text-sky-400" curve="none" />
+
+                <flux:chart.axis axis="x" field="date">
+                    <flux:chart.axis.grid />
+                    <flux:chart.axis.tick />
+                    <flux:chart.axis.line />
+                </flux:chart.axis>
+
+                <flux:chart.axis axis="y">
+                    <flux:chart.axis.tick />
+                </flux:chart.axis>
+
+                <flux:chart.cursor />
+            </flux:chart.svg>
+        </flux:chart.viewport>
+    </flux:chart>
+</flux:card>
 ```
 
 ## Sparkline
@@ -193,9 +232,10 @@ A compact, single-line chart used in tables or dashboards for quick visual insig
 
 ```blade
 <flux:chart :value="[15, 18, 16, 19, 22, 25, 28, 25, 29, 28, 32, 35]" class="w-[5rem] aspect-[3/1]">
-<flux:chart.svg gutter="0">
-<flux:chart.line class="text-green-500 dark:text-green-400" />
-</flux:chart.svg></flux:chart>
+    <flux:chart.svg gutter="0">
+        <flux:chart.line class="text-green-500 dark:text-green-400" />
+    </flux:chart.svg>
+</flux:chart>
 ```
 
 You might have noticed the gutter attribute on the <flux:chart.svg> component. This is because by default, the chart will be rendered with a padding of 8px on all sides. This is to prevent overflowing contents of the chart (like tick labels or stroke lines) from being cut off at the edges of the container.
@@ -210,14 +250,17 @@ A small card displaying a key metric with an embedded chart in the background. U
 
 ```blade
 <flux:card class="overflow-hidden min-w-[12rem]">
-<flux:text>Revenue</flux:text>
-<flux:heading size="xl" class="mt-2 tabular-nums">$12,345</flux:heading>
-<flux:chart class="-mx-8 -mb-8 h-[3rem]" :value="[10, 12, 11, 13, 15, 14, 16, 18, 17, 19, 21, 20]">
-<flux:chart.svg gutter="0">
-<flux:chart.line class="text-sky-200 dark:text-sky-400" />
-<flux:chart.area class="text-sky-100 dark:text-sky-400/30" />
-</flux:chart.svg>
-</flux:chart></flux:card>
+    <flux:text>Revenue</flux:text>
+
+    <flux:heading size="xl" class="mt-2 tabular-nums">$12,345</flux:heading>
+
+    <flux:chart class="-mx-8 -mb-8 h-[3rem]" :value="[10, 12, 11, 13, 15, 14, 16, 18, 17, 19, 21, 20]">
+        <flux:chart.svg gutter="0">
+            <flux:chart.line class="text-sky-200 dark:text-sky-400" />
+            <flux:chart.area class="text-sky-100 dark:text-sky-400/30" />
+        </flux:chart.svg>
+    </flux:chart>
+</flux:card>
 ```
 
 ## Chart padding
@@ -230,9 +273,10 @@ Here's an example of adding the following padding to the chart:
 
 ```blade
 <flux:chart>
-<flux:chart.svg gutter="12 0 12 8">
-<!-- ... -->
-</flux:chart.svg></flux:chart>
+    <flux:chart.svg gutter="12 0 12 8">
+        <!-- ... -->
+    </flux:chart.svg>
+</flux:chart>
 ```
 
 The gutter attribute accepts between one and four values, which correspond to the top, right, bottom, and left padding respectively. Similar to the padding property shorthand in CSS.
@@ -250,7 +294,8 @@ You can configure the scale of an axis and its ticks by setting the scale attrib
 
 ```blade
 <flux:chart.axis axis="y" scale="linear">
-<!-- ... --></flux:chart.axis>
+    <!-- ... -->
+</flux:chart.axis>
 ```
 
 There are three available types of scales:
@@ -269,15 +314,18 @@ By default, axes do not include a visible baseline. You can add an axis line usi
 
 ```blade
 <flux:chart.svg>
-<!-- ... -->
-<flux:chart.axis axis="x">
-<!-- Horizontal "X" axis line: -->
-<flux:chart.axis.line />
-</flux:chart.axis>
-<flux:chart.axis axis="y">
-<!-- Vertical "Y" axis line: -->
-<flux:chart.axis.line />
-</flux:chart.axis></flux:chart.svg>
+    <!-- ... -->
+
+    <flux:chart.axis axis="x">
+        <!-- Horizontal "X" axis line: -->
+        <flux:chart.axis.line />
+    </flux:chart.axis>
+
+    <flux:chart.axis axis="y">
+        <!-- Vertical "Y" axis line: -->
+        <flux:chart.axis.line />
+    </flux:chart.axis>
+</flux:chart.svg>
 ```
 
 **Styling axis lines**
@@ -285,7 +333,8 @@ By default, axes do not include a visible baseline. You can add an axis line usi
 Because the axis line is rendered as a <line> element, you can style it using any of the SVG attributes that are available for the <line> element.
 
 ```blade
-<!-- A dark gray axis line that is 2px wide and has a gray color: --><flux:chart.axis.line class="text-zinc-800" stroke-width="2" />
+<!-- A dark gray axis line that is 2px wide and has a gray color: -->
+<flux:chart.axis.line class="text-zinc-800" stroke-width="2" />
 ```
 
 ## Zero line
@@ -294,9 +343,11 @@ The zero line is the line that represents the zero value on the axis. It will on
 
 ```blade
 <flux:chart.svg>
-<!-- ... -->
-<!-- Zero line: -->
-<flux:chart.zero-line /></flux:chart.svg>
+    <!-- ... -->
+
+    <!-- Zero line: -->
+    <flux:chart.zero-line />
+</flux:chart.svg>
 ```
 
 **Styling the zero line**
@@ -304,7 +355,8 @@ The zero line is the line that represents the zero value on the axis. It will on
 Because the zero line is rendered as a <line> element, you can style it using any of the SVG attributes that are available for the <line> element.
 
 ```blade
-<!-- A dark gray zero line that is 2px wide and has a gray color: --><flux:chart.zero-line class="text-zinc-800" stroke-width="2" />
+<!-- A dark gray zero line that is 2px wide and has a gray color: -->
+<flux:chart.zero-line class="text-zinc-800" stroke-width="2" />
 ```
 
 ## Grid lines
@@ -313,15 +365,18 @@ You can render horizontal and vertical grid lines by adding the <flux:chart.axis
 
 ```blade
 <flux:chart.svg>
-<!-- ... -->
-<flux:chart.axis axis="x">
-<!-- Vertical grid lines: -->
-<flux:chart.axis.grid />
-</flux:chart.axis>
-<flux:chart.axis axis="y">
-<!-- Horizontal grid lines: -->
-<flux:chart.axis.grid />
-</flux:chart.axis></flux:chart.svg>
+    <!-- ... -->
+
+    <flux:chart.axis axis="x">
+        <!-- Vertical grid lines: -->
+        <flux:chart.axis.grid />
+    </flux:chart.axis>
+
+    <flux:chart.axis axis="y">
+        <!-- Horizontal grid lines: -->
+        <flux:chart.axis.grid />
+    </flux:chart.axis>
+</flux:chart.svg>
 ```
 
 **Styling grid lines**
@@ -329,7 +384,8 @@ You can render horizontal and vertical grid lines by adding the <flux:chart.axis
 Because the grid lines are rendered as a <line> element, you can style them using any of the SVG attributes that are available for the <line> element.
 
 ```blade
-<!-- A dashed grid line that is 2px wide and has a gray color: --><flux:chart.axis.grid class="text-zinc-200/50" stroke-width="2" stroke-dasharray="4,4" />
+<!-- A dashed grid line that is 2px wide and has a gray color: -->
+<flux:chart.axis.grid class="text-zinc-200/50" stroke-width="2" stroke-dasharray="4,4" />
 ```
 
 ## Ticks
@@ -338,19 +394,24 @@ You can render tick mark lines and labels by adding the <flux:chart.axis.mark> a
 
 ```blade
 <flux:chart.svg>
-<!-- ... -->
-<flux:chart.axis axis="x">
-<!-- X axis tick mark lines: -->
-<flux:chart.axis.mark />
-<!-- X axis tick labels: -->
-<flux:chart.axis.tick />
-</flux:chart.axis>
-<flux:chart.axis axis="y">
-<!-- Y axis tick mark lines: -->
-<flux:chart.axis.mark />
-<!-- Y axis tick labels: -->
-<flux:chart.axis.tick />
-</flux:chart.axis></flux:chart.svg>
+    <!-- ... -->
+
+    <flux:chart.axis axis="x">
+        <!-- X axis tick mark lines: -->
+        <flux:chart.axis.mark />
+
+        <!-- X axis tick labels: -->
+        <flux:chart.axis.tick />
+    </flux:chart.axis>
+
+    <flux:chart.axis axis="y">
+        <!-- Y axis tick mark lines: -->
+        <flux:chart.axis.mark />
+
+        <!-- Y axis tick labels: -->
+        <flux:chart.axis.tick />
+    </flux:chart.axis>
+</flux:chart.svg>
 ```
 
 **Styling tick mark lines**
@@ -358,7 +419,8 @@ You can render tick mark lines and labels by adding the <flux:chart.axis.mark> a
 The tick mark component is a simple wrapper around the <line> SVG element. You can customize the length, width, and color of the tick mark lines using plain CSS and SVG attributes:
 
 ```blade
-<!-- A tick mark line that is 10px long, 2px wide, and has a gray color: --><flux:chart.axis.mark class="text-zinc-300" stroke-width="2" y1="0" y2="10" />
+<!-- A tick mark line that is 10px long, 2px wide, and has a gray color: -->
+<flux:chart.axis.mark class="text-zinc-300" stroke-width="2" y1="0" y2="10" />
 ```
 
 **Styling tick labels**
@@ -366,7 +428,8 @@ The tick mark component is a simple wrapper around the <line> SVG element. You c
 The <flux:chart.axis.tick> component is a simple wrapper around the <text> SVG element. You can customize the font size, color, and position of the tick labels using plain CSS and SVG attributes:
 
 ```blade
-<!-- A tick label that is 12px, has a blue color, is center aligned, and is 2.5rem from the axis line: --><flux:chart.axis.tick class="text-xs text-blue-500" text-anchor="middle" dy="2.5rem"  />
+<!-- A tick label that is 12px, has a blue color, is center aligned, and is 2.5rem from the axis line: -->
+<flux:chart.axis.tick class="text-xs text-blue-500" text-anchor="middle" dy="2.5rem"  />
 ```
 
 ## Tick frequency
@@ -377,7 +440,8 @@ You can influence the number of ticks on an axis by setting the tick-count attri
 
 ```blade
 <flux:chart.axis axis="y" tick-count="5">
-<!-- ... --></flux:chart.axis>
+    <!-- ... -->
+</flux:chart.axis>
 ```
 
 Note that the tick-count attribute is only a target number, and the actual number of ticks may vary based on the range of values on the axis.
@@ -388,7 +452,8 @@ By default, the tick marks will start at zero, unless negative values are presen
 
 ```blade
 <flux:chart.axis axis="y" tick-start="min">
-<!-- ... --></flux:chart.axis>
+    <!-- ... -->
+</flux:chart.axis>
 ```
 
 The available values for tick-start are:
@@ -404,7 +469,8 @@ By default, the tick marks will end at the next tick mark after the maximum valu
 
 ```blade
 <flux:chart.axis axis="y" tick-end="max">
-<!-- ... --></flux:chart.axis>
+    <!-- ... -->
+</flux:chart.axis>
 ```
 
 The available values for tick-end are:
@@ -419,7 +485,8 @@ You can also set explicit tick values by passing an array of values to the tick-
 
 ```blade
 <flux:chart.axis axis="y" tick-values="[0, 128, 256, 384, 512]" tick-suffix="MB">
-<!-- ... --></flux:chart.axis>
+    <!-- ... -->
+</flux:chart.axis>
 ```
 
 ## Tick formatting
@@ -434,17 +501,20 @@ This means that you can use any of the formatting options that are available for
 
 ```blade
 <flux:chart.svg>
-<!-- ... -->
-<!-- Format the X axis tick labels to display the month and day: -->
-<flux:chart.axis axis="x" :format="['month' => 'long', 'day' => 'numeric']">
-<!-- X axis tick labels: -->
-<flux:chart.axis.tick />
-</flux:chart.axis>
-<!-- Format the Y axis tick labels to display the value in USD: -->
-<flux:chart.axis axis="y" :format="['style' => 'currency', 'currency' => 'USD']">
-<!-- Y axis tick labels: -->
-<flux:chart.axis.tick />
-</flux:chart.axis></flux:chart.svg>
+    <!-- ... -->
+
+    <!-- Format the X axis tick labels to display the month and day: -->
+    <flux:chart.axis axis="x" :format="['month' => 'long', 'day' => 'numeric']">
+        <!-- X axis tick labels: -->
+        <flux:chart.axis.tick />
+    </flux:chart.axis>
+
+    <!-- Format the Y axis tick labels to display the value in USD: -->
+    <flux:chart.axis axis="y" :format="['style' => 'currency', 'currency' => 'USD']">
+        <!-- Y axis tick labels: -->
+        <flux:chart.axis.tick />
+    </flux:chart.axis>
+</flux:chart.svg>
 ```
 
 **Setting a tick prefix**
@@ -453,7 +523,8 @@ You can set a tick prefix by passing a string to the tick-prefix attribute:
 
 ```blade
 <flux:chart.axis axis="y" tick-prefix="$">
-<!-- ... --></flux:chart.axis>
+    <!-- ... -->
+</flux:chart.axis>
 ```
 
 **Setting a tick suffix**
@@ -462,7 +533,8 @@ You can set a tick suffix by passing a string to the tick-suffix attribute:
 
 ```blade
 <flux:chart.axis axis="y" tick-suffix="MB">
-<!-- ... --></flux:chart.axis>
+    <!-- ... -->
+</flux:chart.axis>
 ```
 
 ## Cursor
@@ -473,8 +545,10 @@ To enable a cursor, simply include <flux:chart.cursor> inside <flux:chart.svg>:
 
 ```blade
 <flux:chart.svg>
-<!-- ... -->
-<flux:chart.cursor /></flux:chart.svg>
+    <!-- ... -->
+
+    <flux:chart.cursor />
+</flux:chart.svg>
 ```
 
 **Styling the cursor**
@@ -482,7 +556,8 @@ To enable a cursor, simply include <flux:chart.cursor> inside <flux:chart.svg>:
 Because the cursor is rendered as a <line> element, you can style it using any of the SVG attributes that are available for the <line> element.
 
 ```blade
-<!-- A dashed, black cursor that is 1px wide: --><flux:chart.cursor class="text-zinc-800" stroke-width="1" stroke-dasharray="4,4" />
+<!-- A dashed, black cursor that is 1px wide: -->
+<flux:chart.cursor class="text-zinc-800" stroke-width="1" stroke-dasharray="4,4" />
 ```
 
 ## Tooltip
@@ -493,14 +568,17 @@ To enable tooltips, include <flux:chart.tooltip> inside <flux:chart>:
 
 ```blade
 <flux:chart>
-<flux:chart.svg>
-<!-- ... -->
-</flux:chart.svg>
-<flux:chart.tooltip>
-<flux:chart.tooltip.heading field="date" />
-<flux:chart.tooltip.value field="visitors" label="Visitors" />
-<flux:chart.tooltip.value field="views" label="Views" :format="['notation' => 'compact']" />
-</flux:chart.tooltip></flux:chart>
+    <flux:chart.svg>
+        <!-- ... -->
+    </flux:chart.svg>
+
+    <flux:chart.tooltip>
+        <flux:chart.tooltip.heading field="date" />
+
+        <flux:chart.tooltip.value field="visitors" label="Visitors" />
+        <flux:chart.tooltip.value field="views" label="Views" :format="['notation' => 'compact']" />
+    </flux:chart.tooltip>
+</flux:chart>
 ```
 
 **Customizing tooltip content**
@@ -509,9 +587,11 @@ You can display multiple values and format numbers dynamically.
 
 ```blade
 <flux:chart.tooltip>
-<flux:chart.tooltip.heading field="date" />
-<flux:chart.tooltip.value field="visitors" label="Visitors" />
-<flux:chart.tooltip.value field="views" label="Page Views" :format="['notation' => 'compact']" /></flux:chart.tooltip>
+    <flux:chart.tooltip.heading field="date" />
+
+    <flux:chart.tooltip.value field="visitors" label="Visitors" />
+    <flux:chart.tooltip.value field="views" label="Page Views" :format="['notation' => 'compact']" />
+</flux:chart.tooltip>
 ```
 
 ## Legend
@@ -522,20 +602,23 @@ When using a legend, you will need to include a <flux:chart.viewport> component 
 
 ```blade
 <flux:chart wire:model="data">
-<flux:chart.viewport class="aspect-3/1">
-<flux:chart.svg>
-<flux:chart.line class="text-blue-500" field="visitors" />
-<flux:chart.line class="text-red-500" field="views" />
-</flux:chart.svg>
-</flux:chart.viewport>
-<div class="flex justify-center gap-4 pt-4">
-<flux:chart.legend label="Visitors">
-<flux:chart.legend.indicator class="bg-blue-400" />
-</flux:chart.legend>
-<flux:chart.legend label="Views">
-<flux:chart.legend.indicator class="bg-red-400" />
-</flux:chart.legend>
-</div></flux:chart>
+    <flux:chart.viewport class="aspect-3/1">
+        <flux:chart.svg>
+            <flux:chart.line class="text-blue-500" field="visitors" />
+            <flux:chart.line class="text-red-500" field="views" />
+        </flux:chart.svg>
+    </flux:chart.viewport>
+
+    <div class="flex justify-center gap-4 pt-4">
+        <flux:chart.legend label="Visitors">
+            <flux:chart.legend.indicator class="bg-blue-400" />
+        </flux:chart.legend>
+
+        <flux:chart.legend label="Views">
+            <flux:chart.legend.indicator class="bg-red-400" />
+        </flux:chart.legend>
+    </div>
+</flux:chart>
 ```
 
 ## Summary
@@ -546,12 +629,14 @@ To enable a summary, include <flux:chart.summary> inside <flux:chart>:
 
 ```blade
 <flux:chart wire:model="data">
-<flux:chart.summary>
-<flux:chart.summary.value field="visitors" :format="['notation' => 'compact']" />
-</flux:chart.summary>
-<flux:chart.viewport class="aspect-[3/1]">
-<!-- ... -->
-</flux:chart.viewport></flux:chart>
+    <flux:chart.summary>
+        <flux:chart.summary.value field="visitors" :format="['notation' => 'compact']" />
+    </flux:chart.summary>
+
+    <flux:chart.viewport class="aspect-[3/1]">
+        <!-- ... -->
+    </flux:chart.viewport>
+</flux:chart>
 ```
 
 Notice that you will need to include a <flux:chart.viewport> component to wrap the <flux:chart.svg> component so that the summary is rendered outside of the chart.

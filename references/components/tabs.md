@@ -11,14 +11,16 @@ For full-page navigation, use the [navbar component \->](/components/navbar)
 
 ```blade
 <flux:tab.group>
-<flux:tabs wire:model="tab">
-<flux:tab name="profile">Profile</flux:tab>
-<flux:tab name="account">Account</flux:tab>
-<flux:tab name="billing">Billing</flux:tab>
-</flux:tabs>
-<flux:tab.panel name="profile">...</flux:tab.panel>
-<flux:tab.panel name="account">...</flux:tab.panel>
-<flux:tab.panel name="billing">...</flux:tab.panel></flux:tab.group>
+    <flux:tabs wire:model="tab">
+        <flux:tab name="profile">Profile</flux:tab>
+        <flux:tab name="account">Account</flux:tab>
+        <flux:tab name="billing">Billing</flux:tab>
+    </flux:tabs>
+
+    <flux:tab.panel name="profile">...</flux:tab.panel>
+    <flux:tab.panel name="account">...</flux:tab.panel>
+    <flux:tab.panel name="billing">...</flux:tab.panel>
+</flux:tab.group>
 ```
 
 ## With icons
@@ -26,14 +28,16 @@ Associate tab labels with icons to visually distinguish different sections.
 
 ```blade
 <flux:tab.group>
-<flux:tabs>
-<flux:tab name="profile" icon="user">Profile</flux:tab>
-<flux:tab name="account" icon="cog-6-tooth">Account</flux:tab>
-<flux:tab name="billing" icon="banknotes">Billing</flux:tab>
-</flux:tabs>
-<flux:tab.panel name="profile">...</flux:tab.panel>
-<flux:tab.panel name="account">...</flux:tab.panel>
-<flux:tab.panel name="billing">...</flux:tab.panel></flux:tab.group>
+    <flux:tabs>
+        <flux:tab name="profile" icon="user">Profile</flux:tab>
+        <flux:tab name="account" icon="cog-6-tooth">Account</flux:tab>
+        <flux:tab name="billing" icon="banknotes">Billing</flux:tab>
+    </flux:tabs>
+
+    <flux:tab.panel name="profile">...</flux:tab.panel>
+    <flux:tab.panel name="account">...</flux:tab.panel>
+    <flux:tab.panel name="billing">...</flux:tab.panel>
+</flux:tab.group>
 ```
 
 ## Padded edges
@@ -41,9 +45,10 @@ By default, the tabs will have no horizontal padding around the edges. If you wa
 
 ```blade
 <flux:tabs class="px-4">
-<flux:tab name="profile">Profile</flux:tab>
-<flux:tab name="account">Account</flux:tab>
-<flux:tab name="billing">Billing</flux:tab></flux:tabs>
+    <flux:tab name="profile">Profile</flux:tab>
+    <flux:tab name="account">Account</flux:tab>
+    <flux:tab name="billing">Billing</flux:tab>
+</flux:tabs>
 ```
 
 ## Scrollable tabs
@@ -51,22 +56,24 @@ If your tabs extend beyond the viewport, especially on mobile devices, you shoul
 
 ```blade
 <flux:tab.group>
-<flux:tabs scrollable>
-<flux:tab name="profile">Profile</flux:tab>
-<flux:tab name="account">Account</flux:tab>
-<flux:tab name="billing">Billing</flux:tab>
-<flux:tab name="security">Security</flux:tab>
-<flux:tab name="notifications">Notifications</flux:tab>
-<flux:tab name="integrations">Integrations</flux:tab>
-<flux:tab name="api">API</flux:tab>
-</flux:tabs>
-<flux:tab.panel name="profile">...</flux:tab.panel>
-<flux:tab.panel name="account">...</flux:tab.panel>
-<flux:tab.panel name="billing">...</flux:tab.panel>
-<flux:tab.panel name="security">...</flux:tab.panel>
-<flux:tab.panel name="notifications">...</flux:tab.panel>
-<flux:tab.panel name="integrations">...</flux:tab.panel>
-<flux:tab.panel name="api">...</flux:tab.panel></flux:tab.group>
+    <flux:tabs scrollable>
+        <flux:tab name="profile">Profile</flux:tab>
+        <flux:tab name="account">Account</flux:tab>
+        <flux:tab name="billing">Billing</flux:tab>
+        <flux:tab name="security">Security</flux:tab>
+        <flux:tab name="notifications">Notifications</flux:tab>
+        <flux:tab name="integrations">Integrations</flux:tab>
+        <flux:tab name="api">API</flux:tab>
+    </flux:tabs>
+
+    <flux:tab.panel name="profile">...</flux:tab.panel>
+    <flux:tab.panel name="account">...</flux:tab.panel>
+    <flux:tab.panel name="billing">...</flux:tab.panel>
+    <flux:tab.panel name="security">...</flux:tab.panel>
+    <flux:tab.panel name="notifications">...</flux:tab.panel>
+    <flux:tab.panel name="integrations">...</flux:tab.panel>
+    <flux:tab.panel name="api">...</flux:tab.panel>
+</flux:tab.group>
 ```
 
 You can hide the scrollbar by addding scrollable:scrollbar="hide". Note that this will also hide it on desktop, where users may rely on it for horizontal scrolling.
@@ -76,22 +83,24 @@ Use scrollable:fade to add a fade effect to the trailing edge. This visual cue i
 
 ```blade
 <flux:tab.group>
-<flux:tabs scrollable scrollable:fade>
-<flux:tab name="profile">Profile</flux:tab>
-<flux:tab name="account">Account</flux:tab>
-<flux:tab name="billing">Billing</flux:tab>
-<flux:tab name="security">Security</flux:tab>
-<flux:tab name="notifications">Notifications</flux:tab>
-<flux:tab name="integrations">Integrations</flux:tab>
-<flux:tab name="api">API</flux:tab>
-</flux:tabs>
-<flux:tab.panel name="profile">...</flux:tab.panel>
-<flux:tab.panel name="account">...</flux:tab.panel>
-<flux:tab.panel name="billing">...</flux:tab.panel>
-<flux:tab.panel name="security">...</flux:tab.panel>
-<flux:tab.panel name="notifications">...</flux:tab.panel>
-<flux:tab.panel name="integrations">...</flux:tab.panel>
-<flux:tab.panel name="api">...</flux:tab.panel></flux:tab.group>
+    <flux:tabs scrollable scrollable:fade>
+        <flux:tab name="profile">Profile</flux:tab>
+        <flux:tab name="account">Account</flux:tab>
+        <flux:tab name="billing">Billing</flux:tab>
+        <flux:tab name="security">Security</flux:tab>
+        <flux:tab name="notifications">Notifications</flux:tab>
+        <flux:tab name="integrations">Integrations</flux:tab>
+        <flux:tab name="api">API</flux:tab>
+    </flux:tabs>
+
+    <flux:tab.panel name="profile">...</flux:tab.panel>
+    <flux:tab.panel name="account">...</flux:tab.panel>
+    <flux:tab.panel name="billing">...</flux:tab.panel>
+    <flux:tab.panel name="security">...</flux:tab.panel>
+    <flux:tab.panel name="notifications">...</flux:tab.panel>
+    <flux:tab.panel name="integrations">...</flux:tab.panel>
+    <flux:tab.panel name="api">...</flux:tab.panel>
+</flux:tab.group>
 ```
 
 ## Segmented tabs
@@ -99,9 +108,10 @@ Tab through content with visually separated, button-like tabs. Ideal for togglin
 
 ```blade
 <flux:tabs variant="segmented">
-<flux:tab>List</flux:tab>
-<flux:tab>Board</flux:tab>
-<flux:tab>Timeline</flux:tab></flux:tabs>
+    <flux:tab>List</flux:tab>
+    <flux:tab>Board</flux:tab>
+    <flux:tab>Timeline</flux:tab>
+</flux:tabs>
 ```
 
 ## Segmented with icons
@@ -109,9 +119,10 @@ Combine segmented tabs with icon prefixes.
 
 ```blade
 <flux:tabs variant="segmented">
-<flux:tab icon="list-bullet">List</flux:tab>
-<flux:tab icon="squares-2x2">Board</flux:tab>
-<flux:tab icon="calendar-days">Timeline</flux:tab></flux:tabs>
+    <flux:tab icon="list-bullet">List</flux:tab>
+    <flux:tab icon="squares-2x2">Board</flux:tab>
+    <flux:tab icon="calendar-days">Timeline</flux:tab>
+</flux:tabs>
 ```
 
 ## Small segmented tabs
@@ -119,8 +130,9 @@ For more compact layouts, you can use the size="sm" prop to make the tabs smalle
 
 ```blade
 <flux:tabs variant="segmented" size="sm">
-<flux:tab>Demo</flux:tab>
-<flux:tab>Code</flux:tab></flux:tabs>
+    <flux:tab>Demo</flux:tab>
+    <flux:tab>Code</flux:tab>
+</flux:tabs>
 ```
 
 ## Pill tabs
@@ -128,9 +140,10 @@ Tab through content with visually separated, pill-like tabs.
 
 ```blade
 <flux:tabs variant="pills">
-<flux:tab>List</flux:tab>
-<flux:tab>Board</flux:tab>
-<flux:tab>Timeline</flux:tab></flux:tabs>
+    <flux:tab>List</flux:tab>
+    <flux:tab>Board</flux:tab>
+    <flux:tab>Timeline</flux:tab>
+</flux:tabs>
 ```
 
 ## Dynamic tabs
@@ -138,10 +151,34 @@ If you need, you can dynamically generate additional tabs and panels in your Liv
 
 ```blade
 <flux:tab.group>
-<flux:tabs>        @foreach($tabs as $id => $tab)            <flux:tab :name="$id">{{ $tab }}</flux:tab>        @endforeach        <flux:tab icon="plus" wire:click="addTab" action>Add tab</flux:tab>
-</flux:tabs>    @foreach($tabs as $id => $tab)        <flux:tab.panel :name="$id">
-<!-- ... -->
-</flux:tab.panel>    @endforeach</flux:tab.group><!-- Livewire component example code...    public array $tabs = [        'tab-1' => 'Tab #1',        'tab-2' => 'Tab #2',    ];    public function addTab(): void    {        $id = 'tab-' . str()->random();        $this->tabs[$id] = 'Tab #' . count($this->tabs) + 1;    }-->
+    <flux:tabs>
+        @foreach($tabs as $id => $tab)
+            <flux:tab :name="$id">{{ $tab }}</flux:tab>
+        @endforeach
+
+        <flux:tab icon="plus" wire:click="addTab" action>Add tab</flux:tab>
+    </flux:tabs>
+
+    @foreach($tabs as $id => $tab)
+        <flux:tab.panel :name="$id">
+            <!-- ... -->
+        </flux:tab.panel>
+    @endforeach
+</flux:tab.group>
+
+<!-- Livewire component example code...
+    public array $tabs = [
+        'tab-1' => 'Tab #1',
+        'tab-2' => 'Tab #2',
+    ];
+
+    public function addTab(): void
+    {
+        $id = 'tab-' . str()->random();
+
+        $this->tabs[$id] = 'Tab #' . count($this->tabs) + 1;
+    }
+-->
 ```
 
 ## Reference

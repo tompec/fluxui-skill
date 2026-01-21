@@ -9,9 +9,10 @@ Select one option from a set of mutually exclusive choices. Perfect for single-c
 
 ```blade
 <flux:radio.group wire:model="payment" label="Select your payment method">
-<flux:radio value="cc" label="Credit Card" checked />
-<flux:radio value="paypal" label="Paypal" />
-<flux:radio value="ach" label="Bank transfer" /></flux:radio.group>
+    <flux:radio value="cc" label="Credit Card" checked />
+    <flux:radio value="paypal" label="Paypal" />
+    <flux:radio value="ach" label="Bank transfer" />
+</flux:radio.group>
 ```
 
 ## With descriptions
@@ -19,9 +20,26 @@ Align descriptions for each radio directly below its label.
 
 ```blade
 <flux:radio.group label="Role">
-<flux:radio        name="role"        value="administrator"        label="Administrator"        description="Administrator users can perform any action."        checked    />
-<flux:radio        name="role"        value="editor"        label="Editor"        description="Editor users have the ability to read, create, and update."    />
-<flux:radio        name="role"        value="viewer"        label="Viewer"        description="Viewer users only have the ability to read. Create, and update are restricted."    /></flux:radio.group>
+    <flux:radio
+        name="role"
+        value="administrator"
+        label="Administrator"
+        description="Administrator users can perform any action."
+        checked
+    />
+    <flux:radio
+        name="role"
+        value="editor"
+        label="Editor"
+        description="Editor users have the ability to read, create, and update."
+    />
+    <flux:radio
+        name="role"
+        value="viewer"
+        label="Viewer"
+        description="Viewer users only have the ability to read. Create, and update are restricted."
+    />
+</flux:radio.group>
 ```
 
 ## Within fieldset
@@ -29,12 +47,27 @@ Group radio inputs inside a fieldset and provide more context with descriptions 
 
 ```blade
 <flux:fieldset>
-<flux:legend>Role</flux:legend>
-<flux:radio.group>
-<flux:radio            value="administrator"            label="Administrator"            description="Administrator users can perform any action."            checked        />
-<flux:radio            value="editor"            label="Editor"            description="Editor users have the ability to read, create, and update."        />
-<flux:radio            value="viewer"            label="Viewer"            description="Viewer users only have the ability to read. Create, and update are restricted."        />
-</flux:radio.group></flux:fieldset>
+    <flux:legend>Role</flux:legend>
+
+    <flux:radio.group>
+        <flux:radio
+            value="administrator"
+            label="Administrator"
+            description="Administrator users can perform any action."
+            checked
+        />
+        <flux:radio
+            value="editor"
+            label="Editor"
+            description="Editor users have the ability to read, create, and update."
+        />
+        <flux:radio
+            value="viewer"
+            label="Viewer"
+            description="Viewer users only have the ability to read. Create, and update are restricted."
+        />
+    </flux:radio.group>
+</flux:fieldset>
 ```
 
 ## Segmented
@@ -42,18 +75,20 @@ A more compact alternative to standard radio buttons.
 
 ```blade
 <flux:radio.group wire:model="role" label="Role" variant="segmented">
-<flux:radio label="Admin" />
-<flux:radio label="Editor" />
-<flux:radio label="Viewer" /></flux:radio.group>
+    <flux:radio label="Admin" />
+    <flux:radio label="Editor" />
+    <flux:radio label="Viewer" />
+</flux:radio.group>
 ```
 
 You can also use the size="sm" prop to make the radios smaller.
 
 ```blade
 <flux:radio.group wire:model="role" label="Role" variant="segmented" size="sm">
-<flux:radio label="Admin" />
-<flux:radio label="Editor" />
-<flux:radio label="Viewer" /></flux:radio.group>
+    <flux:radio label="Admin" />
+    <flux:radio label="Editor" />
+    <flux:radio label="Viewer" />
+</flux:radio.group>
 ```
 
 ## Segmented with icons
@@ -61,9 +96,10 @@ Combine segmented radio buttons with icon prefixes.
 
 ```blade
 <flux:radio.group wire:model="role" variant="segmented">
-<flux:radio label="Admin" icon="wrench" />
-<flux:radio label="Editor" icon="pencil-square" />
-<flux:radio label="Viewer" icon="eye" /></flux:radio.group>
+    <flux:radio label="Admin" icon="wrench" />
+    <flux:radio label="Editor" icon="pencil-square" />
+    <flux:radio label="Viewer" icon="eye" />
+</flux:radio.group>
 ```
 
 ## Radio cards
@@ -71,16 +107,18 @@ A bordered alternative to standard radio buttons.
 
 ```blade
 <flux:radio.group wire:model="shipping" label="Shipping" variant="cards" class="max-sm:flex-col">
-<flux:radio value="standard" label="Standard" description="4-10 business days" checked />
-<flux:radio value="fast" label="Fast" description="2-5 business days" />
-<flux:radio value="next-day" label="Next day" description="1 business day" /></flux:radio.group>
+    <flux:radio value="standard" label="Standard" description="4-10 business days" checked />
+    <flux:radio value="fast" label="Fast" description="2-5 business days" />
+    <flux:radio value="next-day" label="Next day" description="1 business day" />
+</flux:radio.group>
 ```
 
 You can swap between vertical and horizontal card layouts by conditionally applying flex-col based on the viewport.
 
 ```blade
 <flux:radio.group ... class="max-sm:flex-col">
-<!-- ... --></flux:radio.group>
+    <!-- ... -->
+</flux:radio.group>
 ```
 
 ## Vertical cards
@@ -88,9 +126,10 @@ You can arrange a set of radio cards vertically by simply adding the flex-col cl
 
 ```blade
 <flux:radio.group label="Shipping" variant="cards" class="flex-col">
-<flux:radio value="standard" label="Standard" description="4-10 business days" />
-<flux:radio value="fast" label="Fast" description="2-5 business days" />
-<flux:radio value="next-day" label="Next day" description="1 business day" /></flux:radio.group>
+    <flux:radio value="standard" label="Standard" description="4-10 business days" />
+    <flux:radio value="fast" label="Fast" description="2-5 business days" />
+    <flux:radio value="next-day" label="Next day" description="1 business day" />
+</flux:radio.group>
 ```
 
 ## Cards with icons
@@ -98,9 +137,10 @@ You can arrange a set of radio cards vertically by simply adding the flex-col cl
 
 ```blade
 <flux:radio.group label="Shipping" variant="cards" class="max-sm:flex-col">
-<flux:radio value="standard" icon="truck" label="Standard" description="4-10 business days" />
-<flux:radio value="fast" icon="cube" label="Fast" description="2-5 business days" />
-<flux:radio value="next-day" icon="clock" label="Next day" description="1 business day" /></flux:radio.group>
+    <flux:radio value="standard" icon="truck" label="Standard" description="4-10 business days" />
+    <flux:radio value="fast" icon="cube" label="Fast" description="2-5 business days" />
+    <flux:radio value="next-day" icon="clock" label="Next day" description="1 business day" />
+</flux:radio.group>
 ```
 
 ## Cards without indicators
@@ -108,9 +148,10 @@ For a cleaner look, you can remove the radio indicator using :indicator="false".
 
 ```blade
 <flux:radio.group label="Shipping" variant="cards" :indicator="false" class="max-sm:flex-col">
-<flux:radio value="standard" icon="truck" label="Standard" description="4-10 business days" />
-<flux:radio value="fast" icon="cube" label="Fast" description="2-5 business days" />
-<flux:radio value="next-day" icon="clock" label="Next day" description="1 business day" /></flux:radio.group>
+    <flux:radio value="standard" icon="truck" label="Standard" description="4-10 business days" />
+    <flux:radio value="fast" icon="cube" label="Fast" description="2-5 business days" />
+    <flux:radio value="next-day" icon="clock" label="Next day" description="1 business day" />
+</flux:radio.group>
 ```
 
 ## Custom card content
@@ -118,27 +159,33 @@ You can compose your own custom cards through the flux:radio component slot.
 
 ```blade
 <flux:radio.group label="Shipping" variant="cards" class="max-sm:flex-col">
-<flux:radio value="standard" checked>
-<flux:radio.indicator />
-<div class="flex-1">
-<flux:heading class="leading-4">Standard</flux:heading>
-<flux:text size="sm" class="mt-2">4-10 business days</flux:text>
-</div>
-</flux:radio>
-<flux:radio value="fast">
-<flux:radio.indicator />
-<div class="flex-1">
-<flux:heading class="leading-4">Fast</flux:heading>
-<flux:text size="sm" class="mt-2">2-5 business days</flux:text>
-</div>
-</flux:radio>
-<flux:radio value="next-day">
-<flux:radio.indicator />
-<div class="flex-1">
-<flux:heading class="leading-4">Next day</flux:heading>
-<flux:text size="sm" class="mt-2">1 business day</flux:text>
-</div>
-</flux:radio></flux:radio.group>
+    <flux:radio value="standard" checked>
+        <flux:radio.indicator />
+
+        <div class="flex-1">
+            <flux:heading class="leading-4">Standard</flux:heading>
+            <flux:text size="sm" class="mt-2">4-10 business days</flux:text>
+        </div>
+    </flux:radio>
+
+    <flux:radio value="fast">
+        <flux:radio.indicator />
+
+        <div class="flex-1">
+            <flux:heading class="leading-4">Fast</flux:heading>
+            <flux:text size="sm" class="mt-2">2-5 business days</flux:text>
+        </div>
+    </flux:radio>
+
+    <flux:radio value="next-day">
+        <flux:radio.indicator />
+
+        <div class="flex-1">
+            <flux:heading class="leading-4">Next day</flux:heading>
+            <flux:text size="sm" class="mt-2">1 business day</flux:text>
+        </div>
+    </flux:radio>
+</flux:radio.group>
 ```
 
 ## Pills
@@ -146,10 +193,11 @@ Compact, rounded radio buttons that look like tags or badges. Perfect for filter
 
 ```blade
 <flux:radio.group wire:model="priority" label="Priority" variant="pills">
-<flux:radio value="low" label="Low" />
-<flux:radio value="medium" label="Medium" />
-<flux:radio value="high" label="High" />
-<flux:radio value="critical" label="Critical" /></flux:radio.group>
+    <flux:radio value="low" label="Low" />
+    <flux:radio value="medium" label="Medium" />
+    <flux:radio value="high" label="High" />
+    <flux:radio value="critical" label="Critical" />
+</flux:radio.group>
 ```
 
 ## Buttons
@@ -157,9 +205,10 @@ Button-style radio options that look like a toolbar. Perfect for action selectio
 
 ```blade
 <flux:radio.group variant="buttons" class="w-full *:flex-1" label="Feedback type">
-<flux:radio icon="bug-ant" checked>Bug report</flux:radio>
-<flux:radio icon="light-bulb">Suggestion</flux:radio>
-<flux:radio icon="question-mark-circle">Question</flux:radio></flux:radio.group>
+    <flux:radio icon="bug-ant" checked>Bug report</flux:radio>
+    <flux:radio icon="light-bulb">Suggestion</flux:radio>
+    <flux:radio icon="question-mark-circle">Question</flux:radio>
+</flux:radio.group>
 ```
 
 ## Reference

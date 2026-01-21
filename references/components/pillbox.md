@@ -9,14 +9,15 @@ A multi-select component that displays selected items as removable "pills" that 
 
 ```blade
 <flux:pillbox wire:model="selectedTags" multiple placeholder="Choose tags...">
-<flux:pillbox.option value="design">Design</flux:pillbox.option>
-<flux:pillbox.option value="development">Development</flux:pillbox.option>
-<flux:pillbox.option value="marketing">Marketing</flux:pillbox.option>
-<flux:pillbox.option value="sales">Sales</flux:pillbox.option>
-<flux:pillbox.option value="support">Support</flux:pillbox.option>
-<flux:pillbox.option value="engineering">Engineering</flux:pillbox.option>
-<flux:pillbox.option value="product">Product</flux:pillbox.option>
-<flux:pillbox.option value="operations">Operations</flux:pillbox.option></flux:pillbox>
+    <flux:pillbox.option value="design">Design</flux:pillbox.option>
+    <flux:pillbox.option value="development">Development</flux:pillbox.option>
+    <flux:pillbox.option value="marketing">Marketing</flux:pillbox.option>
+    <flux:pillbox.option value="sales">Sales</flux:pillbox.option>
+    <flux:pillbox.option value="support">Support</flux:pillbox.option>
+    <flux:pillbox.option value="engineering">Engineering</flux:pillbox.option>
+    <flux:pillbox.option value="product">Product</flux:pillbox.option>
+    <flux:pillbox.option value="operations">Operations</flux:pillbox.option>
+</flux:pillbox>
 ```
 
 ## Small
@@ -24,14 +25,15 @@ A smaller pillbox element for more compact layouts.
 
 ```blade
 <flux:pillbox size="sm" multiple placeholder="Choose tags...">
-<flux:pillbox.option value="design">Design</flux:pillbox.option>
-<flux:pillbox.option value="development">Development</flux:pillbox.option>
-<flux:pillbox.option value="marketing">Marketing</flux:pillbox.option>
-<flux:pillbox.option value="sales">Sales</flux:pillbox.option>
-<flux:pillbox.option value="support">Support</flux:pillbox.option>
-<flux:pillbox.option value="engineering">Engineering</flux:pillbox.option>
-<flux:pillbox.option value="product">Product</flux:pillbox.option>
-<flux:pillbox.option value="operations">Operations</flux:pillbox.option></flux:pillbox>
+    <flux:pillbox.option value="design">Design</flux:pillbox.option>
+    <flux:pillbox.option value="development">Development</flux:pillbox.option>
+    <flux:pillbox.option value="marketing">Marketing</flux:pillbox.option>
+    <flux:pillbox.option value="sales">Sales</flux:pillbox.option>
+    <flux:pillbox.option value="support">Support</flux:pillbox.option>
+    <flux:pillbox.option value="engineering">Engineering</flux:pillbox.option>
+    <flux:pillbox.option value="product">Product</flux:pillbox.option>
+    <flux:pillbox.option value="operations">Operations</flux:pillbox.option>
+</flux:pillbox>
 ```
 
 ## Searchable
@@ -39,16 +41,17 @@ Add a search input to filter through large lists of options.
 
 ```blade
 <flux:pillbox multiple searchable placeholder="Choose skills...">
-<flux:pillbox.option value="javascript">JavaScript</flux:pillbox.option>
-<flux:pillbox.option value="typescript">TypeScript</flux:pillbox.option>
-<flux:pillbox.option value="php">PHP</flux:pillbox.option>
-<flux:pillbox.option value="python">Python</flux:pillbox.option>
-<flux:pillbox.option value="ruby">Ruby</flux:pillbox.option>
-<flux:pillbox.option value="go">Go</flux:pillbox.option>
-<flux:pillbox.option value="rust">Rust</flux:pillbox.option>
-<flux:pillbox.option value="java">Java</flux:pillbox.option>
-<flux:pillbox.option value="csharp">C#</flux:pillbox.option>
-<flux:pillbox.option value="swift">Swift</flux:pillbox.option></flux:pillbox>
+    <flux:pillbox.option value="javascript">JavaScript</flux:pillbox.option>
+    <flux:pillbox.option value="typescript">TypeScript</flux:pillbox.option>
+    <flux:pillbox.option value="php">PHP</flux:pillbox.option>
+    <flux:pillbox.option value="python">Python</flux:pillbox.option>
+    <flux:pillbox.option value="ruby">Ruby</flux:pillbox.option>
+    <flux:pillbox.option value="go">Go</flux:pillbox.option>
+    <flux:pillbox.option value="rust">Rust</flux:pillbox.option>
+    <flux:pillbox.option value="java">Java</flux:pillbox.option>
+    <flux:pillbox.option value="csharp">C#</flux:pillbox.option>
+    <flux:pillbox.option value="swift">Swift</flux:pillbox.option>
+</flux:pillbox>
 ```
 
 ## Custom search placeholder
@@ -56,7 +59,9 @@ Add a search input to filter through large lists of options.
 You can customize the search input placeholder:
 
 ```blade
-<flux:pillbox multiple searchable search:placeholder="Filter skills...">    ...</flux:pillbox>
+<flux:pillbox multiple searchable search:placeholder="Filter skills...">
+    ...
+</flux:pillbox>
 ```
 
 ## With icons
@@ -64,18 +69,22 @@ Add icons to options for better visual recognition.
 
 ```blade
 <flux:pillbox multiple placeholder="Choose platforms...">
-<flux:pillbox.option value="github">
-<div class="flex items-center gap-2">
-<flux:icon.code-bracket variant="mini" class="text-zinc-400" /> GitHub        </div>
-</flux:pillbox.option>
-<flux:pillbox.option value="gitlab">
-<div class="flex items-center gap-2">
-<flux:icon.server variant="mini" class="text-zinc-400" /> GitLab        </div>
-</flux:pillbox.option>
-<flux:pillbox.option value="bitbucket">
-<div class="flex items-center gap-2">
-<flux:icon.cloud variant="mini" class="text-zinc-400" /> Bitbucket        </div>
-</flux:pillbox.option></flux:pillbox>
+    <flux:pillbox.option value="github">
+        <div class="flex items-center gap-2">
+            <flux:icon.code-bracket variant="mini" class="text-zinc-400" /> GitHub
+        </div>
+    </flux:pillbox.option>
+    <flux:pillbox.option value="gitlab">
+        <div class="flex items-center gap-2">
+            <flux:icon.server variant="mini" class="text-zinc-400" /> GitLab
+        </div>
+    </flux:pillbox.option>
+    <flux:pillbox.option value="bitbucket">
+        <div class="flex items-center gap-2">
+            <flux:icon.cloud variant="mini" class="text-zinc-400" /> Bitbucket
+        </div>
+    </flux:pillbox.option>
+</flux:pillbox>
 ```
 
 ## Combobox
@@ -83,16 +92,17 @@ Display an input directly within the pillbox.
 
 ```blade
 <flux:pillbox variant="combobox" multiple placeholder="Choose skills...">
-<flux:pillbox.option value="javascript">JavaScript</flux:pillbox.option>
-<flux:pillbox.option value="typescript">TypeScript</flux:pillbox.option>
-<flux:pillbox.option value="php">PHP</flux:pillbox.option>
-<flux:pillbox.option value="python">Python</flux:pillbox.option>
-<flux:pillbox.option value="ruby">Ruby</flux:pillbox.option>
-<flux:pillbox.option value="go">Go</flux:pillbox.option>
-<flux:pillbox.option value="rust">Rust</flux:pillbox.option>
-<flux:pillbox.option value="java">Java</flux:pillbox.option>
-<flux:pillbox.option value="csharp">C#</flux:pillbox.option>
-<flux:pillbox.option value="swift">Swift</flux:pillbox.option></flux:pillbox>
+    <flux:pillbox.option value="javascript">JavaScript</flux:pillbox.option>
+    <flux:pillbox.option value="typescript">TypeScript</flux:pillbox.option>
+    <flux:pillbox.option value="php">PHP</flux:pillbox.option>
+    <flux:pillbox.option value="python">Python</flux:pillbox.option>
+    <flux:pillbox.option value="ruby">Ruby</flux:pillbox.option>
+    <flux:pillbox.option value="go">Go</flux:pillbox.option>
+    <flux:pillbox.option value="rust">Rust</flux:pillbox.option>
+    <flux:pillbox.option value="java">Java</flux:pillbox.option>
+    <flux:pillbox.option value="csharp">C#</flux:pillbox.option>
+    <flux:pillbox.option value="swift">Swift</flux:pillbox.option>
+</flux:pillbox>
 ```
 
 ## Create option
@@ -102,9 +112,35 @@ Flux will automatically hide the create option when the search input matches an 
 
 ```blade
 <flux:pillbox wire:model="selectedTags" variant="combobox" multiple>
-<x-slot name="input">
-<flux:pillbox.input wire:model="search" placeholder="Choose tags..." />
-</x-slot>    @foreach ($this->tags as $tag)        <flux:pillbox.option :value="$tag->id">{{ $tag->name }}</flux:pillbox.option>    @endforeach    <flux:pillbox.option.create wire:click="createTag" min-length="2">        Create new "<span wire:text="search"></span>"    </flux:pillbox.option.create></flux:pillbox><!--public $search = '';public $selectedTags = [];public function createProject(){    $tag = Tag::create([        'name' => $this->search,    ]);    $this->selectedTags[] = $tag->id;    $this->search = '';}-->
+    <x-slot name="input">
+        <flux:pillbox.input wire:model="search" placeholder="Choose tags..." />
+    </x-slot>
+
+    @foreach ($this->tags as $tag)
+        <flux:pillbox.option :value="$tag->id">{{ $tag->name }}</flux:pillbox.option>
+    @endforeach
+
+    <flux:pillbox.option.create wire:click="createTag" min-length="2">
+        Create new "<span wire:text="search"></span>"
+    </flux:pillbox.option.create>
+</flux:pillbox>
+
+<!--
+public $search = '';
+
+public $selectedTags = [];
+
+public function createProject()
+{
+    $tag = Tag::create([
+        'name' => $this->search,
+    ]);
+
+    $this->selectedTags[] = $tag->id;
+
+    $this->search = '';
+}
+-->
 ```
 
 ### With backend search
@@ -114,9 +150,33 @@ Flux will automatically disable the create option during requests to prevent dup
 
 ```blade
 <flux:pillbox wire:model.live="selectedTags" variant="combobox" multiple :filter="false">
-<x-slot name="input">
-<flux:pillbox.input wire:model.live="search" placeholder="Choose tags..." />
-</x-slot>    @foreach($this->tags as $tag)        <flux:pillbox.option :value="$tag->id">{{ $tag->name }}</flux:pillbox.option>    @endforeach    <flux:pillbox.option.create wire:click="createTag" min-length="2">        Create "<span wire:text="search"></span>"    </flux:pillbox.option.create></flux:pillbox><!--#[\Livewire\Attributes\Computed]public function tags() {    return \App\Models\Tag::query()        ->where('name', 'like', '%' . trim($this->search) . '%')        ->limit(20)->get()        ->when(blank($this->search) && $this->selectedTags, function ($results) {            return \App\Models\Tag::query()                ->whereIn('id', $this->selectedTags)                ->whereNotIn('id', $results->pluck('id'))                ->get()->merge($results);        });}-->
+    <x-slot name="input">
+        <flux:pillbox.input wire:model.live="search" placeholder="Choose tags..." />
+    </x-slot>
+
+    @foreach($this->tags as $tag)
+        <flux:pillbox.option :value="$tag->id">{{ $tag->name }}</flux:pillbox.option>
+    @endforeach
+
+    <flux:pillbox.option.create wire:click="createTag" min-length="2">
+        Create "<span wire:text="search"></span>"
+    </flux:pillbox.option.create>
+</flux:pillbox>
+
+<!--
+#[\Livewire\Attributes\Computed]
+public function tags() {
+    return \App\Models\Tag::query()
+        ->where('name', 'like', '%' . trim($this->search) . '%')
+        ->limit(20)->get()
+        ->when(blank($this->search) && $this->selectedTags, function ($results) {
+            return \App\Models\Tag::query()
+                ->whereIn('id', $this->selectedTags)
+                ->whereNotIn('id', $results->pluck('id'))
+                ->get()->merge($results);
+        });
+}
+-->
 ```
 
 ## Loading message
@@ -124,9 +184,15 @@ Flux will automatically disable the create option during requests to prevent dup
 When then create option is hidden by the frontend but new results aren't available yet, Flux displays a special "Loading..." message. To customize this message, use the when-loading prop on the <flux:pillbox.option.empty> component.
 
 ```blade
-<flux:pillbox wire:model="selectedTags" variant="combobox" multiple :filter="false">    ...    <x-slot name="empty">
-<flux:pillbox.option.empty when-loading="Loading tags...">            No tags found.        </flux:pillbox.option.empty>
-</x-slot></flux:pillbox>
+<flux:pillbox wire:model="selectedTags" variant="combobox" multiple :filter="false">
+    ...
+
+    <x-slot name="empty">
+        <flux:pillbox.option.empty when-loading="Loading tags...">
+            No tags found.
+        </flux:pillbox.option.empty>
+    </x-slot>
+</flux:pillbox>
 ```
 
 ### With validation
@@ -134,9 +200,28 @@ When you perform additional validation on the backend, the search input will ind
 
 ```blade
 <flux:pillbox wire:model.live="selectedTags" variant="combobox" multiple placeholder="Choose tags..." :filter="false">
-<x-slot name="input">
-<flux:pillbox.input wire:model.live="search" placeholder="Choose tags..." />
-</x-slot>        ...    <flux:pillbox.option.create wire:click="createTag" min-length="2">        Create "<span wire:text="search"></span>"    </flux:pillbox.option.create></flux:pillbox><!--public function createTag() {    $this->validate(['search' => 'required|unique:tags,name']);    // Create logic...}public function updatedSearch() {    $this->resetErrorBag('search');}-->
+    <x-slot name="input">
+        <flux:pillbox.input wire:model.live="search" placeholder="Choose tags..." />
+    </x-slot>
+
+    ...
+
+    <flux:pillbox.option.create wire:click="createTag" min-length="2">
+        Create "<span wire:text="search"></span>"
+    </flux:pillbox.option.create>
+</flux:pillbox>
+
+<!--
+public function createTag() {
+    $this->validate(['search' => 'required|unique:tags,name']);
+
+    // Create logic...
+}
+
+public function updatedSearch() {
+    $this->resetErrorBag('search');
+}
+-->
 ```
 
 ### With modal
@@ -144,19 +229,28 @@ Use the modal prop to specify a name of a modal and handle more complex creation
 
 ```blade
 <flux:pillbox wire:model="projectId" variant="combobox" placeholder="Choose project...">
-<flux:pillbox.option.create modal="create-tag">Create new</flux:pillbox.option>    @foreach($this->tags as $tag)        <flux:pillbox.option :value="$tag->id">{{ $tag->name }}</flux:pillbox.option>    @endforeach</flux:pillbox>
+    <flux:pillbox.option.create modal="create-tag">Create new</flux:pillbox.option>
+
+    @foreach($this->tags as $tag)
+        <flux:pillbox.option :value="$tag->id">{{ $tag->name }}</flux:pillbox.option>
+    @endforeach
+</flux:pillbox>
+
 <flux:modal name="create-tag" class="md:w-96">
-<form wire:submit="createTag" class="space-y-6">
-<div>
-<flux:heading size="lg">Create new tag</flux:heading>
-<flux:text class="mt-2">Enter the name of the new tag.</flux:text>
-</div>
-<flux:input wire:model="newTagName" label="Name" placeholder="e.g. 'Research'" />
-<div class="flex">
-<flux:spacer />
-<flux:button type="submit" variant="primary">Create</flux:button>
-</div>
-</form></flux:modal>
+    <form wire:submit="createTag" class="space-y-6">
+        <div>
+            <flux:heading size="lg">Create new tag</flux:heading>
+            <flux:text class="mt-2">Enter the name of the new tag.</flux:text>
+        </div>
+
+        <flux:input wire:model="newTagName" label="Name" placeholder="e.g. 'Research'" />
+
+        <div class="flex">
+            <flux:spacer />
+            <flux:button type="submit" variant="primary">Create</flux:button>
+        </div>
+    </form>
+</flux:modal>
 ```
 
 ## Reference

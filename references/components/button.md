@@ -72,7 +72,9 @@ Automatically sized and styled icons for your buttons.
 Buttons with wire:click or type="submit" will automatically show a loading indicator and disable pointer events during network requests.
 
 ```blade
-<flux:button wire:click="save">    Save changes</flux:button>
+<flux:button wire:click="save">
+    Save changes
+</flux:button>
 ```
 
 You can disable this behavior using :loading="false".
@@ -93,9 +95,10 @@ Fuse related buttons into a group with shared borders.
 
 ```blade
 <flux:button.group>
-<flux:button>Oldest</flux:button>
-<flux:button>Newest</flux:button>
-<flux:button>Top</flux:button></flux:button.group>
+    <flux:button>Oldest</flux:button>
+    <flux:button>Newest</flux:button>
+    <flux:button>Top</flux:button>
+</flux:button.group>
 ```
 
 ## Icon group
@@ -103,9 +106,10 @@ Fuse multiple icon buttons into a visually-linked group.
 
 ```blade
 <flux:button.group>
-<flux:button icon="bars-3-bottom-left"></flux:button>
-<flux:button icon="bars-3"></flux:button>
-<flux:button icon="bars-3-bottom-right"></flux:button></flux:button.group>
+    <flux:button icon="bars-3-bottom-left"></flux:button>
+    <flux:button icon="bars-3"></flux:button>
+    <flux:button icon="bars-3-bottom-right"></flux:button>
+</flux:button.group>
 ```
 
 ## Attached button
@@ -113,15 +117,21 @@ Append or prepend an icon button to another button to add additional functionali
 
 ```blade
 <flux:button.group>
-<flux:button>New product</flux:button>
-<flux:button icon="chevron-down"></flux:button></flux:button.group>
+    <flux:button>New product</flux:button>
+    <flux:button icon="chevron-down"></flux:button>
+</flux:button.group>
 ```
 
 ## As a link
 Display an HTML a tag as a button by passing the href prop.
 
 ```blade
-<flux:button    href="https://google.com"    icon:trailing="arrow-up-right">    Visit Google</flux:button>
+<flux:button
+    href="https://google.com"
+    icon:trailing="arrow-up-right"
+>
+    Visit Google
+</flux:button>
 ```
 
 ## As an input
@@ -143,8 +153,10 @@ When using ghost or subtle button variants, you can use the inset prop to negate
 
 ```blade
 <div class="flex justify-between">
-<flux:heading>Post successfully created.</flux:heading>
-<flux:button size="sm" icon="x-mark" variant="ghost" inset /></div>
+    <flux:heading>Post successfully created.</flux:heading>
+
+    <flux:button size="sm" icon="x-mark" variant="ghost" inset />
+</div>
 ```
 
 ## Reference

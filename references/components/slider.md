@@ -23,11 +23,16 @@ To display the current value, add an element with a wire:text directive.
 
 ```blade
 <flux:field>
-<flux:label>        Corner radius        <x-slot name="trailing">
-<span wire:text="amount" class="tabular-nums"></span>
-</x-slot>
-</flux:label>
-<flux:slider wire:model="amount" /></flux:field>
+    <flux:label>
+        Corner radius
+
+        <x-slot name="trailing">
+            <span wire:text="amount" class="tabular-nums"></span>
+        </x-slot>
+    </flux:label>
+
+    <flux:slider wire:model="amount" />
+</flux:field>
 ```
 
 ## With input
@@ -35,11 +40,13 @@ To display an input next to the slider and ensure accessibility, wrap both insid
 
 ```blade
 <flux:field>
-<flux:label>Corner radius</flux:label>
-<div class="flex items-center gap-4 -mt-2">
-<flux:slider wire:model="amount" />
-<flux:input wire:model="amount" type="number" size="sm" class="max-w-18" />
-</div></flux:field>
+    <flux:label>Corner radius</flux:label>
+
+    <div class="flex items-center gap-4 -mt-2">
+        <flux:slider wire:model="amount" />
+        <flux:input wire:model="amount" type="number" size="sm" class="max-w-18" />
+    </div>
+</flux:field>
 ```
 
 ## Big steps
@@ -53,14 +60,22 @@ Use the big-step prop to define a step size that will be be used when pressing t
 Display ticks below the slider to visualize the steps.
 
 ```blade
-<flux:slider min="1" max="5">    @foreach (range(1, 5) as $i)        <flux:slider.tick :value="$i" />    @endforeach</flux:slider>
+<flux:slider min="1" max="5">
+    @foreach (range(1, 5) as $i)
+        <flux:slider.tick :value="$i" />
+    @endforeach
+</flux:slider>
 ```
 
 ## Numbered steps
 Display numbers below the slider to visualize the steps.
 
 ```blade
-<flux:slider min="1" max="5">    @foreach (range(1, 5) as $i)        <flux:slider.tick :value="$i">{{ $i }}</flux:slider.tick>    @endforeach</flux:slider>
+<flux:slider min="1" max="5">
+    @foreach (range(1, 5) as $i)
+        <flux:slider.tick :value="$i">{{ $i }}</flux:slider.tick>
+    @endforeach
+</flux:slider>
 ```
 
 ## Custom steps
@@ -68,9 +83,10 @@ Display custom labels for specified steps.
 
 ```blade
 <flux:slider min="1" max="5">
-<flux:slider.tick value="1">Low</flux:slider.tick>
-<flux:slider.tick value="3">Mid</flux:slider.tick>
-<flux:slider.tick value="5">High</flux:slider.tick></flux:slider>
+    <flux:slider.tick value="1">Low</flux:slider.tick>
+    <flux:slider.tick value="3">Mid</flux:slider.tick>
+    <flux:slider.tick value="5">High</flux:slider.tick>
+</flux:slider>
 ```
 
 ## Range slider
@@ -96,14 +112,13 @@ You can also bind the values to a Livewire property using wire:model:
 
 Now you can access the values from your Livewire component using an array of values:
 
-```php
+```
 <?php
 
 use Livewire\Component;
 
 class Dashboard extends Component {
-
-        public array $range = [20, 80];
+    public array $range = [20, 80];
 }
 ```
 
@@ -119,12 +134,20 @@ To display the selected range, add two elements with a wire:text directive.
 
 ```blade
 <div class="relative">
-<flux:field>
-<flux:label>            Price range            <x-slot name="trailing">                $<span wire:text="range[0]" class="tabular-nums"></span>                &ndash;                $<span wire:text="range[1]" class="tabular-nums"></span>
-</x-slot>
-</flux:label>
-<flux:slider range wire:model="range" min="0" max="990" step="10" min-steps-between="10" big-step="100" />
-</flux:field></div>
+    <flux:field>
+        <flux:label>
+            Price range
+
+            <x-slot name="trailing">
+                $<span wire:text="range[0]" class="tabular-nums"></span>
+                &ndash;
+                $<span wire:text="range[1]" class="tabular-nums"></span>
+            </x-slot>
+        </flux:label>
+
+        <flux:slider range wire:model="range" min="0" max="990" step="10" min-steps-between="10" big-step="100" />
+    </flux:field>
+</div>
 ```
 
 ## Custom styles

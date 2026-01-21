@@ -11,13 +11,14 @@ For lists of up to 5 items, consider using [checkboxes](/components/checkbox) or
 
 ```blade
 <flux:select wire:model="industry" placeholder="Choose industry...">
-<flux:select.option>Photography</flux:select.option>
-<flux:select.option>Design services</flux:select.option>
-<flux:select.option>Web development</flux:select.option>
-<flux:select.option>Accounting</flux:select.option>
-<flux:select.option>Legal services</flux:select.option>
-<flux:select.option>Consulting</flux:select.option>
-<flux:select.option>Other</flux:select.option></flux:select>
+    <flux:select.option>Photography</flux:select.option>
+    <flux:select.option>Design services</flux:select.option>
+    <flux:select.option>Web development</flux:select.option>
+    <flux:select.option>Accounting</flux:select.option>
+    <flux:select.option>Legal services</flux:select.option>
+    <flux:select.option>Consulting</flux:select.option>
+    <flux:select.option>Other</flux:select.option>
+</flux:select>
 ```
 
 ## Small
@@ -25,13 +26,14 @@ A smaller select element for more compact layouts.
 
 ```blade
 <flux:select size="sm" placeholder="Choose industry...">
-<flux:select.option>Photography</flux:select.option>
-<flux:select.option>Design services</flux:select.option>
-<flux:select.option>Web development</flux:select.option>
-<flux:select.option>Accounting</flux:select.option>
-<flux:select.option>Legal services</flux:select.option>
-<flux:select.option>Consulting</flux:select.option>
-<flux:select.option>Other</flux:select.option></flux:select>
+    <flux:select.option>Photography</flux:select.option>
+    <flux:select.option>Design services</flux:select.option>
+    <flux:select.option>Web development</flux:select.option>
+    <flux:select.option>Accounting</flux:select.option>
+    <flux:select.option>Legal services</flux:select.option>
+    <flux:select.option>Consulting</flux:select.option>
+    <flux:select.option>Other</flux:select.option>
+</flux:select>
 ```
 
 ## Custom select
@@ -43,13 +45,14 @@ This variant is only available in the Pro version of Flux.
 
 ```blade
 <flux:select variant="listbox" placeholder="Choose industry...">
-<flux:select.option>Photography</flux:select.option>
-<flux:select.option>Design services</flux:select.option>
-<flux:select.option>Web development</flux:select.option>
-<flux:select.option>Accounting</flux:select.option>
-<flux:select.option>Legal services</flux:select.option>
-<flux:select.option>Consulting</flux:select.option>
-<flux:select.option>Other</flux:select.option></flux:select>
+    <flux:select.option>Photography</flux:select.option>
+    <flux:select.option>Design services</flux:select.option>
+    <flux:select.option>Web development</flux:select.option>
+    <flux:select.option>Accounting</flux:select.option>
+    <flux:select.option>Legal services</flux:select.option>
+    <flux:select.option>Consulting</flux:select.option>
+    <flux:select.option>Other</flux:select.option>
+</flux:select>
 ```
 
 ## The button slot
@@ -58,10 +61,13 @@ If you need full control over the button used to trigger the custom select, you 
 
 ```blade
 <flux:select variant="listbox">
-<x-slot name="button">
-<flux:select.button class="rounded-full!" placeholder="Choose industry..." :invalid="$errors->has('...')" />
-</x-slot>
-<flux:select.option>Photography</flux:select.option>    ...</flux:select>
+    <x-slot name="button">
+        <flux:select.button class="rounded-full!" placeholder="Choose industry..." :invalid="$errors->has('...')" />
+    </x-slot>
+
+    <flux:select.option>Photography</flux:select.option>
+    ...
+</flux:select>
 ```
 
 ## Clearable
@@ -69,7 +75,9 @@ If you need full control over the button used to trigger the custom select, you 
 If you want to make the selected value clearable, you can use the clearable prop to add an "x" button to the right side of the input:
 
 ```blade
-<flux:select variant="listbox" clearable>    ...</flux:select>
+<flux:select variant="listbox" clearable>
+    ...
+</flux:select>
 ```
 
 ## Options with images/icons
@@ -78,22 +86,30 @@ One distinct advantage of using a custom listbox select over the native <select>
 
 ```blade
 <flux:select variant="listbox" placeholder="Select role...">
-<flux:select.option>
-<div class="flex items-center gap-2">
-<flux:icon.shield-check variant="mini" class="text-zinc-400" /> Owner        </div>
-</flux:select.option>
-<flux:select.option>
-<div class="flex items-center gap-2">
-<flux:icon.key variant="mini" class="text-zinc-400" /> Administrator        </div>
-</flux:select.option>
-<flux:select.option>
-<div class="flex items-center gap-2">
-<flux:icon.user variant="mini" class="text-zinc-400" /> Member        </div>
-</flux:select.option>
-<flux:select.option>
-<div class="flex items-center gap-2">
-<flux:icon.eye variant="mini" class="text-zinc-400" /> Viewer        </div>
-</flux:select.option></flux:select>
+    <flux:select.option>
+        <div class="flex items-center gap-2">
+            <flux:icon.shield-check variant="mini" class="text-zinc-400" /> Owner
+        </div>
+    </flux:select.option>
+
+    <flux:select.option>
+        <div class="flex items-center gap-2">
+            <flux:icon.key variant="mini" class="text-zinc-400" /> Administrator
+        </div>
+    </flux:select.option>
+
+    <flux:select.option>
+        <div class="flex items-center gap-2">
+            <flux:icon.user variant="mini" class="text-zinc-400" /> Member
+        </div>
+    </flux:select.option>
+
+    <flux:select.option>
+        <div class="flex items-center gap-2">
+            <flux:icon.eye variant="mini" class="text-zinc-400" /> Viewer
+        </div>
+    </flux:select.option>
+</flux:select>
 ```
 
 ## Searchable select
@@ -105,13 +121,14 @@ This variant is only available in the Pro version of Flux.
 
 ```blade
 <flux:select variant="listbox" searchable placeholder="Choose industries...">
-<flux:select.option>Photography</flux:select.option>
-<flux:select.option>Design services</flux:select.option>
-<flux:select.option>Web development</flux:select.option>
-<flux:select.option>Accounting</flux:select.option>
-<flux:select.option>Legal services</flux:select.option>
-<flux:select.option>Consulting</flux:select.option>
-<flux:select.option>Other</flux:select.option></flux:select>
+    <flux:select.option>Photography</flux:select.option>
+    <flux:select.option>Design services</flux:select.option>
+    <flux:select.option>Web development</flux:select.option>
+    <flux:select.option>Accounting</flux:select.option>
+    <flux:select.option>Legal services</flux:select.option>
+    <flux:select.option>Consulting</flux:select.option>
+    <flux:select.option>Other</flux:select.option>
+</flux:select>
 ```
 
 ## The search slot
@@ -120,9 +137,12 @@ If you need full control over the search field inside the listbox, you can use t
 
 ```blade
 <flux:select variant="listbox" searchable>
-<x-slot name="search">
-<flux:select.search class="px-4" placeholder="Search industries..." />
-</x-slot>    ...</flux:select>
+    <x-slot name="search">
+        <flux:select.search class="px-4" placeholder="Search industries..." />
+    </x-slot>
+
+    ...
+</flux:select>
 ```
 
 ## Multiple select
@@ -134,13 +154,14 @@ This variant is only available in the Pro version of Flux.
 
 ```blade
 <flux:select variant="listbox" multiple placeholder="Choose industries...">
-<flux:select.option>Photography</flux:select.option>
-<flux:select.option>Design services</flux:select.option>
-<flux:select.option>Web development</flux:select.option>
-<flux:select.option>Accounting</flux:select.option>
-<flux:select.option>Legal services</flux:select.option>
-<flux:select.option>Consulting</flux:select.option>
-<flux:select.option>Other</flux:select.option></flux:select>
+    <flux:select.option>Photography</flux:select.option>
+    <flux:select.option>Design services</flux:select.option>
+    <flux:select.option>Web development</flux:select.option>
+    <flux:select.option>Accounting</flux:select.option>
+    <flux:select.option>Legal services</flux:select.option>
+    <flux:select.option>Consulting</flux:select.option>
+    <flux:select.option>Other</flux:select.option>
+</flux:select>
 ```
 
 ## Selected suffix
@@ -148,13 +169,17 @@ This variant is only available in the Pro version of Flux.
 By default, when more than one option is selected, the suffix " selected" will be appended to the number of selected options. You can customize this language by passing a selected-suffix prop to the select component.
 
 ```blade
-<flux:select variant="listbox" selected-suffix="industries selected" multiple>    ...</flux:select>
+<flux:select variant="listbox" selected-suffix="industries selected" multiple>
+    ...
+</flux:select>
 ```
 
 If you pass a custom suffix, and need localization, you can use the \_\_() helper function to translate the suffix:
 
 ```blade
-<flux:select variant="listbox" selected-suffix="{{ __('industries selected') }}" multiple>    ...</flux:select>
+<flux:select variant="listbox" selected-suffix="{{ __('industries selected') }}" multiple>
+    ...
+</flux:select>
 ```
 
 ## Checkbox indicator
@@ -162,7 +187,9 @@ If you pass a custom suffix, and need localization, you can use the \_\_() helpe
 If you prefer a checkbox indicator instead of the default checkmark icon, you can use the indicator="checkbox" prop.
 
 ```blade
-<flux:select variant="listbox" indicator="checkbox" multiple>    ...</flux:select>
+<flux:select variant="listbox" indicator="checkbox" multiple>
+    ...
+</flux:select>
 ```
 
 ## Clearing search
@@ -170,7 +197,9 @@ If you prefer a checkbox indicator instead of the default checkmark icon, you ca
 By default, a searchable select will clear the search input when the user selects an option. If you want to disable this behavior, you can use the clear="close" prop to only clear the search input when the user closes the select.
 
 ```blade
-<flux:select variant="listbox" searchable multiple clear="close">    ...</flux:select>
+<flux:select variant="listbox" searchable multiple clear="close">
+    ...
+</flux:select>
 ```
 
 ## Combobox
@@ -182,13 +211,14 @@ This variant is only available in the Pro version of Flux.
 
 ```blade
 <flux:select variant="combobox" placeholder="Choose industry...">
-<flux:select.option>Photography</flux:select.option>
-<flux:select.option>Design services</flux:select.option>
-<flux:select.option>Web development</flux:select.option>
-<flux:select.option>Accounting</flux:select.option>
-<flux:select.option>Legal services</flux:select.option>
-<flux:select.option>Consulting</flux:select.option>
-<flux:select.option>Other</flux:select.option></flux:select>
+    <flux:select.option>Photography</flux:select.option>
+    <flux:select.option>Design services</flux:select.option>
+    <flux:select.option>Web development</flux:select.option>
+    <flux:select.option>Accounting</flux:select.option>
+    <flux:select.option>Legal services</flux:select.option>
+    <flux:select.option>Consulting</flux:select.option>
+    <flux:select.option>Other</flux:select.option>
+</flux:select>
 ```
 
 ## The input slot
@@ -197,9 +227,12 @@ If you need full control over the input element used to trigger the combobox, yo
 
 ```blade
 <flux:select variant="combobox">
-<x-slot name="input">
-<flux:select.input x-model="search" :invalid="$errors->has('...')" />
-</x-slot>    ...</flux:select>
+    <x-slot name="input">
+        <flux:select.input x-model="search" :invalid="$errors->has('...')" />
+    </x-slot>
+
+    ...
+</flux:select>
 ```
 
 ## Backend search
@@ -211,9 +244,30 @@ This variant is only available in the Pro version of Flux.
 
 ```blade
 <flux:select wire:model="userId" variant="combobox" :filter="false">
-<x-slot name="input">
-<flux:select.input wire:model.live="search" />
-</x-slot>    @foreach ($this->users as $user)        <flux:select.option value="{{ $user->id }}" wire:key="{{ $user->id }}">            {{ $user->name }}        </flux:select.option>    @endforeach</flux:select><!--public $search = '';public $userId = null;#[\Livewire\Attributes\Computed]public function users() {    return \App\Models\User::query()        ->when($this->search, fn($query) => $query->where('name', 'like', '%' . $this->search . '%'))        ->limit(20)        ->get();}-->
+    <x-slot name="input">
+        <flux:select.input wire:model.live="search" />
+    </x-slot>
+
+    @foreach ($this->users as $user)
+        <flux:select.option value="{{ $user->id }}" wire:key="{{ $user->id }}">
+            {{ $user->name }}
+        </flux:select.option>
+    @endforeach
+</flux:select>
+
+<!--
+public $search = '';
+
+public $userId = null;
+
+#[\Livewire\Attributes\Computed]
+public function users() {
+    return \App\Models\User::query()
+        ->when($this->search, fn($query) => $query->where('name', 'like', '%' . $this->search . '%'))
+        ->limit(20)
+        ->get();
+}
+-->
 ```
 
 ## Create option
@@ -227,9 +281,33 @@ This variant is only available in the Pro version of Flux.
 
 ```blade
 <flux:select wire:model="projectId" variant="combobox">
-<x-slot name="input">
-<flux:select.input wire:model="search" placeholder="Start typing..." />
-</x-slot>    @foreach ($this->projects as $project)        <flux:select.option :wire:key="$project->id">{{ $project->name }}</flux:select.option>    @endforeach    <flux:select.option.create wire:click="createProject" min-length="2">        Create "<span wire:text="search"></span>"    </flux:select.option.create></flux:select><!--public $search = '';public $projectId = null;public function createProject(){    $project = Project::create([        'name' => $this->search,    ]);    $this->projectId = $project->id;}-->
+    <x-slot name="input">
+        <flux:select.input wire:model="search" placeholder="Start typing..." />
+    </x-slot>
+
+    @foreach ($this->projects as $project)
+        <flux:select.option :wire:key="$project->id">{{ $project->name }}</flux:select.option>
+    @endforeach
+
+    <flux:select.option.create wire:click="createProject" min-length="2">
+        Create "<span wire:text="search"></span>"
+    </flux:select.option.create>
+</flux:select>
+
+<!--
+public $search = '';
+
+public $projectId = null;
+
+public function createProject()
+{
+    $project = Project::create([
+        'name' => $this->search,
+    ]);
+
+    $this->projectId = $project->id;
+}
+-->
 ```
 
 ### With backend search
@@ -239,9 +317,33 @@ Flux will automatically disable the create option during requests to prevent dup
 
 ```blade
 <flux:select wire:model="projectId" variant="combobox" :filter="false">
-<x-slot name="input">
-<flux:select.input wire:model.live="search" placeholder="Start typing..." />
-</x-slot>    @foreach($this->projects as $project)        <flux:select.option :value="$project->id">{{ $project->name }}</flux:select.option>    @endforeach    <flux:select.option.create wire:click="createProject" min-length="2">        Create "<span wire:text="search"></span>"    </flux:select.option.create></flux:select><!--#[\Livewire\Attributes\Computed]public function projects() {    return Project::query()        ->where('name', 'like', '%' . trim($this->search) . '%')        ->limit(20)->get()        ->when(blank($this->search) && $this->projectId, function ($results) {            return Project::query()                ->whereIn('id', [$this->projectId])                ->whereNotIn('id', $results->pluck('id'))                ->get()->merge($results);        });}-->
+    <x-slot name="input">
+        <flux:select.input wire:model.live="search" placeholder="Start typing..." />
+    </x-slot>
+
+    @foreach($this->projects as $project)
+        <flux:select.option :value="$project->id">{{ $project->name }}</flux:select.option>
+    @endforeach
+
+    <flux:select.option.create wire:click="createProject" min-length="2">
+        Create "<span wire:text="search"></span>"
+    </flux:select.option.create>
+</flux:select>
+
+<!--
+#[\Livewire\Attributes\Computed]
+public function projects() {
+    return Project::query()
+        ->where('name', 'like', '%' . trim($this->search) . '%')
+        ->limit(20)->get()
+        ->when(blank($this->search) && $this->projectId, function ($results) {
+            return Project::query()
+                ->whereIn('id', [$this->projectId])
+                ->whereNotIn('id', $results->pluck('id'))
+                ->get()->merge($results);
+        });
+}
+-->
 ```
 
 ## With listbox variant
@@ -249,7 +351,11 @@ Flux will automatically disable the create option during requests to prevent dup
 If you're using the listbox variant with backend search, make sure to clear the search input after creation to prevent an additional request from being sent when the search input is cleared by the frontend.
 
 ```
-public function createProject() {    // Create logic...    $this->search = '';}
+public function createProject() {
+    // Create logic...
+
+    $this->search = '';
+}
 ```
 
 ## Loading message
@@ -257,9 +363,15 @@ public function createProject() {    // Create logic...    $this->search = '';}
 When then create option is hidden by the frontend but new results aren't available yet, Flux displays a special "Loading..." message. To customize this message, use the when-loading prop on the <flux:select.option.empty> component.
 
 ```blade
-<flux:select wire:model="projectId" variant="combobox" :filter="false">    ...    <x-slot name="empty">
-<flux:select.option.empty when-loading="Loading projects...">            No projects found.        </flux:select.option.empty>
-</x-slot></flux:select>
+<flux:select wire:model="projectId" variant="combobox" :filter="false">
+    ...
+
+    <x-slot name="empty">
+        <flux:select.option.empty when-loading="Loading projects...">
+            No projects found.
+        </flux:select.option.empty>
+    </x-slot>
+</flux:select>
 ```
 
 ### With validation
@@ -267,28 +379,57 @@ When you perform additional validation on the backend, the search input will ind
 
 ```blade
 <flux:select wire:model="projectId" variant="combobox" :filter="false">
-<x-slot name="input">
-<flux:select.input wire:model.live="search" placeholder="Start typing..." />
-</x-slot>    ...    <flux:select.option.create wire:click="createProject" min-length="2">        Create "<span wire:text="search"></span>"    </flux:select.option.create></flux:select><!--public function createProject() {    $this->validate(['search' => 'required|unique:projects,name']);    // Create logic...}public function updatedSearch() {    $this->resetErrorBag('search');}-->
+    <x-slot name="input">
+        <flux:select.input wire:model.live="search" placeholder="Start typing..." />
+    </x-slot>
+
+    ...
+
+    <flux:select.option.create wire:click="createProject" min-length="2">
+        Create "<span wire:text="search"></span>"
+    </flux:select.option.create>
+</flux:select>
+
+<!--
+public function createProject() {
+    $this->validate(['search' => 'required|unique:projects,name']);
+
+    // Create logic...
+}
+
+public function updatedSearch() {
+    $this->resetErrorBag('search');
+}
+-->
 ```
 
 ### With modal
 Use the modal prop to specify a name of a modal and handle more complex creation workflows inside a form.
 
 ```blade
-<flux:select wire:model="projectId" variant="listbox">    @foreach($this->projects as $project)        <flux:select.option :value="$project->id">{{ $project->name }}</flux:select.option>    @endforeach    <flux:select.option.create modal="create-project">Create new</flux:select.option></flux:select>
+<flux:select wire:model="projectId" variant="listbox">
+    @foreach($this->projects as $project)
+        <flux:select.option :value="$project->id">{{ $project->name }}</flux:select.option>
+    @endforeach
+
+    <flux:select.option.create modal="create-project">Create new</flux:select.option>
+</flux:select>
+
 <flux:modal name="create-project" class="md:w-96">
-<form wire:submit="createProject" class="space-y-6">
-<div>
-<flux:heading size="lg">Create new project</flux:heading>
-<flux:text class="mt-2">Enter the name of the new project.</flux:text>
-</div>
-<flux:input wire:model="projectName" label="Name" placeholder="e.g. 'UX Research'" />
-<div class="flex">
-<flux:spacer />
-<flux:button type="submit" variant="primary">Create</flux:button>
-</div>
-</form></flux:modal>
+    <form wire:submit="createProject" class="space-y-6">
+        <div>
+            <flux:heading size="lg">Create new project</flux:heading>
+            <flux:text class="mt-2">Enter the name of the new project.</flux:text>
+        </div>
+
+        <flux:input wire:model="projectName" label="Name" placeholder="e.g. 'UX Research'" />
+
+        <div class="flex">
+            <flux:spacer />
+            <flux:button type="submit" variant="primary">Create</flux:button>
+        </div>
+    </form>
+</flux:modal>
 ```
 
 ## Reference

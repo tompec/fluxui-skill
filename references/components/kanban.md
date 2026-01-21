@@ -8,10 +8,19 @@ components_used: [avatar, badge, button, dropdown, heading, icon, menu]
 A collection of cards arranged in columns, representing different stages of a workflow.
 
 ```blade
-<flux:kanban>    @foreach ($this->columns as $column)        <flux:kanban.column>
-<flux:kanban.column.header :heading="$column->title" :count="count($column->cards)" />
-<flux:kanban.column.cards>                @foreach ($column->cards as $card)                    <flux:kanban.card :heading="$card->title" />                @endforeach            </flux:kanban.column.cards>
-</flux:kanban.column>    @endforeach</flux:kanban>
+<flux:kanban>
+    @foreach ($this->columns as $column)
+        <flux:kanban.column>
+            <flux:kanban.column.header :heading="$column->title" :count="count($column->cards)" />
+
+            <flux:kanban.column.cards>
+                @foreach ($column->cards as $card)
+                    <flux:kanban.card :heading="$card->title" />
+                @endforeach
+            </flux:kanban.column.cards>
+        </flux:kanban.column>
+    @endforeach
+</flux:kanban>
 ```
 
 ## Column actions
@@ -19,23 +28,29 @@ Add actions to the column header.
 
 ```blade
 <flux:kanban.column>
-<flux:kanban.column.header :heading="$column->title" :count="count($column->cards)">
-<x-slot name="actions">
-<flux:dropdown>
-<flux:button variant="subtle" icon="ellipsis-horizontal" size="sm" />
-<flux:menu>
-<flux:menu.item icon="plus">New card</flux:menu.item>
-<flux:menu.item icon="archive-box">Archive column</flux:menu.item>
-<flux:menu.separator />
-<flux:menu.item variant="danger" icon="trash">Delete</flux:menu.item>
-</flux:menu>
-</flux:dropdown>
-<flux:button variant="subtle" icon="plus" size="sm" />
-</x-slot>
-</flux:kanban.column.header>
-<flux:kanban.column.cards>
-<!-- ... -->
-</flux:kanban.column.cards></flux:kanban.column>
+    <flux:kanban.column.header :heading="$column->title" :count="count($column->cards)">
+        <x-slot name="actions">
+            <flux:dropdown>
+                <flux:button variant="subtle" icon="ellipsis-horizontal" size="sm" />
+
+                <flux:menu>
+                    <flux:menu.item icon="plus">New card</flux:menu.item>
+                    <flux:menu.item icon="archive-box">Archive column</flux:menu.item>
+
+                    <flux:menu.separator />
+
+                    <flux:menu.item variant="danger" icon="trash">Delete</flux:menu.item>
+                </flux:menu>
+            </flux:dropdown>
+
+            <flux:button variant="subtle" icon="plus" size="sm" />
+        </x-slot>
+    </flux:kanban.column.header>
+
+    <flux:kanban.column.cards>
+        <!-- ... -->
+    </flux:kanban.column.cards>
+</flux:kanban.column>
 ```
 
 ## Column subheading
@@ -43,10 +58,12 @@ Add a subheading to the column header using the subheading prop.
 
 ```blade
 <flux:kanban.column>
-<flux:kanban.column.header heading="Blacklog" subheading="Ideas and suggestions" />
-<flux:kanban.column.cards>
-<!-- ... -->
-</flux:kanban.column.cards></flux:kanban.column>
+    <flux:kanban.column.header heading="Blacklog" subheading="Ideas and suggestions" />
+
+    <flux:kanban.column.cards>
+        <!-- ... -->
+    </flux:kanban.column.cards>
+</flux:kanban.column>
 ```
 
 ## Column footer
@@ -54,23 +71,30 @@ Add a footer to the column using the flux:kanban.column.footer component to disp
 
 ```blade
 <flux:kanban.column>
-<flux:kanban.column.header :heading="$column['title']" count="5" />
-<flux:kanban.column.cards>
-<!-- ... -->
-</flux:kanban.column.cards>
-<flux:kanban.column.footer>
-<form>
-<flux:kanban.card>
-<div class="flex items-center gap-1">
-<flux:heading class="flex-1">
-<input class="w-full outline-none" placeholder="New card...">
-</flux:heading>
-<flux:button type="submit" variant="filled" size="sm" inset="top bottom" class="-me-1.5">Add</flux:button>
-</div>
-</flux:kanban.card>
-</form>
-<flux:button variant="subtle" icon="plus" size="sm" align="start">            New card        </flux:button>
-</flux:kanban.column.footer></flux:kanban.column>
+    <flux:kanban.column.header :heading="$column['title']" count="5" />
+
+    <flux:kanban.column.cards>
+        <!-- ... -->
+    </flux:kanban.column.cards>
+
+    <flux:kanban.column.footer>
+        <form>
+            <flux:kanban.card>
+                <div class="flex items-center gap-1">
+                    <flux:heading class="flex-1">
+                        <input class="w-full outline-none" placeholder="New card...">
+                    </flux:heading>
+
+                    <flux:button type="submit" variant="filled" size="sm" inset="top bottom" class="-me-1.5">Add</flux:button>
+                </div>
+            </flux:kanban.card>
+        </form>
+
+        <flux:button variant="subtle" icon="plus" size="sm" align="start">
+            New card
+        </flux:button>
+    </flux:kanban.column.footer>
+</flux:kanban.column>
 ```
 
 ## Card as button
@@ -87,13 +111,14 @@ Add a header to the card using the <x-slot name="header"> slot to display additi
 
 ```blade
 <flux:kanban.card as="button" heading="Update privacy policy in app">
-<x-slot name="header">
-<div class="flex gap-2">
-<flux:badge color="blue" size="sm">UI</flux:badge>
-<flux:badge color="green" size="sm">Backend</flux:badge>
-<flux:badge color="red" size="sm">Bug</flux:badge>
-</div>
-</x-slot></flux:kanban.card>
+    <x-slot name="header">
+        <div class="flex gap-2">
+            <flux:badge color="blue" size="sm">UI</flux:badge>
+            <flux:badge color="green" size="sm">Backend</flux:badge>
+            <flux:badge color="red" size="sm">Bug</flux:badge>
+        </div>
+    </x-slot>
+</flux:kanban.card>
 ```
 
 ## Card footer
@@ -101,15 +126,17 @@ Add a footer to the card using the <x-slot name="footer"> slot to display additi
 
 ```blade
 <flux:kanban.card as="button" heading="Update privacy policy in app">
-<x-slot name="footer">
-<flux:icon name="bars-3-bottom-left" variant="micro" class="text-zinc-400" />
-<flux:avatar.group>
-<flux:avatar circle size="xs" src="https://unavatar.io/x/calebporzio" />
-<flux:avatar circle size="xs" src="https://unavatar.io/github/hugosaintemarie" />
-<flux:avatar circle size="xs" src="https://unavatar.io/github/joshhanley" />
-<flux:avatar circle size="xs">3+</flux:avatar>
-</flux:avatar.group>
-</x-slot></flux:kanban.card>
+    <x-slot name="footer">
+        <flux:icon name="bars-3-bottom-left" variant="micro" class="text-zinc-400" />
+
+        <flux:avatar.group>
+            <flux:avatar circle size="xs" src="https://unavatar.io/x/calebporzio" />
+            <flux:avatar circle size="xs" src="https://unavatar.io/github/hugosaintemarie" />
+            <flux:avatar circle size="xs" src="https://unavatar.io/github/joshhanley" />
+            <flux:avatar circle size="xs">3+</flux:avatar>
+        </flux:avatar.group>
+    </x-slot>
+</flux:kanban.card>
 ```
 
 ## Reference

@@ -15,7 +15,7 @@ A flexible calendar component for date selection. Supports single dates, multipl
 Set the initial selected date using the value prop with a Y-m-d formatted date string:
 
 ```blade
-<flux:calendar value="2026-01-20" />
+<flux:calendar value="2026-01-21" />
 ```
 
 You can also bind the selection to a Livewire property using wire:model:
@@ -26,15 +26,18 @@ You can also bind the selection to a Livewire property using wire:model:
 
 Now you can access the selected date from your Livewire component using either a Carbon instance or a Y-m-d formatted string:
 
-```php
+```
 <?php
 
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 
 class BookAppointment extends Component {
+    public Carbon $date;
 
-        public Carbon $date;        public function mount() {        $this->date = now();    }
+    public function mount() {
+        $this->date = now();
+    }
 }
 ```
 
@@ -48,7 +51,10 @@ Select multiple non-consecutive dates.
 Set multiple selected dates using a comma-separated list in the value prop:
 
 ```blade
-<flux:calendar    multiple    value="2026-01-02,2026-01-05,2026-01-15"/>
+<flux:calendar
+    multiple
+    value="2026-01-02,2026-01-05,2026-01-15"
+/>
 ```
 
 You can also bind the selection to a Livewire property using wire:model:
@@ -59,15 +65,20 @@ You can also bind the selection to a Livewire property using wire:model:
 
 You can access the selected dates in your Livewire component using an array of Y-m-d formatted date strings:
 
-```php
+```
 <?php
 
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 
 class RequestTimeOff extends Component {
+    public array $dates = [];
 
-        public array $dates = [];        public function mount() {        $this->dates = [            now()->format('Y-m-d'),            now()->addDays(1)->format('Y-m-d'),        ];
+    public function mount() {
+        $this->dates = [
+            now()->format('Y-m-d'),
+            now()->addDays(1)->format('Y-m-d'),
+        ];
     }
 }
 ```
@@ -93,28 +104,44 @@ You can also bind the selection to a Livewire property using wire:model:
 
 Now you can access the selected range from your Livewire component using an associative array of Y-m-d formatted date strings:
 
-```php
+```
 <?php
 
 use Livewire\Component;
 
 class BookFlight extends Component {
+    public ?array $range;
 
-        public ?array $range;        public function book() {        // ...        $flight->depart_on = $this->range['start'];        $flight->return_on = $this->range['end'];        // ...    }
+    public function book() {
+        // ...
+
+        $flight->depart_on = $this->range['start'];
+        $flight->return_on = $this->range['end'];
+
+        // ...
+    }
 }
 ```
 
 Alternatively, you can use the specialized DateRange object for enhanced functionality:
 
-```php
+```
 <?php
 
 use Livewire\Component;
 use Flux\DateRange;
 
 class BookFlight extends Component {
+    public ?DateRange $range;
 
-        public ?DateRange $range;        public function book() {        // ...        $flight->depart_on = $this->range->start();        $flight->return_on = $this->range->end();        // ...    }
+    public function book() {
+        // ...
+
+        $flight->depart_on = $this->range->start();
+        $flight->return_on = $this->range->end();
+
+        // ...
+    }
 }
 ```
 
@@ -127,7 +154,11 @@ We highly recommend using the DateRange object for range selection, it provides 
 Control range behavior with these props:
 
 ```blade
-<!-- Set minimum and maximum range limits --><flux:calendar mode="range" min-range="3" max-range="10" /><!-- Control number of months shown --><flux:calendar mode="range" months="2" />
+<!-- Set minimum and maximum range limits -->
+<flux:calendar mode="range" min-range="3" max-range="10" />
+
+<!-- Control number of months shown -->
+<flux:calendar mode="range" months="2" />
 ```
 
 ## Size
@@ -141,27 +172,36 @@ Adjust the calendar's size to fit your layout. Available sizes include xs, sm, l
 Create a non-interactive calendar for display purposes.
 
 ```blade
-<flux:calendar    static    value="2026-01-20"    size="xs"    :navigation="false"/>
+<flux:calendar
+    static
+    value="2026-01-21"
+    size="xs"
+    :navigation="false"
+/>
 ```
 
 ## Min/max dates
 Restrict the selectable date range by setting minimum and maximum boundaries.
 
 ```blade
-<flux:calendar max="2026-01-20" />
+<flux:calendar max="2026-01-21" />
 ```
 
 You can also use the convenient "today" shorthand:
 
 ```blade
-<!-- Prevent selection before today... --><flux:calendar min="today" /><!-- Prevent selection after today... --><flux:calendar max="today" />
+<!-- Prevent selection before today... -->
+<flux:calendar min="today" />
+
+<!-- Prevent selection after today... -->
+<flux:calendar max="today" />
 ```
 
 ## Unavailable dates
 Disable specific dates from being selected. Useful for blocking out holidays, showing booked dates, or indicating unavailable time slots.
 
 ```blade
-<flux:calendar unavailable="2026-01-19,2026-01-21" />
+<flux:calendar unavailable="2026-01-20,2026-01-22" />
 ```
 
 ## With today shortcut
@@ -233,30 +273,33 @@ First, it's worth noting that most of the time, you will want to use wire:model.
 
 Now, in your component, you can type hint the range property as a DateRange object:
 
-```php
+```
 <?php
 
 use Livewire\Component;
 use Flux\DateRange;
 
 class Dashboard extends Component {
-
-        public DateRange $range;}
+    public DateRange $range;
+}
 ```
 
 ## Instantiation
 
 You can initialize a DateRange object by passing a start and end date to the DateRange constructor from something like the mount method:
 
-```php
+```
 <?php
 
 use Livewire\Component;
 use Flux\DateRange;
 
 class Dashboard extends Component {
+    public DateRange $range;
 
-        public DateRange $range;        public function mount() {        $this->range = new DateRange(now(), now()->addDays(7));    }
+    public function mount() {
+        $this->range = new DateRange(now(), now()->addDays(7));
+    }
 }
 ```
 
@@ -264,7 +307,7 @@ class Dashboard extends Component {
 
 You can persist a DateRange object in the user's session by using the #\[Session\] attribute:
 
-```php
+```
 <?php
 
 use Livewire\Attributes\Session;
@@ -272,14 +315,16 @@ use Livewire\Component;
 use Flux\DateRange;
 
 class Dashboard extends Component {
-    #[Session]        public DateRange $range;}
+    #[Session]
+    public DateRange $range;
+}
 ```
 
 ## Using with Eloquent
 
 You can use the DateRange object with Eloquent's whereBetween() method to filter queries by date range:
 
-```php
+```
 <?php
 
 use Livewire\Attributes\Computed;
@@ -288,8 +333,14 @@ use App\Models\Order;
 use Flux\DateRange;
 
 class Dashboard extends Component {
+    public ?DateRange $range;
 
-        public ?DateRange $range;    #[Computed]        public function orders() {        return $this->range            ? Order::whereBetween('created_at', $this->range)->get()            : Order::all();    }
+    #[Computed]
+    public function orders() {
+        return $this->range
+            ? Order::whereBetween('created_at', $this->range)->get()
+            : Order::all();
+    }
 }
 ```
 
@@ -298,7 +349,28 @@ class Dashboard extends Component {
 The DateRange object extends the native CarbonPeriod class, so it inherits all of its methods. Here are a few examples:
 
 ```
-$range = new Flux\DateRange(    now()->subDays(1),    now()->addDays(1),);// Get the start and end dates as Carbon instances...$start = $range->start();$end = $range->end();// Check if the range contains a date...$range->contains(now());// Get the number of days in the range...$range->length();// Loop over the range by day...foreach ($range as $date) {    // $date is a Carbon instance...}// Get the range as an array of Carbon instances representing each day in the range...$range->toArray();
+$range = new Flux\DateRange(
+    now()->subDays(1),
+    now()->addDays(1),
+);
+
+// Get the start and end dates as Carbon instances...
+$start = $range->start();
+$end = $range->end();
+
+// Check if the range contains a date...
+$range->contains(now());
+
+// Get the number of days in the range...
+$range->length();
+
+// Loop over the range by day...
+foreach ($range as $date) {
+    // $date is a Carbon instance...
+}
+
+// Get the range as an array of Carbon instances representing each day in the range...
+$range->toArray();
 ```
 
 You can also use it anywhere Eloquent utilities expect a CarbonPeriod instance:

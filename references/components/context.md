@@ -11,27 +11,34 @@ Learn more about the menu component on the [dropdown page \->](/components/drop
 
 ```blade
 <flux:context>
-<flux:card class="border-dashed border-2 px-16">
-<flux:text>Right click</flux:text>
-</flux:card>
-<flux:menu>
-<flux:menu.item icon="plus">New post</flux:menu.item>
-<flux:menu.separator />
-<flux:menu.submenu heading="Sort by">
-<flux:menu.radio.group>
-<flux:menu.radio checked>Name</flux:menu.radio>
-<flux:menu.radio>Date</flux:menu.radio>
-<flux:menu.radio>Popularity</flux:menu.radio>
-</flux:menu.radio.group>
-</flux:menu.submenu>
-<flux:menu.submenu heading="Filter">
-<flux:menu.checkbox checked>Draft</flux:menu.checkbox>
-<flux:menu.checkbox checked>Published</flux:menu.checkbox>
-<flux:menu.checkbox>Archived</flux:menu.checkbox>
-</flux:menu.submenu>
-<flux:menu.separator />
-<flux:menu.item variant="danger" icon="trash">Delete</flux:menu.item>
-</flux:menu></flux:context>
+    <flux:card class="border-dashed border-2 px-16">
+        <flux:text>Right click</flux:text>
+    </flux:card>
+
+    <flux:menu>
+        <flux:menu.item icon="plus">New post</flux:menu.item>
+
+        <flux:menu.separator />
+
+        <flux:menu.submenu heading="Sort by">
+            <flux:menu.radio.group>
+                <flux:menu.radio checked>Name</flux:menu.radio>
+                <flux:menu.radio>Date</flux:menu.radio>
+                <flux:menu.radio>Popularity</flux:menu.radio>
+            </flux:menu.radio.group>
+        </flux:menu.submenu>
+
+        <flux:menu.submenu heading="Filter">
+            <flux:menu.checkbox checked>Draft</flux:menu.checkbox>
+            <flux:menu.checkbox checked>Published</flux:menu.checkbox>
+            <flux:menu.checkbox>Archived</flux:menu.checkbox>
+        </flux:menu.submenu>
+
+        <flux:menu.separator />
+
+        <flux:menu.item variant="danger" icon="trash">Delete</flux:menu.item>
+    </flux:menu>
+</flux:context>
 ```
 
 ## Reference
