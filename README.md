@@ -16,7 +16,7 @@ Each component reference includes:
 
 ## Usage
 
-Copy the `skills/flux-ui` folder to your agent's skills directory.
+Copy the repo into your agent's skills directory.
 
 ## License
 
