@@ -78,9 +78,9 @@ Control a group of checkboxes with a single checkbox.
 <flux:checkbox.group>
     <flux:checkbox.all />
 
-    <flux:checkbox checked />
-    <flux:checkbox />
-    <flux:checkbox />
+    <flux:checkbox value="caleb" checked />
+    <flux:checkbox value="hugo" />
+    <flux:checkbox value="keith" />
 </flux:checkbox.group>
 ```
 

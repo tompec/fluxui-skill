@@ -43,9 +43,9 @@ use Livewire\Component;
 class Dashboard extends Component
 {
     public array $data = [
-        ['date' => '2026-07-07', 'visitors' => 267],
-        ['date' => '2026-07-06', 'visitors' => 259],
-        ['date' => '2026-07-05', 'visitors' => 269],
+        ['date' => '2026-08-19', 'visitors' => 267],
+        ['date' => '2026-08-18', 'visitors' => 259],
+        ['date' => '2026-08-17', 'visitors' => 269],
         // ...
     ];
 }

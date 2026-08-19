@@ -236,11 +236,19 @@ If you want to use an input group in a form field with a label, you will need to
 | default | The input group content, typically containing an input and prefix/suffix elements. |
 
 ### flux:input.group.prefix
+| Prop | Description |
+| --- | --- |
+| size | Size of the prefix. Options: sm, xs. |
+
 | Slot | Description |
 | --- | --- |
 | default | Content displayed before the input (e.g., icons, text, buttons). |
 
 ### flux:input.group.suffix
+| Prop | Description |
+| --- | --- |
+| size | Size of the suffix. Options: sm, xs. |
+
 | Slot | Description |
 | --- | --- |
 | default | Content displayed after the input (e.g., icons, text, buttons). |

@@ -59,17 +59,6 @@ Position tooltips around the element for optimal visibility. Choose from top, ri
 </flux:tooltip>
 ```
 
-## Disabled buttons
-By default, tooltips on disabled buttons won't be triggered because pointer events are disabled as well. However, as a workaround, you can target a wrapping element instead of the button directly.
-
-```blade
-<flux:tooltip content="Cannot merge until reviewed by a team member">
-    <div>
-        <flux:button disabled icon="arrow-turn-down-right">Merge pull request</flux:button>
-    </div>
-</flux:tooltip>
-```
-
 ## Reference
 
 ### flux:tooltip

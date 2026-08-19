@@ -22,6 +22,33 @@ For full-page navigation, use the [navbar component \->](/components/navbar)
 </flux:tab.group>
 ```
 
+## Findable tabs
+Add findable to the tab group to make content in inactive panels discoverable by the browser's find-in-page feature. When a match is found, Flux automatically selects the associated tab.
+
+Try it: with Profile selected, press <kbd class="font-medium text-zinc-700 dark:text-zinc-200">⌘F</kbd> (<kbd class="font-medium text-zinc-700 dark:text-zinc-200">Ctrl+F</kbd> on Windows) and search for
+
+```blade
+<flux:tab.group findable>
+    <flux:tabs>
+        <flux:tab name="profile" selected>Profile</flux:tab>
+        <flux:tab name="account">Account</flux:tab>
+        <flux:tab name="billing">Billing</flux:tab>
+    </flux:tabs>
+
+    <flux:tab.panel name="profile" selected class="px-2 pt-6!">
+        Manage your public profile and personal information.
+    </flux:tab.panel>
+
+    <flux:tab.panel name="account" class="px-2 pt-6!">
+        Update your email address, password, and security settings.
+    </flux:tab.panel>
+
+    <flux:tab.panel name="billing" class="px-2 pt-6!">
+        Your latest invoice is due on September 1.
+    </flux:tab.panel>
+</flux:tab.group>
+```
+
 ## With icons
 Associate tab labels with icons to visually distinguish different sections.
 
@@ -184,6 +211,10 @@ If you need, you can dynamically generate additional tabs and panels in your Liv
 
 ### flux:tab.group
 Container for tabs and their associated panels.
+
+| Prop | Description |
+| --- | --- |
+| findable | If true, content in inactive panels can be discovered using the browser's find-in-page feature. The matching panel is selected automatically. |
 
 | Slot | Description |
 | --- | --- |

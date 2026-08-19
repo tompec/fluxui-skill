@@ -49,6 +49,21 @@ Use the small card variant for compact content like notifications, alerts, or br
 </a>
 ```
 
+## Soft card
+Use the soft variant for a lower-emphasis surface that adapts to the color behind it.
+
+```blade
+<flux:card variant="soft" class="py-4">
+    <flux:text class="font-medium">Page views</flux:text>
+
+    <flux:heading size="xl" class="mt-1">153k</flux:heading>
+
+    <flux:link href="#" class="text-sm" variant="subtle">
+        compare to last month
+    </flux:link>
+</flux:card>
+```
+
 ## Header actions
 Use the [button component](/components/button) to add actions to the header.
 
@@ -96,6 +111,10 @@ Let's be honest, a card is just a div with a border and some padding.
 ## Reference
 
 ### flux:card
+| Prop | Description |
+| --- | --- |
+| variant | Visual treatment. Options: outline (default) or soft. |
+
 | Slot | Description |
 | --- | --- |
 | default | Content to display within the card. Can include headings, text, forms, buttons, and other components. |

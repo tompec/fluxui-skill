@@ -1,5 +1,5 @@
 ---
-components_used: [button, heading, icon, input, modal, spacer, text]
+components_used: [button, heading, input, modal, spacer, text]
 ---
 
 # Select
@@ -32,6 +32,29 @@ A smaller select element for more compact layouts.
     <flux:select.option>Legal services</flux:select.option>
     <flux:select.option>Consulting</flux:select.option>
     <flux:select.option>Other</flux:select.option>
+</flux:select>
+```
+
+## Option groups
+Organize related options into labeled groups to make longer lists easier to scan.
+
+```blade
+<flux:select wire:model="industry" placeholder="Choose an industry...">
+    <flux:select.group label="Creative">
+        <flux:select.option value="photography">Photography</flux:select.option>
+        <flux:select.option value="design">Design services</flux:select.option>
+    </flux:select.group>
+
+    <flux:select.group label="Technology">
+        <flux:select.option value="web-development">Web development</flux:select.option>
+        <flux:select.option value="it-consulting">IT consulting</flux:select.option>
+    </flux:select.group>
+
+    <flux:select.group label="Services">
+        <flux:select.option value="accounting">Accounting</flux:select.option>
+        <flux:select.option value="legal">Legal services</flux:select.option>
+        <flux:select.option value="consulting">Consulting</flux:select.option>
+    </flux:select.group>
 </flux:select>
 ```
 
@@ -79,35 +102,93 @@ If you want to make the selected value clearable, you can use the clearable prop
 </flux:select>
 ```
 
-## Options with images/icons
-
-One distinct advantage of using a custom listbox select over the native <select> element is that you can now add icons and images to your options.
+### With a prefix
+Use the prefix prop to keep contextual text visible before the selected value.
 
 ```blade
-<flux:select variant="listbox" placeholder="Select role...">
-    <flux:select.option>
+<flux:select wire:model="comparison" variant="listbox" prefix="Compare to">
+    <flux:select.option value="previous-period">Previous period</flux:select.option>
+    <flux:select.option value="last-month">Last month</flux:select.option>
+    <flux:select.option value="last-quarter">Last quarter</flux:select.option>
+    <flux:select.option value="last-year">Last year</flux:select.option>
+</flux:select>
+```
+
+### With icons
+Use the icon prop to display an icon at the start of an option.
+
+```blade
+<flux:select variant="listbox" placeholder="Choose method...">
+    <flux:select.option value="card" label="Credit card" icon="credit-card" />
+    <flux:select.option value="paypal" label="PayPal" icon="banknotes" />
+    <flux:select.option value="bank" label="Bank transfer" icon="building-library" />
+</flux:select>
+```
+
+### With descriptions
+Use the description prop to display supporting text below an option's label.
+
+```blade
+<flux:select variant="listbox" placeholder="Choose plan...">
+    <flux:select.option value="basic" label="Basic" description="For individuals getting started" />
+    <flux:select.option value="pro" label="Pro" description="For small teams that need more power" />
+    <flux:select.option value="enterprise" label="Enterprise" description="Advanced controls and support" />
+</flux:select>
+```
+
+### With avatars
+Use the avatar prop to display an avatar at the start of an option.
+
+```blade
+<flux:select variant="listbox" placeholder="Search people...">
+    <flux:select.option value="calebporzio" label="Caleb Porzio" avatar="https://unavatar.io/github/calebporzio" />
+    <flux:select.option value="taylorotwell" label="Taylor Otwell" avatar="https://unavatar.io/github/taylorotwell" />
+    <flux:select.option value="adamwathan" label="Adam Wathan" avatar="https://unavatar.io/github/adamwathan" />
+</flux:select>
+```
+
+You can customize the underlying [avatar component](/components/avatar) using avatar: prefixed props, e.g. avatar:color="auto".
+
+### With custom content
+If you need full control over the option content, pass your own markup into the default slot.
+
+```blade
+<flux:select variant="listbox" placeholder="Select color...">
+    <flux:select.option value="red">
         <div class="flex items-center gap-2">
-            <flux:icon.shield-check variant="mini" class="text-zinc-400" /> Owner
+            <div class="rounded-full size-4 bg-red-500"></div> Red
         </div>
     </flux:select.option>
 
-    <flux:select.option>
+    <flux:select.option value="orange">
         <div class="flex items-center gap-2">
-            <flux:icon.key variant="mini" class="text-zinc-400" /> Administrator
+            <div class="rounded-full size-4 bg-orange-500"></div> Orange
         </div>
     </flux:select.option>
 
-    <flux:select.option>
+    <flux:select.option value="amber">
         <div class="flex items-center gap-2">
-            <flux:icon.user variant="mini" class="text-zinc-400" /> Member
+            <div class="rounded-full size-4 bg-amber-500"></div> Amber
         </div>
     </flux:select.option>
 
-    <flux:select.option>
+    <flux:select.option value="yellow">
         <div class="flex items-center gap-2">
-            <flux:icon.eye variant="mini" class="text-zinc-400" /> Viewer
+            <div class="rounded-full size-4 bg-yellow-500"></div> Yellow
         </div>
     </flux:select.option>
+
+    <!-- ... -->
+</flux:select>
+```
+
+### Customizing the dropdown width
+By default, the options dropdown is as wide as the select trigger. Use the options:class prop to add Tailwind width utilities to the dropdown.
+
+```blade
+<flux:select variant="listbox" wire:model="visibility" placeholder="Select visibility..." class="max-w-32" options:class="min-w-72">
+    <flux:select.option value="public" label="Public" icon="globe-alt" description="Shown on your calendar and eligible to be featured on our homepage." />
+    <flux:select.option value="private" label="Private" icon="lock-closed" description="Unlisted. Only invited people and people with the link can register." />
 </flux:select>
 ```
 
@@ -449,8 +530,12 @@ Use the modal prop to specify a name of a modal and handle more complex creation
 | searchable | Adds a search input to filter options (listbox and combobox variants only). |
 | empty | Message shown when no search results are found for searchable selects. Default: No results found. |
 | clearable | Displays a clear button when an option is selected (listbox and combobox variants only). |
+| prefix | Text displayed before the selected value (listbox variant only). |
 | selected-suffix | Text appended to the number of selected options in multiple mode (listbox variant only). |
 | clear | When to clear the search input. Options: select (default), close (listbox and combobox variants only). |
+| position | Position of the dropdown menu. Options: top, right, bottom (default), left (listbox variant only). |
+| align | Alignment of the dropdown menu. Options: start, center, end. Default: start (listbox variant only). |
+| options:class | CSS classes applied to the options dropdown. Useful for setting a custom dropdown width using Tailwind width utilities like min-w-72 (listbox variant only). |
 | disabled | Prevents user interaction with the select. |
 | invalid | Applies error styling to the select. |
 
@@ -470,11 +555,26 @@ Use the modal prop to specify a name of a modal and handle more complex creation
 | value | Value associated with the option. |
 | label | Text content displayed for the option. |
 | selected-label | Text content displayed when the option is selected. |
+| icon | Name of the icon displayed at the start of the option (listbox and combobox variants only). |
+| icon:variant | Icon variant. Options: outline, solid, mini, micro. Default: mini. |
+| icon:class | CSS classes applied to the icon. |
+| avatar | URL of an image displayed as an avatar at the start of the option (listbox and combobox variants only). Takes precedence over the icon prop. |
+| avatar:* | Props forwarded to the underlying avatar component, e.g. avatar:color="auto". See the avatar component. |
+| description | Supporting text displayed below the option label (listbox and combobox variants only). Only shown in the dropdown, not in the selected value. |
 | disabled | Prevents selecting the option. |
 
 | Slot | Description |
 | --- | --- |
 | default | The option content (can include icons, images, etc. in listbox variant). |
+
+### flux:select.group
+| Prop | Description |
+| --- | --- |
+| label | Label displayed above the grouped options. |
+
+| Slot | Description |
+| --- | --- |
+| default | The options contained in the group. |
 
 ### flux:select.option.create
 | Prop | Description |

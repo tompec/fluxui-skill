@@ -66,6 +66,17 @@ Display ticks below the slider to visualize the steps.
 </flux:slider>
 ```
 
+## Step dots
+Set tick:position="inside" on the slider and variant="dot" on each tick to display step dot marks inside the track.
+
+```blade
+<flux:slider tick:position="inside" min="1" max="5" track:class="h-5" thumb:class="size-6">
+    @foreach (range(1, 5) as $i)
+        <flux:slider.tick :value="$i" variant="dot" />
+    @endforeach
+</flux:slider>
+```
+
 ## Numbered steps
 Display numbers below the slider to visualize the steps.
 
@@ -167,6 +178,7 @@ Customize the styles of the slider using the track:class and thumb:class props.
 | step | Step size of the slider. |
 | big-step | Step size of the slider when holding shift. |
 | min-steps-between | Minimum distance between thumbs in number of steps. |
+| tick:position | Position of the tick slot. Options: below (default), inside. |
 | track:class | CSS classes applied to the track. |
 | thumb:class | CSS classes applied to the thumb. |
 
@@ -174,6 +186,7 @@ Customize the styles of the slider using the track:class and thumb:class props.
 | Prop | Description |
 | --- | --- |
 | value | The value at which the tick should be displayed. |
+| variant | Visual style of the tick. Options: line (default), dot. |
 
 | Slot | Description |
 | --- | --- |

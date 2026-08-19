@@ -207,7 +207,7 @@ Here's an example of supporting Spanish localization:
 ## Extensions
 Tiptap has a wide range of extensions that can be used to add custom functionality to the editor.
 
-The following extensions are already installed:
+The following extensions are installed and enabled by default:
 
 -   Highlight
 -   Link
@@ -218,7 +218,14 @@ The following extensions are already installed:
 -   TextAlign
 -   Underline
 
-But you can also add your own extensions, disable built-in extensions, or modify the behavior of the editor.
+The following table extensions are installed but disabled by default:
+
+-   Table
+-   TableCell
+-   TableHeader
+-   TableRow
+
+You can also add your own extensions, enable or disable installed extensions, or modify the editor's behavior.
 
 ## Set up listener
 
@@ -263,6 +270,21 @@ document.addEventListener('flux:editor', (e) => {
     ])
 })
 ```
+
+## Enabling extensions
+
+Bundled extensions that are disabled by default can be enabled using the enableExtension method supplied by the flux:editor event:
+
+```
+document.addEventListener('flux:editor', (e) => {
+    e.detail.enableExtension('table')
+    e.detail.enableExtension('tableRow')
+    e.detail.enableExtension('tableCell')
+    e.detail.enableExtension('tableHeader')
+})
+```
+
+Do not install these table extensions through npm or register them using registerExtension() or registerExtensions(). This loads a second copy of ProseMirror and causes runtime errors.
 
 ## Disabling extensions
 

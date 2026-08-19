@@ -166,6 +166,15 @@ By default, clicking outside the modal will close it. If you want to disable thi
 </flux:modal>
 ```
 
+## Disable escape
+By default, pressing escape will close the modal. If you want to disable this behavior, you can use the :escapable="false" prop.
+
+```blade
+<flux:modal :escapable="false">
+    <!-- ... -->
+</flux:modal>
+```
+
 ## Scrolling long content
 By default, long modal content scrolls within the modal itself, making it easy to miss content below the fold. Set scroll="body" to let the modal extend beyond the viewport, making it obvious that content continues below.
 
@@ -285,6 +294,7 @@ Use the "floating" variant to give your flyout modal a floating appearance.
 | position | For flyout modals, the direction they open from. Options: right (default), left, bottom. |
 | scroll | Scrolling behavior for long content. Options: body. When set to body, the entire viewport scrolls instead of clipping overflow. |
 | dismissible | If false, prevents closing the modal by clicking outside. Default: true. |
+| escapable | If false, prevents closing the modal by pressing escape. Default: true. |
 | closable | If false, hides the close button. Default: true. |
 | wire:model | Optional Livewire property to bind the modal's open state to. |
 

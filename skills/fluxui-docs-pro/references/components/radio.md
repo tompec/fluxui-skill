@@ -74,9 +74,9 @@ A more compact alternative to standard radio buttons.
 
 ```blade
 <flux:radio.group wire:model="role" label="Role" variant="segmented">
-    <flux:radio label="Admin" />
-    <flux:radio label="Editor" />
-    <flux:radio label="Viewer" />
+    <flux:radio value="administrator" label="Admin" />
+    <flux:radio value="editor" label="Editor" />
+    <flux:radio value="viewer" label="Viewer" />
 </flux:radio.group>
 ```
 
@@ -84,9 +84,9 @@ You can also use the size="sm" prop to make the radios smaller.
 
 ```blade
 <flux:radio.group wire:model="role" label="Role" variant="segmented" size="sm">
-    <flux:radio label="Admin" />
-    <flux:radio label="Editor" />
-    <flux:radio label="Viewer" />
+    <flux:radio value="administrator" label="Admin" />
+    <flux:radio value="editor" label="Editor" />
+    <flux:radio value="viewer" label="Viewer" />
 </flux:radio.group>
 ```
 
@@ -95,9 +95,9 @@ Combine segmented radio buttons with icon prefixes.
 
 ```blade
 <flux:radio.group wire:model="role" variant="segmented">
-    <flux:radio label="Admin" icon="wrench" />
-    <flux:radio label="Editor" icon="pencil-square" />
-    <flux:radio label="Viewer" icon="eye" />
+    <flux:radio value="administrator" label="Admin" icon="wrench" />
+    <flux:radio value="editor" label="Editor" icon="pencil-square" />
+    <flux:radio value="viewer" label="Viewer" icon="eye" />
 </flux:radio.group>
 ```
 
@@ -204,9 +204,9 @@ Button-style radio options that look like a toolbar. Perfect for action selectio
 
 ```blade
 <flux:radio.group variant="buttons" class="w-full *:flex-1" label="Feedback type">
-    <flux:radio icon="bug-ant" checked>Bug report</flux:radio>
-    <flux:radio icon="light-bulb">Suggestion</flux:radio>
-    <flux:radio icon="question-mark-circle">Question</flux:radio>
+    <flux:radio value="bug" icon="bug-ant" checked>Bug report</flux:radio>
+    <flux:radio value="suggestion" icon="light-bulb">Suggestion</flux:radio>
+    <flux:radio value="question" icon="question-mark-circle">Question</flux:radio>
 </flux:radio.group>
 ```
 

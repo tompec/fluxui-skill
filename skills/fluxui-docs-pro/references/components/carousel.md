@@ -183,6 +183,7 @@ Use page advance to move by the number of visible slides instead of one slide at
 | snap | Scroll snap behavior. Options: proximity, mandatory. Default: proximity. |
 | scroll | Arrow and indicator scroll behavior. Options: smooth, instant. Default: smooth. |
 | advance | How many slides arrow controls move. Options: slide, page. Default: slide. |
+| wrap | What happens when advancing past the final slide. Options: none, rewind. With rewind, the next control remains available at the end and returns to the first slide. Default: none. |
 | name | Unique name used to connect the carousel with external controls. |
 | track:class | Additional classes applied to the scrollable track. |
 

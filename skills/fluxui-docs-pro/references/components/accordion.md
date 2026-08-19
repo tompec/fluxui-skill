@@ -48,6 +48,27 @@ Enable expanding transitions for smoother interactions.
 </flux:accordion>
 ```
 
+## Findable content
+Content inside collapsed accordion items remains discoverable by the browser's find-in-page feature. When a match is found, Flux automatically expands the associated item. This works automatically—no additional prop is required.
+
+Try it: press <kbd class="font-medium text-zinc-700 dark:text-zinc-200">⌘F</kbd> (<kbd class="font-medium text-zinc-700 dark:text-zinc-200">Ctrl+F</kbd> on Windows) and search for
+
+```blade
+<flux:accordion>
+    <flux:accordion.item heading="Where do you ship?">
+        We ship throughout the United States and Canada.
+    </flux:accordion.item>
+
+    <flux:accordion.item heading="Do I need to be home for delivery?">
+        Orders over $500 must be signed for.
+    </flux:accordion.item>
+
+    <flux:accordion.item heading="Can I change my order?">
+        Contact our support team before your order has shipped.
+    </flux:accordion.item>
+</flux:accordion>
+```
+
 ## Disabled
 Restrict an accordion item from being expanded.
 

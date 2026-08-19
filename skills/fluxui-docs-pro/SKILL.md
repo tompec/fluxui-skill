@@ -72,6 +72,7 @@ Use `components_used` to find related components and real-world usage patterns.
 - **[Time picker](references/components/time-picker.md)**: Allow users to select specific times for scheduling events or setting appointments. Perfect for t...
 - **[Timeline](references/components/timeline.md)**: Display a series of events or steps in a vertical or horizontal timeline.
 - **[Toast](references/components/toast.md)**: A message that provides feedback to users about an action or event, often temporary and dismissible.
+- **[Toggle](references/components/toggle.md)**: Turn a setting on or off using a compact, button-shaped control.
 - **[Tooltip](references/components/tooltip.md)**: Provide additional information when users hover over or focus on an element.
 
 ## Docs

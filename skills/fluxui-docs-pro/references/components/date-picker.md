@@ -17,7 +17,7 @@ Use date inputs instead of date pickers for far-future or past events such as bi
 Set the initial selected date using the value prop with a Y-m-d formatted date string:
 
 ```blade
-<flux:date-picker value="2026-07-07" />
+<flux:date-picker value="2026-08-19" />
 ```
 
 You can also bind the selection to a Livewire property using wire:model:
@@ -67,7 +67,7 @@ Enable selection of date ranges for reporting, booking systems, or any scenario 
 Set the initial range using the value prop with a start and end date separated by a forward slash:
 
 ```blade
-<flux:date-picker mode="range" value="2026-07-02/2026-07-06" />
+<flux:date-picker mode="range" value="2026-08-02/2026-08-06" />
 ```
 
 You can also bind the selection to a Livewire property using wire:model:
@@ -231,7 +231,7 @@ When a user selects a custom date range that doesn't match any other preset, the
 Disable specific dates from being selected. Useful for blocking out holidays, showing booked dates, or indicating unavailable time slots.
 
 ```blade
-<flux:date-picker unavailable="2026-07-06,2026-07-08" />
+<flux:date-picker unavailable="2026-08-18,2026-08-20" />
 ```
 
 ## With today shortcut
@@ -266,13 +266,13 @@ By default the first day of the week will be automatically set based on the user
 Set the date that the date picker will open to, if there is no selected date.
 
 ```blade
-<flux:date-picker open-to="2027-08-01" />
+<flux:date-picker open-to="2027-09-01" />
 ```
 
 If you want the date picker to always use the open-to date, you can add the force-open-to attribute.
 
 ```blade
-<flux:date-picker open-to="2027-08-01" force-open-to />
+<flux:date-picker open-to="2027-09-01" force-open-to />
 ```
 
 ## Week numbers
@@ -392,7 +392,7 @@ $end = $range->end();
 $range->contains(now());
 
 // Get the number of days in the range...
-$range->length();
+$range->count();
 
 // Loop over the range by day...
 foreach ($range as $date) {
@@ -542,7 +542,7 @@ A specialized object for handling date ranges when using mode="range".
 | --- | --- |
 | $range->start() | Get the start date as a Carbon instance. |
 | $range->end() | Get the end date as a Carbon instance. |
-| $range->days() | Get the number of days in the range. |
+| $range->count() | Get the number of days in the range. |
 | $range->preset() | Get the current preset as a DateRangePreset enum value. |
 | $range->toArray() | Get the range as an array with start and end keys. |
 
