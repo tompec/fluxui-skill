@@ -25,27 +25,25 @@ Use primary buttons sparingly; mostly for form submissions.
 ```
 
 ## Colors
-Use standard Tailwind color names with the color prop to control the color of the primary button.
+Use standard Tailwind color names with the color prop. Color works independently with primary, filled, outline, ghost, and subtle buttons.
+
+Neutral colors use the default styling for filled, outline, ghost, and subtle buttons.
 
 ```blade
-<flux:button variant="primary" color="zinc">Zinc</flux:button>
-<flux:button variant="primary" color="red">Red</flux:button>
-<flux:button variant="primary" color="orange">Orange</flux:button>
-<flux:button variant="primary" color="amber">Amber</flux:button>
-<flux:button variant="primary" color="yellow">Yellow</flux:button>
-<flux:button variant="primary" color="lime">Lime</flux:button>
-<flux:button variant="primary" color="green">Green</flux:button>
-<flux:button variant="primary" color="emerald">Emerald</flux:button>
-<flux:button variant="primary" color="teal">Teal</flux:button>
-<flux:button variant="primary" color="cyan">Cyan</flux:button>
-<flux:button variant="primary" color="sky">Sky</flux:button>
-<flux:button variant="primary" color="blue">Blue</flux:button>
-<flux:button variant="primary" color="indigo">Indigo</flux:button>
-<flux:button variant="primary" color="violet">Violet</flux:button>
-<flux:button variant="primary" color="purple">Purple</flux:button>
-<flux:button variant="primary" color="fuchsia">Fuchsia</flux:button>
-<flux:button variant="primary" color="pink">Pink</flux:button>
-<flux:button variant="primary" color="rose">Rose</flux:button>
+<flux:button variant="primary" color="blue">Primary</flux:button>
+<flux:button variant="filled" color="blue">Filled</flux:button>
+<flux:button variant="outline" color="blue">Outline</flux:button>
+<flux:button variant="ghost" color="blue">Ghost</flux:button>
+<flux:button variant="subtle" color="blue">Subtle</flux:button>
+```
+
+## Outline colors
+Colored outline buttons keep the default surface and shadow while softly mixing the selected color into the label, border, and hover state.
+
+```blade
+<flux:button variant="outline" color="blue">Blue</flux:button>
+<flux:button variant="outline" color="green">Green</flux:button>
+<flux:button variant="outline" color="red">Red</flux:button>
 ```
 
 ## Sizes
@@ -167,6 +165,7 @@ When using ghost or subtle button variants, you can use the inset prop to negate
 | href | The URL to link to when the button is used as an anchor tag. |
 | type | The HTML type attribute of the button. Options: button (default), submit. |
 | variant | Visual style of the button. Options: outline, primary, filled, danger, ghost, subtle. Default: outline. |
+| color | Color of the button. Accepts standard Tailwind color names. Chromatic colors work with primary, filled, outline, ghost, and subtle; neutral colors use the default styling outside of primary. |
 | size | Size of the button. Options: base (default), sm, xs. |
 | icon | Name of the icon to display at the start of the button. |
 | icon:variant | Visual style of the icon. Options: outline, solid, mini, micro. Default: micro. |

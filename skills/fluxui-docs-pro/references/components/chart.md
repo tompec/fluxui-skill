@@ -42,12 +42,21 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
+    <!-- MARKDOWN:REPLACE:START -->
     public array $data = [
-        ['date' => '2026-08-19', 'visitors' => 267],
-        ['date' => '2026-08-18', 'visitors' => 259],
-        ['date' => '2026-08-17', 'visitors' => 269],
+        ['date' => '2026-09-08', 'visitors' => 267],
+        ['date' => '2026-09-07', 'visitors' => 259],
+        ['date' => '2026-09-06', 'visitors' => 269],
         // ...
     ];
+    <!-- MARKDOWN:REPLACE:END
+    public array $data = [
+        ['date' => '2026-01-01', 'visitors' => 267],
+        ['date' => '2026-01-02', 'visitors' => 259],
+        ['date' => '2026-01-03', 'visitors' => 269],
+        // ...
+    ];
+    -->
 }
 ```
 
@@ -220,6 +229,37 @@ blade
 </flux:chart>
 ```
 
+## Horizontal charts
+
+Add the horizontal prop to place the index on the Y axis and values on the X axis. Horizontal orientation works with bars, groups, stacks, lines, areas, points, cursors, and tooltips.
+
+When adding axes, put the category or time field on the Y axis and use the X axis for the numeric scale:
+
+```blade
+<flux:chart horizontal wire:model="data" class="aspect-[2/1]">
+    <flux:chart.svg>
+        <flux:chart.bar field="online" class="text-blue-500" radius="4 0" width="70%" />
+
+        <flux:chart.axis axis="y" field="category">
+            <flux:chart.axis.tick />
+            <flux:chart.axis.line />
+        </flux:chart.axis>
+
+        <flux:chart.axis axis="x">
+            <flux:chart.axis.grid />
+            <flux:chart.axis.tick />
+        </flux:chart.axis>
+
+        <flux:chart.cursor type="area" />
+    </flux:chart.svg>
+
+    <flux:chart.tooltip>
+        <flux:chart.tooltip.heading field="category" />
+        <flux:chart.tooltip.value field="online" label="Orders" />
+    </flux:chart.tooltip>
+</flux:chart>
+```
+
 ## Grouped bar chart
 
 To create a grouped bar chart, you can wrap multiple <flux:chart.bar> components inside a single <flux:chart.group> component:
@@ -299,6 +339,164 @@ To create a stacked bar chart, you can wrap multiple <flux:chart.bar> components
     </div>
 </flux:chart>
 ```
+
+## Pie chart
+
+To create a pie chart, include a single <flux:chart.pie> component in the <flux:chart.svg> component. Every row of data becomes a slice: field sets its size and label-field names it. A pie always draws a full circle, starting at 12 o'clock and moving clockwise.
+
+Hovering a slice shows the chart's tooltip. For a pie, a single <flux:chart.tooltip.value> row with a label-field reads best, and <flux:chart.tooltip.indicator> adds a dot in the hovered slice's color:
+
+```blade
+<flux:chart wire:model="data">
+    <flux:chart.viewport class="aspect-square">
+        <flux:chart.svg>
+            <flux:chart.pie field="value" label-field="label" />
+        </flux:chart.svg>
+    </flux:chart.viewport>
+
+    <flux:chart.tooltip>
+        <flux:chart.tooltip.value label-field="label" field="value" suffix="%">
+            <flux:chart.tooltip.indicator />
+        </flux:chart.tooltip.value>
+    </flux:chart.tooltip>
+</flux:chart>
+```
+
+Pie data is one row per slice:
+
+```
+public array $data = [
+    ['id' => 'subscriptions', 'label' => 'Subscriptions', 'value' => 52],
+    ['id' => 'services', 'label' => 'Services', 'value' => 28],
+    ['id' => 'training', 'label' => 'Training', 'value' => 20],
+];
+```
+
+Rows whose value is 0, null, or missing are left out of the circle. Negative or non-numeric values are left out as well, and log a warning in the console once.
+
+A pie can't share a chart with bars, lines, areas, points, axes, or a cursor, and a chart may only contain one <flux:chart.pie>. Invalid combinations log a warning and render nothing.
+
+## Donut chart
+
+Add an inner-radius to turn a pie into a donut. It accepts a percentage of the outer radius or a pixel value. Use radius to round the corners of each slice:
+
+```blade
+<flux:chart wire:model="data">
+    <flux:chart.viewport class="aspect-square">
+        <flux:chart.svg>
+            <flux:chart.pie field="value" label-field="label" inner-radius="60%" radius="4" />
+        </flux:chart.svg>
+    </flux:chart.viewport>
+
+    <flux:chart.tooltip>
+        <flux:chart.tooltip.value label-field="label" field="value" suffix="%">
+            <flux:chart.tooltip.indicator />
+        </flux:chart.tooltip.value>
+    </flux:chart.tooltip>
+</flux:chart>
+```
+
+Anything you place inside <flux:chart.viewport> next to the SVG can fill the center of a donut. Position it absolutely and let pointer events pass through so the slices stay hoverable:
+
+```blade
+<flux:chart wire:model="data">
+    <flux:chart.viewport class="relative aspect-square">
+        <flux:chart.svg>
+            <flux:chart.pie field="value" label-field="label" inner-radius="60%" radius="4" />
+        </flux:chart.svg>
+
+        <div class="pointer-events-none absolute inset-0 grid place-items-center">
+            <div class="text-center">
+                <flux:heading size="xl">$128k</flux:heading>
+                <flux:text>Revenue</flux:text>
+            </div>
+        </div>
+    </flux:chart.viewport>
+</flux:chart>
+```
+
+## Slice colors
+
+Flux gives each slice a color from a built-in palette. Colors are tied to a slice's identity (its id, or its label-field value when there is no id), so reordering rows or removing one doesn't recolor the slices that remain.
+
+To pick a color yourself, add a color key to the row. Any of Flux's named colors work: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, and rose.
+
+```
+public array $data = [
+    ['id' => 'subscriptions', 'label' => 'Subscriptions', 'value' => 52, 'color' => 'blue'],
+    ['id' => 'services', 'label' => 'Services', 'value' => 28, 'color' => 'emerald'],
+    ['id' => 'training', 'label' => 'Training', 'value' => 20, 'color' => 'amber'],
+];
+```
+
+Legends are composed by hand, like every other Flux chart. The built-in palette isn't exposed to Blade, so when you show a legend, give each row an explicit color and mirror it in the legend indicators:
+
+```blade
+<flux:card>
+    <flux:chart wire:model="data" class="flex items-center gap-8">
+        <flux:chart.viewport class="w-36 shrink-0 aspect-square">
+            <flux:chart.svg>
+                <flux:chart.pie field="value" label-field="label" inner-radius="60%" radius="4" class="dark:stroke-zinc-800" />
+            </flux:chart.svg>
+        </flux:chart.viewport>
+
+        <div class="flex-1">
+            <div class="flex items-center justify-between">
+                <flux:chart.legend label="Subscriptions">
+                    <flux:chart.legend.indicator class="bg-blue-500" />
+                </flux:chart.legend>
+
+                <flux:text size="sm" class="tabular-nums">52%</flux:text>
+            </div>
+
+            <div class="flex items-center justify-between">
+                <flux:chart.legend label="Services">
+                    <flux:chart.legend.indicator class="bg-emerald-500" />
+                </flux:chart.legend>
+
+                <flux:text size="sm" class="tabular-nums">28%</flux:text>
+            </div>
+
+            <div class="flex items-center justify-between">
+                <flux:chart.legend label="Training">
+                    <flux:chart.legend.indicator class="bg-amber-500" />
+                </flux:chart.legend>
+
+                <flux:text size="sm" class="tabular-nums">20%</flux:text>
+            </div>
+        </div>
+
+        <flux:chart.tooltip>
+            <flux:chart.tooltip.value label-field="label" field="value" suffix="%">
+                <flux:chart.tooltip.indicator />
+            </flux:chart.tooltip.value>
+        </flux:chart.tooltip>
+    </flux:chart>
+</flux:card>
+```
+
+Slices are separated by a stroke in the chart's surface color: white, or zinc-900 in dark mode. If your chart sits on a different surface, like the card above, match it with a stroke class:
+
+```blade
+<flux:chart.pie field="value" label-field="label" class="dark:stroke-zinc-800" />
+```
+
+## Hover styles
+
+Pie slices don't change appearance on hover by default. While a slice is hovered, it receives a data-active attribute and every other slice receives data-inactive. Use Tailwind's data attribute variants to choose a treatment that fits your chart:
+
+```blade
+{{-- Dim the other slices... --}}
+<flux:chart.pie class="transition-opacity data-inactive:opacity-40" />
+
+{{-- Add a stronger border to the active slice... --}}
+<flux:chart.pie class="transition-[stroke-width] data-active:stroke-[5]" />
+
+{{-- Scale the active slice... --}}
+<flux:chart.pie class="origin-center transition-transform data-active:scale-105" />
+```
+
+The attributes are removed when the pointer leaves the pie. You can use either attribute independently or combine both in the same treatment.
 
 ## Live summary
 
@@ -842,6 +1040,7 @@ For more detailed information about formatting options, refer to:
 | --- | --- |
 | wire:model | Binds the chart to a Livewire property containing the data to display. See the wire:model documentation for more information. |
 | value | Array of data points for the chart. Each point should be an associative array with named fields. Used when not binding with wire:model. |
+| horizontal | Places the chart's index on the Y axis and its values on the X axis. Useful for horizontal bars and other transposed chart layouts. |
 
 | Slot | Description |
 | --- | --- |
@@ -865,7 +1064,7 @@ Container for the chart's SVG elements. This component must be included within a
 ### flux:chart.line
 | Prop | Description |
 | --- | --- |
-| field | Name of the data field to plot on the y-axis. Required. |
+| field | Name of the data field to plot on the value axis. Required. |
 | curve | Line curve type. Options: smooth (default), none. |
 
 | CSS | Description |
@@ -875,7 +1074,7 @@ Container for the chart's SVG elements. This component must be included within a
 ### flux:chart.area
 | Prop | Description |
 | --- | --- |
-| field | Name of the data field to plot on the y-axis. Required. |
+| field | Name of the data field to plot on the value axis. Required. |
 | curve | Area curve type. Options: smooth (default), none. |
 
 | CSS | Description |
@@ -893,11 +1092,25 @@ Adds points (dots) to mark data points on a line or area chart.
 | --- | --- |
 | class | Additional CSS classes applied to the points. Common use: fill-{color} for point fill color, r attribute for point radius. |
 
+### flux:chart.pie
+Renders a pie or donut chart from one row per slice. Use one per chart, on its own, without other marks, axes, or a cursor.
+
+| Prop | Description |
+| --- | --- |
+| field | Name of the numeric data field that sets each slice's size. Default: value. |
+| label-field | Data field used as a slice's label and, when a row has no id, as its identity for stable colors. |
+| inner-radius | Radius of the donut hole, as pixels or a percentage of the outer radius (e.g. 60%). Default: 0. |
+| radius | Corner radius of each slice in pixels. Default: 0. |
+
+| CSS | Description |
+| --- | --- |
+| class | Additional CSS classes applied to each slice. Common use: stroke-{color} to match the separator between slices to your surface. |
+
 ### flux:chart.axis
 | Prop | Description |
 | --- | --- |
 | axis | Axis to configure. Options: x, y. Required. |
-| field | For x-axis, the data field to use for labels. |
+| field | Data field to use for labels on the chart's index axis. |
 | format | Date/number formatting options for axis labels. See Formatting for more details. |
 
 ### flux:chart.axis.mark
@@ -937,7 +1150,7 @@ Adds tick marks and labels to an axis. Must be used within a \`flux:chart.axis\`
 | class | Additional CSS classes applied to the tick marks and labels. Common use: text-{color} for label color, font-{weight} for label weight. |
 
 ### flux:chart.zero-line
-Adds a horizontal line at y=0. Useful for charts that contain both positive and negative values.
+Adds a line at zero on the value axis. It is horizontal for vertical charts and vertical for horizontal charts.
 
 | CSS | Description |
 | --- | --- |
@@ -960,6 +1173,19 @@ Adds a horizontal line at y=0. Useful for charts that contain both positive and 
 | --- | --- |
 | field | Data field to display in the tooltip. |
 | format | Date/number formatting options for tooltip values. See Formatting for more details. |
+| label | Static text shown before the value, such as a series name. |
+| label-field | Data field to show as the label instead of static text. Useful for pie charts, where the label is the hovered slice's name. |
+
+| Slot | Description |
+| --- | --- |
+| default | Content rendered before the label, such as a flux:chart.tooltip.indicator. |
+
+### flux:chart.tooltip.indicator
+A small dot in the color of the hovered pie slice. Place it inside a \`flux:chart.tooltip.value\` row. Only pie charts set the hovered color.
+
+| CSS | Description |
+| --- | --- |
+| class | Additional CSS classes applied to the indicator. |
 
 ### flux:chart.cursor
 Adds an interactive cursor that follows mouse movement over the chart. Activates tooltips when present.

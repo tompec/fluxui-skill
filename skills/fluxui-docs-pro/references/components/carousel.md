@@ -63,7 +63,7 @@ Automatically advance slides at a fixed interval. Autoplay pauses when the carou
 ```
 
 ## External controls
-Use a shared name to place carousel controls outside the carousel layout.
+Use a shared name to place carousel controls outside the carousel layout. The bleed prop extends the track through surrounding padding while keeping slides aligned to the content gutter.
 
 ```blade
 <div class="flex justify-between items-center mb-4">
@@ -77,7 +77,7 @@ Use a shared name to place carousel controls outside the carousel layout.
     </div>
 </div>
 
-<flux:carousel name="popular-stays" class="-mx-6" :arrows="false" track:class="px-6 scroll-px-6">
+<flux:carousel name="popular-stays" bleed :arrows="false">
     <flux:carousel.slide class="w-4/5 sm:w-1/2 md:w-1/3">
         <img src="https://fluxui.dev/img/carousel/house1.png" class="aspect-2/1 rounded-lg object-cover" />
 
@@ -153,7 +153,7 @@ Change where the built-in arrow controls sit relative to the carousel viewport.
 Add edge fades to hint that more slides are available without covering the arrow controls.
 
 ```blade
-<flux:carousel fade class="-mx-6" track:class="px-6 scroll-px-6">
+<flux:carousel fade bleed>
     <!-- ... -->
 </flux:carousel>
 ```
@@ -180,12 +180,17 @@ Use page advance to move by the number of visible slides instead of one slide at
 | indicators | If true, shows slide indicators below the carousel. Default: false. |
 | disabled | If true, disables carousel controls and indicators. |
 | fade | If true, fades the scrollable track edges when additional slides are overflowed. |
+| bleed | Extends the carousel through surrounding horizontal padding while keeping slides and scroll snap positions aligned to the content gutter. Defaults to 1.5rem and respects an inherited --flux-bleed value. |
 | snap | Scroll snap behavior. Options: proximity, mandatory. Default: proximity. |
 | scroll | Arrow and indicator scroll behavior. Options: smooth, instant. Default: smooth. |
 | advance | How many slides arrow controls move. Options: slide, page. Default: slide. |
 | wrap | What happens when advancing past the final slide. Options: none, rewind. With rewind, the next control remains available at the end and returns to the first slide. Default: none. |
 | name | Unique name used to connect the carousel with external controls. |
 | track:class | Additional classes applied to the scrollable track. |
+
+| CSS Variable | Description |
+| --- | --- |
+| --flux-bleed | Horizontal distance the carousel extends through its parent container. Set this to match the parent's horizontal padding. Flux cards provide it automatically. |
 
 ### flux:carousel.slide
 | Prop | Description |

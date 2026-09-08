@@ -35,6 +35,7 @@ Use `components_used` to find related components and real-world usage patterns.
 - **[Checkbox](references/components/checkbox.md)**: Select one or multiple options from a set.
 - **[Dropdown](references/components/dropdown.md)**: A composable dropdown component that can handle both simple navigation menus as well as complex a...
 - **[Field](references/components/field.md)**: Encapsulate input elements with labels, descriptions, and validation.
+- **[Flag](references/components/flag.md)**: Display a flag using its two-letter Unicode region code.
 - **[Heading](references/components/heading.md)**: A consistent heading component for your application.
 - **[Icon](references/components/icon.md)**: Flux uses the excellent Heroicons project for its icon collection. Heroicons is a set of beautifu...
 - **[Input](references/components/input.md)**: Capture user data with various forms of text input.

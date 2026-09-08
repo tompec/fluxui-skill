@@ -1,5 +1,5 @@
 ---
-components_used: [avatar, badge, button]
+components_used: [avatar, badge, button, card, heading, text]
 ---
 
 # Table
@@ -109,6 +109,53 @@ The primary table example above is a full-featured table with sorting, paginatio
 </flux:table>
 ```
 
+## Full-bleed
+When placing a table inside a card, use the bleed prop to extend its dividers through the card's horizontal padding while keeping the first and last columns aligned with the card content. The gutter automatically adapts to the card's size.
+
+```blade
+<flux:card>
+    <div class="flex items-center justify-between gap-4">
+        <div>
+            <flux:heading>Recent customers</flux:heading>
+            <flux:text class="mt-1">Your latest customer activity.</flux:text>
+        </div>
+
+        <flux:button size="sm" icon="plus">Add customer</flux:button>
+    </div>
+
+    <flux:table bleed container:class="mt-6">
+        <flux:table.columns>
+            <flux:table.column>Customer</flux:table.column>
+            <flux:table.column>Date</flux:table.column>
+            <flux:table.column>Status</flux:table.column>
+            <flux:table.column align="end">Amount</flux:table.column>
+        </flux:table.columns>
+
+        <flux:table.rows>
+            @foreach ($orders as $order)
+                <flux:table.row :key="$order->id">
+                    <flux:table.cell variant="strong">{{ $order->customer }}</flux:table.cell>
+                    <flux:table.cell>{{ $order->date }}</flux:table.cell>
+                    <flux:table.cell>{{ $order->status }}</flux:table.cell>
+                    <flux:table.cell align="end" variant="strong">{{ $order->amount }}</flux:table.cell>
+                </flux:table.row>
+            @endforeach
+        </flux:table.rows>
+    </flux:table>
+</flux:card>
+```
+
+### Custom gutters
+Flux cards provide the gutter automatically, including size="sm" cards. For a custom container, set \--flux-bleed to match its horizontal padding.
+
+```blade
+<div class="p-4 [--flux-bleed:1rem]">
+    <flux:table bleed>
+        <!-- ... -->
+    </flux:table>
+</div>
+```
+
 ## Pagination
 Allow users to navigate through different pages of data by passing in any model paginator to the paginate prop.
 
@@ -195,9 +242,14 @@ Make sure to set a background color on columns and cells to prevent content over
 ### flux:table
 | Prop | Description |
 | --- | --- |
+| bleed | Extends table dividers through the horizontal padding of a parent card while keeping the first and last columns aligned with the card content. |
 | paginate | A Laravel paginator instance to enable pagination. |
 | pagination:scroll-to | Scroll to an element when a pagination button is clicked. Pass a CSS selector to target a specific element. Default: body. |
 | container:class | Additional CSS classes applied to the container. Useful for setting height constraints like max-h-80. |
+
+| CSS Variable | Description |
+| --- | --- |
+| --flux-bleed | Horizontal distance a bleeding table extends through its parent container. Defaults to 1.5rem; set this to match custom parent padding. Flux cards provide it automatically. |
 
 | Attribute | Description |
 | --- | --- |

@@ -89,6 +89,65 @@ Flux::toast(
 );
 ```
 
+## Variants
+Use the variant prop to change the visual style of the toast.
+
+```
+Flux::toast(variant: 'success', ...);
+Flux::toast(variant: 'warning', ...);
+Flux::toast(variant: 'danger', ...);
+```
+
+## Inverted
+Add invert to the toast component in your layout to use a dark appearance in light mode and a light appearance in dark mode. This configures every toast while leaving variant available for per-message semantics.
+
+```blade
+<flux:toast invert />
+```
+
+## Actions
+Add a single action to a toast when users need to respond to it. The action dispatches a browser event that any Livewire component on the page can listen for.
+
+```
+use Flux\Flux;
+use Livewire\Attributes\On;
+
+public function save()
+{
+    // ...
+
+    Flux::toast(
+        text: 'Changes saved.',
+        action: [
+            'label' => 'Undo',
+            'event' => 'undo-changes',
+            'params' => ['changeSetId' => $changeSet->id],
+        ],
+    );
+}
+
+#[On('undo-changes')]
+public function undoChanges(int $changeSetId)
+{
+    // Restore the changes...
+}
+```
+
+The action shows a loading indicator while the listening component is working, then dismisses the toast when the request finishes. Pass 'dismiss' => false to keep it open afterward.
+
+An action can also be a real link. This keeps native link behavior such as opening in a new tab and supports wire:navigate.
+
+```
+Flux::toast(
+    text: 'Invoice created.',
+    action: [
+        'label' => 'View',
+        'href' => route('invoices.show', $invoice),
+        'navigate' => true,
+    ],
+);
+```
+
 ## Links
 Add a link to a toast to give users a clear next step.
 
@@ -96,7 +155,7 @@ Add a link to a toast to give users a clear next step.
 Flux::toast(
     text: 'Invoice created.',
     link: [
-        'text' => 'View invoice',
+        'label' => 'View invoice',
         'href' => route('invoices.show', $invoice),
         'navigate' => true,
     ],
@@ -108,20 +167,11 @@ The same link options are available when triggering a toast from JavaScript.
 ```
 $flux.toast('Invoice created.', {
     link: {
-        text: 'View invoice',
+        label: 'View invoice',
         href: '/invoices/123',
         navigate: true,
     },
 })
-```
-
-## Variants
-Use the variant prop to change the visual style of the toast.
-
-```
-Flux::toast(variant: 'success', ...);
-Flux::toast(variant: 'warning', ...);
-Flux::toast(variant: 'danger', ...);
 ```
 
 ## Positioning
@@ -181,6 +231,7 @@ The group component also accepts the position prop to control where the toast st
 | Prop | Description |
 | --- | --- |
 | position | Position of the toast on the screen. Options: bottom end (default), bottom center, bottom start, top end, top center, top start. |
+| invert | If true, uses a dark appearance in light mode and a light appearance in dark mode for every toast. Default: false. |
 
 ### flux:toast.group
 | Prop | Description |
@@ -197,7 +248,8 @@ The PHP method used to trigger toasts from Livewire components.
 | text | Main content text of the toast. |
 | variant | Visual style. Options: success, warning, danger. |
 | duration | Duration in milliseconds. Use 0 for permanent toasts. Default: 5000. |
-| link | Optional link configuration. Supports text, href, target, rel, download, and navigate. |
+| link | Optional link configuration. Supports label, href, target, rel, download, and navigate. The legacy text option is also supported for backwards compatibility. |
+| action | Optional action configuration. Requires a label and either an event or href. Event actions support params and dismiss; link actions support target, rel, download, and navigate. |
 
 ### $flux.toast()
 The Alpine.js magic method used to trigger toasts from Alpine components. It can be used in two ways:
@@ -218,4 +270,4 @@ $flux.toast({
 | Parameter | Description |
 | --- | --- |
 | message | A string containing the toast message. When using this simple form, the message becomes the toast's text content. |
-| options | Alternatively, an object containing: - heading: Optional title text - text: Main message text - variant: Visual style (success, warning, danger) - duration: Display time in milliseconds - link: Optional link configuration with text, href, target, rel, download, and navigate |
+| options | Alternatively, an object containing: - heading: Optional title text - text: Main message text - variant: Visual style (success, warning, danger) - duration: Display time in milliseconds - link: Optional link configuration with label, href, target, rel, download, and navigate. The legacy text option is also supported for backwards compatibility - action: Optional action configuration with label and either event, href, or onClick |

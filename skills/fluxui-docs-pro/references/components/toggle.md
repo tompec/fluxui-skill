@@ -1,3 +1,7 @@
+---
+components_used: [icon]
+---
+
 # Toggle
 
 Turn a setting on or off using a compact, button-shaped control.
@@ -57,6 +61,18 @@ Use the on:icon and off:icon props to show a different icon for each state.
 <flux:toggle on:icon="speaker-wave" off:icon="speaker-x-mark" tooltip="Toggle sound" />
 ```
 
+## Custom icons
+After importing custom icons with php artisan flux:icon shrink expand, use the icon slot for full control over each state.
+
+```blade
+<flux:toggle tooltip="Toggle fullscreen">
+    <x-slot:icon>
+        <flux:icon.shrink class="size-5 hidden group-data-checked:block text-(--color-accent-content)" />
+        <flux:icon.expand class="size-5 group-data-checked:hidden text-zinc-500/85 dark:text-zinc-300/80" />
+    </x-slot:icon>
+</flux:toggle>
+```
+
 ## Stateful label
 Use the on:label and off:label props to show different text for each state.
 
@@ -87,3 +103,8 @@ Use the on:label and off:label props to show different text for each state.
 | --- | --- |
 | data-flux-toggle | Applied to the root element for styling and identification. |
 | data-checked | Applied when the toggle is on. |
+
+| Slot | Description |
+| --- | --- |
+| default | Visible label content. |
+| icon | Custom icon content. Use group-data-checked modifiers to control each checked state. |
